@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dra. Joice Cereser, pediatra com foco em neurodesenvolvimento infantil. CRM-SP 174512 · RQE 119336.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Dra. Joice Cereser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: "consultório-casa" — arcos de acolhimento, papel de linho, ilustrações de traço fino (brinquedos, ursinho, balão) espalhadas pelos fundos. Cada seção tem um fundo próprio. */
+:root{
+  --linho:#F5EDE2;      /* fundo base */
+  --areia:#EADBC6;      /* fundo secundário */
+  --cafe:#2F211A;       /* texto e seções escuras */
+  --caramelo:#A26B44;   /* acento principal */
+  --oliva:#5B5A3C;      /* acento do Explorador */
+  --salvia:#DCE0D0;     /* fundo leve, ternura */
+  --argila:#D9A898;     /* rosa-argila, toques de ternura */
+  --ouro:#E3C59E;       /* acento sobre escuro */
+  --texto:#5A463A;
+  --display:"Cormorant Garamond","Lora",Georgia,serif;
+  --body:"Jost","Poppins",system-ui,sans-serif;
+  --script:"Pinyon Script","Snell Roundhand",cursive;
+  --gl:max(20px, env(safe-area-inset-left, 0px));
+  --gr:max(20px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+section,footer,header{overflow-x:clip}
+section{position:relative;isolation:isolate}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--linho);color:var(--cafe);font:300 18px/1.7 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+figure{margin:0}
+.wrap{position:relative;max-width:1180px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.eyebrow{font:500 12px/1 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--caramelo);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;opacity:.6}
+.center{text-align:center}
+.center .eyebrow{justify-content:center}
+.center .eyebrow::after{content:"";width:34px;height:1px;background:currentColor;opacity:.6}
+.grain{position:relative;isolation:isolate}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .2 0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border-radius:999px;font:500 14px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:transform .25s ease,background .25s ease,color .25s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--caramelo);outline-offset:4px}
+.btn-solid{background:var(--cafe);color:var(--linho)}
+.btn-solid:hover{background:var(--caramelo)}
+.btn-line{border:1px solid rgba(47,33,26,.35);color:var(--cafe)}
+.btn-line:hover{background:rgba(47,33,26,.06)}
+
+/* ilustrações de traço fino */
+.ill{position:absolute;color:var(--caramelo);pointer-events:none;z-index:0}
+.ill svg{width:100%;height:100%;display:block;overflow:visible}
+.ill.argila{color:var(--argila)} .ill.oliva{color:var(--oliva)} .ill.ouro{color:var(--ouro)}
+.float{animation:float 7s ease-in-out infinite}
+.float.b{animation-duration:9s;animation-delay:-3s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-10px) rotate(var(--r,0deg))}}
+
+/* HEADER */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--linho)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(245,237,226,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(162,107,68,.18)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
+.logo{text-decoration:none;display:flex;align-items:center;gap:12px;line-height:1}
+.logo .mark{width:40px;height:40px;color:var(--caramelo)}
+.logo div{display:flex;flex-direction:column}
+.logo b{font:400 32px/1 var(--script);color:var(--cafe)}
+.logo small{font:500 10px/1 var(--body);letter-spacing:.38em;text-transform:uppercase;color:var(--caramelo);margin-top:4px;padding-left:4px}
+nav{display:flex;align-items:center;gap:28px}
+nav a.l{font:400 14px/1 var(--body);letter-spacing:.08em;text-decoration:none;color:var(--texto)}
+nav a.l:hover{color:var(--caramelo)}
+nav .btn{padding:12px 20px;font-size:12px}
+@media (max-width:960px){nav a.l{display:none}}
+
+/* HERO */
+.hero{background:
+  radial-gradient(55% 70% at 78% 42%,rgba(255,236,212,.98) 0%,rgba(245,237,226,0) 62%),
+  radial-gradient(45% 50% at 8% 95%,rgba(217,168,152,.28) 0%,rgba(245,237,226,0) 70%),
+  radial-gradient(40% 40% at 95% 100%,rgba(220,224,208,.9) 0%,rgba(245,237,226,0) 70%),
+  var(--linho)}
+.hero .arcs{position:absolute;right:-8%;top:-18%;width:68%;height:140%;z-index:-1;opacity:.5}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:76px 100px}
+.hero h1{font-size:clamp(46px,6.4vw,90px);letter-spacing:-.01em;margin-top:26px}
+.hero h1 em{font-style:italic;color:var(--caramelo)}
+.hero .lead{font-size:clamp(17px,1.6vw,20px);max-width:30em;margin-top:28px;color:var(--texto)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:46px;font:400 13px/1.4 var(--body);letter-spacing:.06em;color:var(--texto)}
+.hero .meta span{display:flex;align-items:center;gap:10px}
+.hero .meta span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--oliva)}
+.portrait{position:relative;justify-self:center;width:min(440px,100%)}
+.portrait .arch{position:relative;z-index:1;aspect-ratio:4/5.4;max-width:100%;border-radius:999px 999px 18px 18px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(47,33,26,.5)}
+.portrait .arch img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.portrait .line{position:absolute;inset:0;border:1px solid var(--caramelo);border-radius:999px 999px 18px 18px;transform:translate(18px,18px);opacity:.55}
+.portrait .note{position:absolute;z-index:2;left:-44px;bottom:56px;background:var(--linho);padding:18px 22px;box-shadow:0 18px 40px -16px rgba(47,33,26,.35);display:flex;align-items:center;gap:14px;transform:rotate(-3deg)}
+.portrait .note b{font:400 56px/.8 var(--display);color:var(--caramelo)}
+.portrait .note span{font:400 13px/1.35 var(--body);letter-spacing:.06em;color:var(--texto)}
+.portrait .balloon{width:74px;height:150px;left:-78px;top:-6px;--r:-8deg}
+.portrait .star1{width:34px;height:34px;right:-40px;top:70px;--r:12deg}
+.portrait .bear{width:96px;height:96px;right:-58px;bottom:-30px;z-index:3;color:var(--cafe)}
+.portrait .bear svg{filter:drop-shadow(0 8px 14px rgba(47,33,26,.15))}
+.rise{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+.rise.d2{animation-delay:.12s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.36s}
+@keyframes rise{from{transform:translateY(18px);opacity:.01}to{transform:none;opacity:1}}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:48px 72px}
+  .portrait{order:-1;width:min(320px,74%)}
+  .portrait .note{left:-24px}
+  .portrait .balloon{left:-58px;width:56px;height:112px}
+  .portrait .bear{right:-34px;width:76px;height:76px}
+}
+
+/* MANIFESTO */
+.manifesto{background:
+  repeating-linear-gradient(90deg,rgba(227,197,158,.07) 0 1px,transparent 1px 88px),
+  radial-gradient(80% 120% at 50% 0%,#66654A 0%,var(--oliva) 70%);color:var(--linho)}
+.manifesto .wrap{padding-block:96px}
+.manifesto .q{font:400 120px/.5 var(--display);color:var(--ouro);height:46px}
+.manifesto p{font:400 clamp(30px,4.2vw,54px)/1.18 var(--display);max-width:20em;margin:0 auto;text-wrap:balance}
+.manifesto p em{color:var(--ouro)}
+.manifesto small{display:block;margin-top:30px;font:500 12px/1 var(--body);letter-spacing:.34em;text-transform:uppercase;color:var(--ouro);opacity:.85}
+.manifesto .m1{width:60px;height:60px;left:6%;top:24%;--r:-10deg;opacity:.5}
+.manifesto .m2{width:52px;height:52px;right:7%;bottom:20%;opacity:.5}
+
+/* SOBRE */
+.sobre{background:linear-gradient(180deg,var(--linho) 0%,#EFE4D5 100%)}
+.sobre .water{position:absolute;right:-2%;bottom:-6%;font:400 clamp(160px,26vw,380px)/1 var(--script);color:rgba(162,107,68,.08);z-index:-1;white-space:nowrap;pointer-events:none}
+.sobre .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px;align-items:center;padding-block:120px}
+.photo-tape{position:relative;background:#FFFCF7;padding:14px 14px 64px;box-shadow:0 30px 60px -24px rgba(47,33,26,.4);transform:rotate(-2.5deg);max-width:440px}
+.photo-tape img{aspect-ratio:4/5;width:100%;object-fit:cover;object-position:40% 25%}
+.photo-tape .tape{position:absolute;top:-16px;left:50%;width:130px;height:36px;background:rgba(214,193,166,.8);transform:translateX(-50%) rotate(3deg)}
+.photo-tape figcaption{position:absolute;left:0;right:0;bottom:18px;text-align:center;font:400 30px/1 var(--script);color:var(--cafe)}
+.photo-tape .heart{width:46px;height:46px;right:-26px;bottom:20px;color:var(--argila);--r:14deg}
+.sobre h2{font-size:clamp(40px,5vw,68px);margin-top:22px}
+.sobre h2 em{color:var(--caramelo)}
+.sobre .txt{display:flex;flex-direction:column;gap:20px;margin-top:30px;max-width:34em;color:var(--texto)}
+.sobre .txt strong{font-weight:500;color:var(--cafe)}
+@media (max-width:860px){.sobre .wrap{grid-template-columns:1fr;gap:56px;padding-block:84px}.photo-tape{margin:0 auto;width:84%}}
+
+/* COMO ATENDO */
+.atendo{color:var(--linho);background:
+  radial-gradient(70% 60% at 20% 0%,rgba(120,80,55,.45) 0%,transparent 60%),
+  radial-gradient(60% 60% at 100% 100%,rgba(90,58,40,.5) 0%,transparent 60%),
+  #2A1D17}
+.atendo .wrap{padding-block:120px}
+.atendo .head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.atendo .eyebrow{color:var(--ouro)}
+.atendo h2{font-size:clamp(40px,5vw,66px);margin-top:22px;max-width:12em}
+.atendo h2 em{color:var(--ouro)}
+.atendo .head p{max-width:24em;color:rgba(245,237,226,.75)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px}
+.pillar{position:relative;padding:44px 34px 40px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid rgba(227,197,158,.22);min-width:0}
+.pillar::before{content:"";position:absolute;inset:8px;border:1px solid rgba(227,197,158,.09);pointer-events:none}
+.pillar .cap{font:400 92px/.8 var(--script);color:var(--ouro);height:72px}
+.pillar h3{font-size:34px;margin-top:22px}
+.pillar p{margin-top:14px;color:rgba(245,237,226,.78);font-size:17px}
+.atendo .a1{width:70px;height:70px;right:4%;top:60px;opacity:.35}
+@media (max-width:900px){.pillars{grid-template-columns:1fr}}
+
+/* SINAIS — sálvia com estampa de brinquedos */
+.sinais{background-color:var(--salvia);background-image:
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' fill='none' stroke='%235B5A3C' stroke-opacity='.13' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'><path d='M30 22l3.5 7 7.7 1.1-5.6 5.4 1.3 7.6L30 39.5l-6.9 3.6 1.3-7.6-5.6-5.4 7.7-1.1z'/><circle cx='130' cy='40' r='10'/><path d='M130 50q-3 8 2 14t0 14'/><rect x='88' y='112' width='22' height='22' rx='2'/><rect x='112' y='112' width='22' height='22' rx='2'/><rect x='100' y='89' width='22' height='22' rx='2'/><path d='M30 140a14 14 0 1 0 14-18 11 11 0 0 1-14 18z'/><circle cx='160' cy='150' r='2.5' fill='%235B5A3C' fill-opacity='.13'/><circle cx='70' cy='70' r='2.5' fill='%235B5A3C' fill-opacity='.13'/></svg>"),
+  radial-gradient(70% 60% at 50% 0%,rgba(255,255,255,.55) 0%,transparent 70%)}
+.sinais .wrap{padding-block:120px}
+.sinais h2{font-size:clamp(40px,5vw,66px);margin-top:22px}
+.sinais h2 em{color:var(--oliva)}
+.sinais .sub{max-width:36em;margin:22px auto 0;color:var(--texto)}
+.ages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:60px;text-align:left}
+.age{position:relative;background:rgba(253,250,244,.92);border-radius:22px;padding:32px 30px 30px;box-shadow:0 20px 40px -26px rgba(47,33,26,.35);min-width:0}
+.age .when{display:flex;align-items:baseline;gap:8px}
+.age .when b{font:400 54px/.9 var(--display);color:var(--caramelo)}
+.age .when span{font:500 12px/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--caramelo)}
+.age p{margin-top:14px;font-size:17px;line-height:1.55;color:var(--texto)}
+.age.any{background:var(--oliva);color:var(--linho)}
+.age.any .when b{font-size:36px;line-height:1.05;color:var(--ouro)}
+.age.any p{color:rgba(245,237,226,.88)}
+.sinais .note{display:flex;gap:16px;align-items:flex-start;max-width:44em;margin:44px auto 0;padding:22px 26px;border:1px dashed rgba(91,90,60,.45);border-radius:16px;text-align:left;font-size:16px;color:var(--texto);background:rgba(253,250,244,.5)}
+.sinais .note svg{flex:none;color:var(--oliva);margin-top:2px}
+.sinais .s1{width:80px;height:80px;left:3%;top:90px;color:var(--oliva);opacity:.6;--r:-6deg}
+.sinais .s2{width:60px;height:120px;right:4%;top:120px;color:var(--argila)}
+@media (max-width:900px){.ages{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ages{grid-template-columns:1fr}.sinais .s1,.sinais .s2{display:none}}
+
+/* PRIMEIRA CONSULTA — linho com caminho tracejado */
+.primeira{background:
+  radial-gradient(50% 60% at 100% 0%,rgba(217,168,152,.22) 0%,transparent 70%),
+  linear-gradient(180deg,#F8F2EA 0%,var(--linho) 100%)}
+.primeira .wrap{padding-block:120px}
+.primeira .top{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+.primeira h2{font-size:clamp(40px,5vw,66px);margin-top:22px}
+.primeira h2 em{color:var(--caramelo)}
+.primeira .top p{color:var(--texto);max-width:28em}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:72px}
+.steps .path{position:absolute;left:4%;right:4%;top:34px;height:2px;z-index:0;background-image:linear-gradient(90deg,var(--caramelo) 50%,transparent 50%);background-size:14px 2px;opacity:.5}
+.step{position:relative;z-index:1;min-width:0}
+.step .n{width:68px;height:68px;border-radius:50%;background:var(--linho);border:1px solid var(--caramelo);display:grid;place-items:center;font:400 34px/1 var(--display);color:var(--caramelo)}
+.step h3{font-size:28px;margin-top:22px}
+.step p{margin-top:10px;font-size:16.5px;line-height:1.6;color:var(--texto)}
+.step ul{margin:12px 0 0;padding:0;list-style:none;font-size:16px;line-height:1.5;color:var(--texto);display:flex;flex-direction:column;gap:6px}
+.step li{display:flex;gap:10px}
+.step li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--argila);margin-top:9px}
+.primeira .p1{width:90px;height:90px;right:6%;top:96px;--r:8deg}
+@media (max-width:900px){.primeira .top{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr;row-gap:44px}.steps .path{display:none}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* O QUE ACOMPANHO */
+.acompanho{background:var(--areia)}
+.acompanho .wrap{padding-block:120px;display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:start}
+.acompanho h2{font-size:clamp(40px,5vw,64px);margin-top:22px}
+.acompanho h2 em{color:var(--oliva)}
+.acompanho .intro p{margin-top:24px;color:var(--texto);max-width:26em}
+.acompanho .window{position:relative;margin-top:40px;width:min(320px,100%)}
+.acompanho .window .frame{aspect-ratio:3/4;border-radius:999px 999px 0 0;overflow:hidden;position:relative}
+.acompanho .window img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:sepia(.18) saturate(.95)}
+.acompanho .window .frame::after{content:"";position:absolute;inset:0;background:#E2C29C;mix-blend-mode:multiply;opacity:.35}
+.acompanho .window .blocks{width:110px;height:110px;right:-54px;bottom:-26px;color:var(--cafe)}
+.list{display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:auto 1fr;gap:26px;padding:34px 0;border-top:1px solid rgba(47,33,26,.16)}
+.item:last-child{border-bottom:1px solid rgba(47,33,26,.16)}
+.item .ic{width:56px;height:56px;border-radius:50%;background:rgba(253,250,244,.6);border:1px solid var(--caramelo);display:grid;place-items:center;color:var(--caramelo)}
+.item h3{font-size:30px}
+.item p{margin-top:8px;color:var(--texto);font-size:17px}
+.item .tag{display:inline-block;margin-left:10px;vertical-align:middle;font:500 10px/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--linho);background:var(--oliva);padding:6px 10px;border-radius:999px}
+@media (max-width:860px){.acompanho .wrap{grid-template-columns:1fr;gap:48px;padding-block:84px}.acompanho .window{display:none}}
+
+/* FORMAÇÃO */
+.formacao{background:
+  repeating-linear-gradient(180deg,transparent 0 47px,rgba(162,107,68,.08) 47px 48px),
+  linear-gradient(180deg,#F7F0E7 0%,var(--linho) 100%)}
+.formacao .wrap{padding-block:120px;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
+.formacao .big{display:flex;align-items:flex-end;gap:20px;margin-top:22px}
+.formacao .big b{font:400 clamp(120px,15vw,200px)/.78 var(--display);color:var(--caramelo)}
+.formacao .big span{font:italic 400 clamp(26px,3vw,38px)/1.1 var(--display);padding-bottom:8px}
+.cred{list-style:none;margin:48px 0 0;padding:0;background:rgba(245,237,226,.7)}
+.cred li{display:grid;grid-template-columns:1fr auto;gap:6px 20px;padding:22px 0;border-top:1px solid rgba(162,107,68,.25)}
+.cred li:last-child{border-bottom:1px solid rgba(162,107,68,.25)}
+.cred b{font:500 19px/1.35 var(--body)}
+.cred small{grid-column:1;font:italic 400 18px/1.3 var(--display);color:var(--caramelo)}
+.cred .st{grid-column:2;grid-row:1/3;align-self:center;font:500 10px/1 var(--body);letter-spacing:.22em;text-transform:uppercase;padding:7px 11px;border-radius:999px;border:1px solid rgba(91,90,60,.5);color:var(--oliva);white-space:nowrap}
+.formacao .pic{position:relative;max-width:420px;justify-self:center;width:100%}
+.formacao .pic img{position:relative;z-index:1;aspect-ratio:4/5;width:100%;object-fit:cover;object-position:50% 20%;border-radius:999px 999px 0 0}
+.formacao .pic::before{content:"";position:absolute;inset:-18px -18px 18px 18px;border:1px solid rgba(162,107,68,.45);border-radius:999px 999px 0 0}
+.formacao .pic .ruler{width:44px;height:240px;left:-60px;top:80px;z-index:2;color:var(--caramelo)}
+@media (max-width:860px){.formacao .wrap{grid-template-columns:1fr;gap:56px;padding-block:84px}.formacao .pic{width:78%}.formacao .pic .ruler{left:-44px;width:34px}}
+
+/* FORA DO CONSULTÓRIO */
+.vida{background:
+  repeating-linear-gradient(0deg,rgba(120,80,50,.035) 0 2px,transparent 2px 7px),
+  linear-gradient(180deg,#E7D6BF 0%,#DFCBB0 100%)}
+.vida .wrap{padding-block:110px}
+.vida h2{font-size:clamp(38px,4.8vw,62px);margin-top:20px;font-style:italic}
+.pols{display:flex;justify-content:center;flex-wrap:wrap;gap:40px;margin-top:64px}
+.pol{position:relative;background:#FFFCF7;padding:14px 14px 62px;width:min(300px,80vw);box-shadow:0 24px 44px -18px rgba(47,33,26,.45)}
+.pol img{aspect-ratio:4/5;width:100%;object-fit:cover}
+.pol:nth-child(1){transform:rotate(-4deg)}
+.pol:nth-child(2){transform:rotate(3deg) translateY(18px)}
+.pol .tape{position:absolute;top:-14px;left:50%;width:110px;height:32px;background:rgba(214,193,166,.85);transform:translateX(-50%) rotate(-3deg)}
+.pol figcaption{position:absolute;left:0;right:0;bottom:16px;font:400 28px/1 var(--script);color:var(--cafe)}
+.vida p.foot{margin:72px auto 0;max-width:30em;font-size:19px;color:var(--texto)}
+.vida p.foot em{font:italic 500 23px/1 var(--display);color:var(--caramelo)}
+.vida .v1{width:70px;height:70px;left:8%;top:120px;--r:-8deg}
+.vida .v2{width:64px;height:64px;right:9%;bottom:140px;color:var(--argila)}
+
+/* AGENDAR */
+.agendar{color:var(--linho);background:
+  radial-gradient(50% 80% at 75% 50%,rgba(162,107,68,.35) 0%,transparent 70%),
+  linear-gradient(135deg,#33241C 0%,#241914 100%)}
+.agendar .wrap{padding-block:120px;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.agendar .eyebrow{color:var(--ouro)}
+.agendar h2{font-size:clamp(42px,5.4vw,72px);margin-top:22px}
+.agendar h2 em{color:var(--ouro)}
+.agendar p.l{margin-top:24px;max-width:28em;color:rgba(245,237,226,.78)}
+.infos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:44px}
+.info{border-top:1px solid rgba(227,197,158,.3);padding-top:18px;min-width:0}
+.info small{display:block;font:500 11px/1 var(--body);letter-spacing:.3em;text-transform:uppercase;color:var(--ouro)}
+.info span{display:block;margin-top:10px;font:400 26px/1.25 var(--display);overflow-wrap:anywhere}
+.agendar .btn-solid{background:var(--ouro);color:var(--cafe);margin-top:48px}
+.agendar .btn-solid:hover{background:var(--linho)}
+.agendar .archbox{position:relative;justify-self:center;width:min(380px,100%)}
+.agendar .arch{aspect-ratio:4/5.2;border-radius:999px 999px 0 0;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.agendar .arch img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.agendar .moon{width:60px;height:60px;right:-30px;top:20px;color:var(--ouro);--r:-10deg}
+.agendar .st1{width:28px;height:28px;left:-34px;top:120px;color:var(--ouro)}
+.agendar .st2{width:20px;height:20px;right:-10px;top:110px;color:var(--ouro)}
+@media (max-width:860px){.agendar .wrap{grid-template-columns:1fr;padding-block:84px}.agendar .archbox{width:72%}}
+
+/* FLUTUANTE */
+.fab{position:fixed;z-index:70;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;padding:14px 20px 14px 16px;border-radius:999px;background:var(--cafe);color:var(--linho);text-decoration:none;font:500 13px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 14px 30px -10px rgba(47,33,26,.55);transition:transform .25s ease,background .25s ease}
+.fab:hover{transform:translateY(-2px);background:var(--caramelo)}
+.fab svg{color:var(--ouro)}
+
+/* RODAPÉ */
+footer{background:#1C1410;color:rgba(245,237,226,.7)}
+footer .wrap{padding-block:46px 96px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;font-size:14px}
+footer b{font:400 34px/1 var(--script);color:var(--linho)}
+footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-weight:500}
+</style>
+</head>
+<body>
+
+
+<!-- ilustrações reutilizáveis -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bear" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="17" r="7"/><circle cx="48" cy="17" r="7"/><circle cx="16" cy="17" r="3"/><circle cx="48" cy="17" r="3"/><circle cx="32" cy="35" r="20" fill="#F5EDE2"/><ellipse cx="32" cy="43" rx="8" ry="6"/><path d="M29.5 41.5h5l-2.5 2.5z" fill="currentColor"/><path d="M32 44v2.5M29 47.5q3 2 6 0"/></g><circle cx="24.5" cy="32" r="1.8" fill="currentColor"/><circle cx="39.5" cy="32" r="1.8" fill="currentColor"/><g fill="#D9A898" opacity=".55"><ellipse cx="20" cy="40" rx="3" ry="2"/><ellipse cx="44" cy="40" rx="3" ry="2"/></g></symbol>
+    <symbol id="i-balloon" viewBox="0 0 40 80"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3C10 3 5 11 5 19c0 10 8 18 15 21 7-3 15-11 15-21C35 11 30 3 20 3z"/><path d="M11 14q2-5 7-7" opacity=".6"/><path d="M17 43l3-3 3 3z"/><path d="M20 43q-5 8 0 15t0 18"/></g></symbol>
+    <symbol id="i-star" viewBox="0 0 40 40"><path d="M20 4l4.6 9.7 10.6 1.4-7.8 7.3 2 10.5L20 27.8l-9.4 5.1 2-10.5-7.8-7.3 10.6-1.4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-blocks" viewBox="0 0 80 80"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="6" y="44" width="32" height="32" rx="3" fill="#F5EDE2"/><rect x="42" y="44" width="32" height="32" rx="3" fill="#F5EDE2"/><rect x="24" y="10" width="32" height="32" rx="3" fill="#F5EDE2" transform="rotate(6 40 26)"/></g><g font-family="Cormorant Garamond,Georgia,serif" font-size="20" fill="currentColor" text-anchor="middle"><text x="22" y="67">A</text><text x="58" y="67" fill="#A26B44">B</text><text x="40" y="33" transform="rotate(6 40 26)" fill="#D9A898">C</text></g></symbol>
+    <symbol id="i-heart" viewBox="0 0 40 40"><path d="M20 34S5 25 5 14.5A7.5 7.5 0 0 1 20 11a7.5 7.5 0 0 1 15 3.5C35 25 20 34 20 34z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 40 40"><path d="M27 6a15 15 0 1 0 8 22A12 12 0 0 1 27 6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-boat" viewBox="0 0 70 50"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4 30h62l-8 14H12z"/><path d="M14 30l21-26 21 26"/><path d="M35 4v26"/><path d="M2 48q6-3 12 0t12 0 12 0 12 0 12 0"/></g></symbol>
+    <symbol id="i-rattle" viewBox="0 0 40 80"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="20" cy="18" r="13"/><circle cx="20" cy="18" r="6"/><path d="M20 31v34"/><circle cx="20" cy="70" r="5"/><path d="M16 46h8"/></g></symbol>
+    <symbol id="i-ruler" viewBox="0 0 40 240"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="4" y="2" width="32" height="236" rx="4"/><path d="M4 22h12M4 42h8M4 62h12M4 82h8M4 102h12M4 122h8M4 142h12M4 162h8M4 182h12M4 202h8M4 222h12"/></g><g font-family="Jost,sans-serif" font-size="8" fill="currentColor"><text x="20" y="25">1</text><text x="20" y="65">2</text><text x="20" y="105">3</text><text x="20" y="145">4</text><text x="20" y="185">5</text></g></symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#inicio"><svg class="mark" aria-hidden="true"><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Pediatria</small></div></a>
+    <nav>
+      <a class="l" href="#sobre">Sobre</a>
+      <a class="l" href="#sinais">Sinais de atenção</a>
+      <a class="l" href="#primeira">Primeira consulta</a>
+      <a class="l" href="#formacao">Formação</a>
+      <a class="btn btn-solid" href="#agendar">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero grain" id="inicio">
+  <svg class="arcs" viewBox="0 0 600 900" fill="none" stroke="#A26B44" stroke-width="1" aria-hidden="true">
+    <path d="M60 900 V340 a240 240 0 0 1 480 0 V900"/>
+    <path d="M110 900 V350 a190 190 0 0 1 380 0 V900" opacity=".6"/>
+    <path d="M160 900 V360 a140 140 0 0 1 280 0 V900" opacity=".35"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow rise">Pediatra · Tatuí, SP</div>
+      <h1 class="rise d2">Pediatria com tempo para <em>ouvir</em> e olhar atento para <em>cada sinal.</em></h1>
+      <p class="lead rise d3">Consultas sem pressa, escuta de verdade e um acompanhamento próximo do desenvolvimento do seu filho, com foco em neurodesenvolvimento infantil.</p>
+      <div class="ctas rise d4">
+        <a class="btn btn-solid" href="#agendar">Agendar consulta</a>
+        <a class="btn btn-line" href="#sinais">Sinais de atenção</a>
+      </div>
+      <div class="meta rise d4">
+        <span>Especialista em Pediatria (SBP · AMB)</span>
+        <span>Foco em autismo e TND</span>
+      </div>
+    </div>
+    <div class="portrait rise d2">
+      <div class="line"></div>
+      <div class="ill balloon float"><svg><use href="#i-balloon"/></svg></div>
+      <div class="ill star1 argila float b"><svg><use href="#i-star"/></svg></div>
+      <div class="arch"><img src="img/hero.jpg" alt="Dra. Joice Cereser sorrindo, sentada, com blazer de tweed"></div>
+      <div class="note"><b>15</b><span>anos de<br>pediatria</span></div>
+      <div class="ill bear"><svg><use href="#i-bear"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto center">
+  <div class="ill m1 ouro float"><svg><use href="#i-star"/></svg></div>
+  <div class="ill m2 ouro float b"><svg><use href="#i-heart"/></svg></div>
+  <div class="wrap">
+    <div class="q">“</div>
+    <p>Toda mãe merece sair da consulta <em>mais tranquila</em> do que entrou.</p>
+    <small>É isso que guia cada atendimento</small>
+  </div>
+</section>
+
+<section class="sobre grain" id="sobre">
+  <div class="water" aria-hidden="true">Joice</div>
+  <div class="wrap">
+    <figure class="photo-tape">
+      <div class="tape"></div>
+      <img src="img/sobre.jpg" alt="Dra. Joice olhando para o lado, com as mãos junto ao rosto">
+      <figcaption>prazer, Joice</figcaption>
+      <div class="ill heart float"><svg><use href="#i-heart"/></svg></div>
+    </figure>
+    <div>
+      <div class="eyebrow">Sobre mim</div>
+      <h2>Por trás do diagnóstico, existe <em>quem escuta.</em></h2>
+      <div class="txt">
+        <p>Me formei na <strong>Universidade Federal do Amazonas há 15 anos</strong> e, desde então, trabalho com pediatria. Sou <strong>especialista em Pediatria</strong> pela Sociedade Brasileira de Pediatria e pela Associação Médica Brasileira.</p>
+        <p>Hoje me aprofundo no <strong>neurodesenvolvimento infantil</strong>: estou na Certificação Thiago Castro e na pós-graduação em Autismo e Transtornos do Neurodesenvolvimento.</p>
+        <p>Na minha consulta, o tempo é seu. Ouço a família até o fim, investigo cada detalhe e só considero o caso encerrado quando tudo faz sentido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="atendo" id="atendimento">
+  <div class="ill a1 ouro"><svg><use href="#i-moon"/></svg></div>
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Como eu atendo</div>
+        <h2>Três coisas que você vai sentir <em>na consulta.</em></h2>
+      </div>
+      <p>Cada criança é única. Por isso a consulta começa na escuta e só termina quando a família sai com clareza sobre o próximo passo.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar"><div class="cap">E</div><h3>Escuta sem pressa</h3><p>O relógio para. Você conta tudo, do seu jeito, sem julgamento. Nenhuma dúvida sobre um filho é pequena demais.</p></article>
+      <article class="pillar"><div class="cap">I</div><h3>Investigação até entender</h3><p>“É normal, vai passar” não serve quando algo não parece normal. Cada detalhe é estudado até o quadro fazer sentido.</p></article>
+      <article class="pillar"><div class="cap">O</div><h3>Olhar para os sinais</h3><p>Toda criança se comunica, mesmo quando ainda não fala: no olhar, no sono, no jeito de brincar. Esses sinais guiam o cuidado.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sinais center" id="sinais">
+  <div class="ill s1 float"><svg><use href="#i-boat"/></svg></div>
+  <div class="ill s2 float b"><svg><use href="#i-rattle"/></svg></div>
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--oliva)">Para os pais</div>
+    <h2>Sinais que merecem <em>um olhar atento</em></h2>
+    <p class="sub">Cada criança tem o seu ritmo. Mas alguns sinais indicam que vale conversar com a pediatra e avaliar o desenvolvimento com mais cuidado.</p>
+    <div class="ages">
+      <div class="age"><div class="when"><b>6</b><span>meses</span></div><p>Pouco contato visual, ou não sorri e não demonstra alegria com as pessoas próximas.</p></div>
+      <div class="age"><div class="when"><b>9</b><span>meses</span></div><p>Não troca sons, sorrisos ou expressões com você, numa espécie de "conversa".</p></div>
+      <div class="age"><div class="when"><b>12</b><span>meses</span></div><p>Não responde quando é chamado pelo nome, não balbucia, não aponta e não dá tchau.</p></div>
+      <div class="age"><div class="when"><b>16</b><span>meses</span></div><p>Ainda não fala nenhuma palavra.</p></div>
+      <div class="age"><div class="when"><b>24</b><span>meses</span></div><p>Não forma frases de duas palavras com sentido, que não sejam só repetição.</p></div>
+      <div class="age any"><div class="when"><b>Em qualquer idade</b></div><p>Perda de fala, de balbucio ou de habilidades sociais que a criança já tinha.</p></div>
+    </div>
+    <div class="note"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><span>Esses sinais não são um diagnóstico. Eles indicam que a criança merece uma avaliação, e quanto antes ela acontece, melhor para o desenvolvimento.</span></div>
+  </div>
+</section>
+
+<section class="primeira" id="primeira">
+  <div class="ill p1 argila float"><svg><use href="#i-balloon"/></svg></div>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="eyebrow">Sua primeira consulta</div>
+        <h2>Do primeiro contato ao <em>plano de cuidado.</em></h2>
+      </div>
+      <p>Saber o que esperar deixa tudo mais leve, para você e para a criança. Assim funciona o primeiro encontro.</p>
+    </div>
+    <div class="steps">
+      <div class="path" aria-hidden="true"></div>
+      <div class="step"><div class="n">1</div><h3>O contato</h3><p>Você envia uma mensagem, conta brevemente o motivo da consulta e escolhe o melhor horário.</p></div>
+      <div class="step"><div class="n">2</div><h3>O que levar</h3><ul><li>Caderneta de vacinação</li><li>Exames e relatórios anteriores</li><li>Relatórios da escola ou de terapeutas</li><li>Sua lista de dúvidas</li></ul></div>
+      <div class="step"><div class="n">3</div><h3>A consulta</h3><p>Tempo para ouvir a família, examinar a criança e observar como ela brinca e interage.</p></div>
+      <div class="step"><div class="n">4</div><h3>O plano</h3><p>Você sai com explicações claras, os próximos passos definidos e um acompanhamento próximo.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="acompanho grain">
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">O que eu acompanho</div>
+      <h2>Do primeiro mês aos <em>grandes marcos.</em></h2>
+      <p>Um acompanhamento contínuo, que olha para a saúde e também para o desenvolvimento da criança.</p>
+      <div class="window"><div class="frame"><img src="img/consulta.jpg" alt="Dra. Joice sentada, sorrindo, inclinada para a frente"></div><div class="ill blocks"><svg><use href="#i-blocks"/></svg></div></div>
+    </div>
+    <div class="list">
+      <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><div><h3>Consultas de rotina e puericultura</h3><p>Crescimento, vacinas, alimentação e sono, acompanhados de perto em cada fase.</p></div></div>
+      <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20c2-6 6-9 8-9s6 3 8 9"/><circle cx="12" cy="6" r="3"/></svg></div><div><h3>Desenvolvimento infantil</h3><p>Marcos motores, fala, comportamento e interação, com atenção ao que foge do esperado.</p></div></div>
+      <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8"/><path d="M8.5 9.5c1 .8 2.2.8 3.5 0s2.5-.8 3.5 0M8.5 14.5c1 .8 2.2.8 3.5 0s2.5-.8 3.5 0"/></svg></div><div><h3>Neurodesenvolvimento e autismo <span class="tag">Foco</span></h3><p>Olhar atento aos sinais de TEA e outros transtornos do neurodesenvolvimento, com acompanhamento próximo da família.</p></div></div>
+      <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div><div><h3>Orientação à família</h3><p>Explicações claras e um plano possível para o dia a dia, para que ninguém saia da consulta com dúvida.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="formacao" id="formacao">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Formação</div>
+      <div class="big"><b>15</b><span>anos<br>de pediatria</span></div>
+      <ul class="cred">
+        <li><b>Medicina</b><small>Universidade Federal do Amazonas (UFAM) · CRM-SP 174512</small></li>
+        <li><b>Especialista em Pediatria</b><small>Sociedade Brasileira de Pediatria · AMB · RQE 119336</small></li>
+        <li><b>Pós-graduação em Autismo e TND</b><small>Transtornos do Neurodesenvolvimento</small><span class="st">Em andamento</span></li>
+        <li><b>Certificação Thiago Castro</b><small>Neurodesenvolvimento infantil</small><span class="st">Em andamento</span></li>
+      </ul>
+    </div>
+    <div class="pic"><div class="ill ruler"><svg><use href="#i-ruler"/></svg></div><img src="img/formacao.jpg" alt="Dra. Joice em pé, com vestido escuro e colar de âmbar"></div>
+  </div>
+</section>
+
+<section class="vida center">
+  <div class="ill v1 float"><svg><use href="#i-star"/></svg></div>
+  <div class="ill v2 float b"><svg><use href="#i-heart"/></svg></div>
+  <div class="wrap">
+    <div class="eyebrow">Fora do consultório</div>
+    <h2>E quando ela não está atendendo…</h2>
+    <div class="pols">
+      <figure class="pol"><div class="tape"></div><img src="img/gato.jpg" alt="Gato branco dormindo ao lado de um livro aberto"><figcaption>um livro e um gato</figcaption></figure>
+      <figure class="pol"><div class="tape"></div><img src="img/familia.jpg" alt="Dra. Joice com a família em uma decoração de Natal"><figcaption>a família por perto</figcaption></figure>
+    </div>
+    <p class="foot">Um bom livro, um gato no colo e <em>quem ela ama</em> por perto.</p>
+  </div>
+</section>
+
+<section class="agendar" id="agendar">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Agendamento</div>
+      <h2>Vamos cuidar <em>juntos</em> do seu filho?</h2>
+      <p class="l">Consultório em Tatuí, SP. Envie uma mensagem para saber os horários disponíveis e agendar a primeira consulta.</p>
+      <div class="infos">
+        <div class="info"><small>Local</small><span>Tatuí · SP</span></div>
+        <div class="info"><small>Instagram</small><span>@dra.joicecereser</span></div>
+      </div>
+      <a class="btn btn-solid" href="https://www.instagram.com/dra.joicecereser/" target="_blank" rel="noopener">Agendar pelo Instagram →</a>
+    </div>
+    <div class="archbox">
+      <div class="ill moon float"><svg><use href="#i-moon"/></svg></div>
+      <div class="ill st1 float b"><svg><use href="#i-star"/></svg></div>
+      <div class="ill st2 float"><svg><use href="#i-star"/></svg></div>
+      <div class="arch"><img src="img/agendar.jpg" alt="Dra. Joice sentada em uma poltrona, sorrindo"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>Joice Cereser</b>
+    <span class="reg">Médica Pediatra · CRM-SP 174512 · RQE 119336</span>
+    <span>Tatuí · SP</span>
+  </div>
+</footer>
+
+<a class="fab" href="#agendar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agendar</a>
+
+</body>
+</html>
