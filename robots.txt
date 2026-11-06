@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://drajoicecereser.pages.dev/sitemap.xml
