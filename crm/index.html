@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>CRM · Dra. Joice Cereser</title>
+<title>Agenda · Dra. Joice Cereser</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232F211A'/%3E%3Cg fill='none' stroke='%23E3C59E' stroke-width='2.4'%3E%3Ccircle cx='18' cy='19' r='6'/%3E%3Ccircle cx='46' cy='19' r='6'/%3E%3Ccircle cx='32' cy='36' r='17'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap">
@@ -297,22 +297,20 @@ aside .axis{color:#C2B2A4!important}
 
 <div id="app" hidden>
 <aside>
-  <div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>CRM · Pacientes</small></div></div>
+  <div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Agenda</small></div></div>
   <nav id="nav">
-    <button data-v="funil"><svg><use href="#i-board"/></svg>Funil<span class="badge" data-badge hidden></span></button>
     <button data-v="agenda"><svg><use href="#i-cal"/></svg>Agenda</button>
-    <button data-v="contatos"><svg><use href="#i-users"/></svg>Contatos</button>
-    <button data-v="horarios"><svg><use href="#i-clock"/></svg>Agenda online</button>
+    <button data-v="horarios"><svg><use href="#i-clock"/></svg>Horários no site</button>
   </nav>
   <div class="foot">
-    <a href="/painel/"><svg><use href="#i-chart"/></svg>Painel do site</a>
+    <a href="/painel/"><svg><use href="#i-chart"/></svg>Voltar ao painel</a>
     <a href="/" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg>Ver meu site</a>
     <button id="logout"><svg><use href="#i-out"/></svg>Sair</button>
     <div class="axis">Desenvolvido por AXIS</div>
   </div>
 </aside>
 <main>
-  <div class="mtop"><div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>CRM</small></div></div><a class="btn btn-line" href="/painel/" style="padding:10px 14px">Painel</a></div>
+  <div class="mtop"><div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Agenda</small></div></div><a class="btn btn-line" href="/painel/" style="padding:10px 14px">Painel</a></div>
 
   <!-- FUNIL -->
   <section class="page" id="v-funil" hidden>
@@ -339,7 +337,7 @@ aside .axis{color:#C2B2A4!important}
 
   <!-- HORÁRIOS -->
   <section class="page" id="v-horarios" hidden>
-    <div class="top"><div><div class="s">Agenda online</div><h1>Horários que as famílias <em>podem escolher</em></h1></div></div>
+    <div class="top"><div><div class="s">Horários no site</div><h1>Horários que as famílias <em>podem escolher</em></h1></div></div>
     <div class="cfg">
       <form class="card" id="agForm">
         <h2>Configuração</h2>
@@ -359,10 +357,9 @@ aside .axis{color:#C2B2A4!important}
   </section>
 </main>
 <nav class="mnav" id="mnav">
-  <button data-v="funil"><svg><use href="#i-board"/></svg>Funil</button>
   <button data-v="agenda"><svg><use href="#i-cal"/></svg>Agenda</button>
-  <button data-v="contatos"><svg><use href="#i-users"/></svg>Contatos</button>
-  <button data-v="horarios"><svg><use href="#i-clock"/></svg>Online</button>
+  <button data-v="horarios"><svg><use href="#i-clock"/></svg>Horários</button>
+  <button onclick="location.href='/painel/'"><svg><use href="#i-board"/></svg>Painel</button>
 </nav>
 </div>
 
@@ -407,9 +404,9 @@ function origin(l){return l.kind==='guia'?['Guia','']:(l.source==='cadastro manu
 var leads=[],agCfg=null,cur='funil';
 
 /* ---------- navegação ---------- */
-function go(v){if(!/^(funil|agenda|contatos|horarios)$/.test(v))v='funil';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
+function go(v){if(!/^(agenda|horarios)$/.test(v))v='agenda';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
   if(v==='funil'||v==='contatos')loadLeads();if(v==='agenda')loadCal();if(v==='horarios')loadAg()}
-$$('#nav button,#mnav button').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
+$$('#nav button[data-v],#mnav button[data-v]').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
 $('#logout').onclick=function(){rpc('joice_logout',{p_token:token}).catch(function(){});try{localStorage.removeItem('jc_token')}catch(e){}location.href='/painel/'};
 
 /* ---------- funil ---------- */
@@ -606,7 +603,7 @@ function preview(){var el=$('#prev2');el.innerHTML='<div class="skel" style="hei
     el.innerHTML=d.days.slice(0,10).map(function(x){return '<div><b>'+WDS[wdOf(x.date)]+' '+fmtD(x.date)+'</b><span>'+x.slots.map(function(t){return '<i>'+t+'</i>'}).join('')+'</span></div>'}).join('')}).catch(function(){el.innerHTML='<p class="hint">Não foi possível carregar a prévia.</p>'})}
 
 /* ---------- início ---------- */
-rpc('joice_me',{p_token:token}).then(function(){$('#app').hidden=false;go(location.hash.slice(1)||'funil');getCfg()});
+rpc('joice_me',{p_token:token}).then(function(){$('#app').hidden=false;go(location.hash.slice(1)||'agenda');getCfg()});
 window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(v&&v!==cur)go(v)});
 setInterval(function(){if(document.visibilityState==='visible'&&(cur==='funil'||cur==='contatos')&&!dr.classList.contains('on')&&$('#modal').hidden)loadLeads()},60000);
 })();
