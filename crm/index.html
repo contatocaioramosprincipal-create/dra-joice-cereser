@@ -508,6 +508,7 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
 @media(max-width:700px){.gform{grid-template-columns:1fr 1fr}.done ul{grid-template-columns:1fr}.phone{transform:scale(.85);transform-origin:top center;margin-bottom:-80px}}
 
 @media(max-width:860px){.mnav{overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none}.mnav::-webkit-scrollbar{display:none}.mnav button{flex:none!important;min-width:72px}}
+.site-page{padding-bottom:24px}.site-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}.site-tabs button{padding:10px 17px;background:var(--papel);border:1px solid var(--linha);border-radius:999px;cursor:pointer;font:500 12px var(--body)}.site-tabs button[aria-pressed="true"]{background:var(--caramelo);color:#fff;border-color:var(--caramelo)}#siteFrame{display:block;width:100%;height:calc(100vh - 215px);min-height:580px;border:1px solid var(--linha);border-radius:20px;background:var(--linho)}@media(max-width:860px){#siteFrame{height:calc(100dvh - 245px);min-height:440px}.site-page{padding:16px 12px 95px}}
 </style>
 </head>
 <body>
@@ -542,16 +543,23 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
     <button data-v="horarios"><svg><use href="#i-clock"/></svg>Horários no site</button>
     <button data-v="plano"><svg><use href="#i-plan"/></svg>Planejamento</button>
     <button data-v="app"><svg><use href="#i-phone"/></svg>Baixar no celular</button>
+    <button data-v="site"><svg><use href="#i-chart"/></svg>Site</button>
   </nav>
   <div class="foot">
-    <a href="/painel/"><svg><use href="#i-chart"/></svg>Voltar ao painel</a>
     <a href="/" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg>Ver meu site</a>
     <button id="logout"><svg><use href="#i-out"/></svg>Sair</button>
     <div class="axis">Desenvolvido por AXIS</div>
   </div>
 </aside>
 <main>
-  <div class="mtop"><div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Agenda</small></div></div><a class="btn btn-line" href="/painel/" style="padding:10px 14px">Painel</a></div>
+  <div class="mtop"><div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Agenda</small></div></div><a class="btn btn-line" href="#site">Site</a></div>
+
+  <!-- SITE integrado -->
+  <section class="page site-page" id="v-site" hidden>
+    <div class="top"><div><div class="s">Presença digital</div><h1>Resultados do <em>seu site</em></h1></div><a class="btn btn-line" href="/" target="_blank" rel="noopener">Ver meu site</a></div>
+    <div class="site-tabs" role="group" aria-label="Relatórios do site"><button type="button" data-site-tab="geral" aria-pressed="true">Visão geral</button><button type="button" data-site-tab="pedidos">Pedidos</button><button type="button" data-site-tab="calor">Mapa de calor</button></div>
+    <iframe id="siteFrame" title="Relatórios do site" loading="lazy" referrerpolicy="same-origin"></iframe>
+  </section>
 
   <!-- HOJE -->
   <section class="page" id="v-hoje" hidden>
@@ -669,6 +677,7 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
   <button data-v="horarios"><svg><use href="#i-clock"/></svg>Horários</button>
   <button data-v="plano"><svg><use href="#i-plan"/></svg>Planos</button>
   <button data-v="app"><svg><use href="#i-phone"/></svg>Celular</button>
+  <button data-v="site"><svg><use href="#i-chart"/></svg>Site</button>
 </nav>
 </div>
 
@@ -713,9 +722,10 @@ function origin(l){return l.kind==='guia'?['Guia','']:(l.source==='cadastro manu
 var leads=[],agCfg=null,cur='funil';
 
 /* ---------- navegação ---------- */
-function go(v){if(!/^(hoje|funil|agenda|contatos|horarios|plano|app)$/.test(v))v='hoje';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
-  if(v==='funil'||v==='contatos')loadLeads();if(v==='agenda')loadCal();if(v==='horarios')loadAg();if(v==='hoje')loadHoje();if(v==='app')appView()}
-$$('#nav button[data-v],#mnav button[data-v]').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
+function go(v){if(!/^(hoje|funil|agenda|contatos|horarios|plano|app|site)$/.test(v))v='hoje';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
+  if(v==='funil'||v==='contatos')loadLeads();if(v==='agenda')loadCal();if(v==='horarios')loadAg();if(v==='hoje')loadHoje();if(v==='app')appView();if(v==='site'){var f=$('#siteFrame');if(!f.getAttribute('src'))f.src='/painel/?embed=crm#geral'}}
+$('#nav button[data-v],#mnav button[data-v]').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
+$('[data-site-tab]').forEach(function(b){b.onclick=function(){var tab=b.dataset.siteTab;$('[data-site-tab]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});$('#siteFrame').contentWindow.location.hash=tab}});
 $('#logout').onclick=function(){rpc('joice_logout',{p_token:token}).catch(function(){});try{localStorage.removeItem('jc_token')}catch(e){}location.href='/painel/'};
 
 /* ---------- funil ---------- */
