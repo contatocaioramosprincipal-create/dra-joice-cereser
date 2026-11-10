@@ -6,6 +6,11 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Agenda · Dra. Joice Cereser</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232F211A'/%3E%3Cg fill='none' stroke='%23E3C59E' stroke-width='2.4'%3E%3Ccircle cx='18' cy='19' r='6'/%3E%3Ccircle cx='46' cy='19' r='6'/%3E%3Ccircle cx='32' cy='36' r='17'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="manifest" href="/crm/manifest.webmanifest">
+<meta name="theme-color" content="#A26B44">
+<link rel="apple-touch-icon" href="/crm/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dra. Joice">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap">
 <style>
@@ -352,11 +357,165 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
 .prev b{font:500 14px/1.3 "Jost"!important}
 .tbl{background:var(--surface)!important}
 .tbl td.nm{font:500 15px/1.3 "Jost"!important}
+
+/* ===== Hoje, busca, ficha, app ===== */
+.kbtn{display:flex;align-items:center;gap:10px;width:100%;margin:18px 0 0;padding:11px 13px;border-radius:12px;border:1px solid rgba(47,33,26,.12);background:rgba(255,255,255,.55);color:#7A6656;cursor:pointer;font:400 14px/1 "Jost"}
+.kbtn svg{width:16px;height:16px}
+.kbtn kbd{margin-left:auto;font:500 11px/1 "Jost";padding:4px 7px;border-radius:6px;background:#fff;border:1px solid rgba(47,33,26,.12);color:#8A7566}
+.hero-today{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:16px}
+.hello2 h1{font:500 30px/1.15 "Jost"!important}
+.hello2 .dt{font:500 11px/1 "Jost";letter-spacing:.2em;text-transform:uppercase;color:var(--caramelo);margin-bottom:10px}
+.hello2 p{color:var(--mudo);margin-top:6px;font-size:15px}
+.next{position:relative;overflow:hidden;background:var(--oliva);color:#fff;border-radius:20px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:170px}
+.next .lb{font:500 11px/1 "Jost";letter-spacing:.18em;text-transform:uppercase;color:var(--ouro)}
+.next .nm{font:500 22px/1.2 "Jost";margin-top:10px}
+.next .sub{font-size:14px;color:rgba(255,255,255,.8);margin-top:4px}
+.next .cd2{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+.next .count{font:300 36px/1 "Jost";color:var(--ouro);letter-spacing:-.02em}
+.next .count small{display:block;font:400 12px/1.4 "Jost";color:rgba(255,255,255,.7);letter-spacing:0}
+.next .btn{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.next .btn:hover{background:rgba(255,255,255,.24)}
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.kp>div{border-radius:18px;padding:18px 20px;position:relative}
+.kp>div:nth-child(1){background:var(--t-caramelo)}.kp>div:nth-child(2){background:var(--t-ouro)}.kp>div:nth-child(3){background:var(--t-salvia)}.kp>div:nth-child(4){background:var(--t-argila)}
+.kp .l{font:500 11px/1.3 "Jost";letter-spacing:.14em;text-transform:uppercase;color:#7A6656}
+.kp .v{font:300 38px/1 "Jost";margin-top:12px;color:var(--cafe);letter-spacing:-.02em}
+.kp .v small{font-size:16px;color:#7A6656}
+.kp .s{font-size:12.5px;color:#7A6656;margin-top:8px}
+.tgrid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:16px}
+.panel h3{font:500 16px/1.3 "Jost"!important;color:var(--cafe);display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.panel h3 small{font:400 13px/1 "Jost";color:var(--mudo)}
+.tl2{display:flex;flex-direction:column}
+.tl2 .it{display:grid;grid-template-columns:62px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.tl2 .it:first-child{border-top:0}
+.tl2 .hr{font:500 15px/1 "Jost";color:var(--cafe)}
+.tl2 .hr small{display:block;font:400 11.5px/1.4 "Jost";color:var(--mudo)}
+.tl2 .who b{display:block;font:500 15px/1.3 "Jost"}
+.tl2 .who small{color:var(--mudo);font-size:13px}
+.tl2 .it.past{opacity:.55}
+.tag{display:inline-flex;align-items:center;gap:6px;font:500 11px/1 "Jost";padding:6px 10px;border-radius:999px;white-space:nowrap}
+.tag.pendente{background:var(--t-caramelo);color:#8B5530}.tag.confirmado{background:var(--t-salvia);color:#4F5A15}.tag.realizado{background:#E9E2D9;color:var(--cafe)}.tag.faltou{background:var(--t-argila);color:#8E3B26}.tag.bloqueio{background:#EEE8E2;color:#7A6656}
+.mini{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.mini:first-child{border-top:0}
+.mini .av{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font:500 13px/1 "Jost";flex:none;background:var(--t-caramelo);color:var(--caramelo)}
+.mini .av.g{background:var(--t-salvia);color:var(--oliva)}.mini .av.o{background:var(--t-ouro);color:#8A6A2A}
+.mini .tx{flex:1;min-width:0}
+.mini .tx b{display:block;font:500 14.5px/1.3 "Jost";white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini .tx small{color:var(--mudo);font-size:12.5px}
+.mini a.w{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(47,125,78,.1);color:#2F7D4E;flex:none}
+.mini a.w svg{width:16px;height:16px}
+.empty2{font-size:13.5px;color:var(--mudo);padding:8px 0}
+.rate{display:flex;align-items:center;gap:16px}
+.ring{width:84px;height:84px;flex:none}
+.rate b{font:300 30px/1 "Jost"}
+.rate p{font-size:13px;color:var(--mudo);margin-top:4px}
+.bars2{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.bars2 div{display:grid;grid-template-columns:96px 1fr 30px;gap:10px;align-items:center;font-size:13px}
+.bars2 i{height:8px;border-radius:9px;background:var(--line);overflow:hidden;display:block}
+.bars2 i span{display:block;height:100%;border-radius:9px}
+.bars2 em{font-style:normal;text-align:right;color:var(--texto)}
+/* busca */
+.cmd{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 16px;background:rgba(47,33,26,.35);backdrop-filter:blur(4px)}
+.cmd-box{width:min(620px,100%);background:var(--surface);border-radius:20px;box-shadow:0 40px 80px -30px rgba(47,33,26,.6);overflow:hidden;border:1px solid var(--line)}
+.cmd-in{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.cmd-in svg{width:20px;height:20px;color:var(--caramelo)}
+.cmd-in input{flex:1;border:0;outline:none;background:none;font:400 18px/1.2 "Jost";color:var(--cafe)}
+.cmd-in kbd{font:500 11px/1 "Jost";padding:4px 7px;border-radius:6px;background:var(--bg);color:var(--mudo)}
+.cmd-res{max-height:52vh;overflow:auto;padding:8px}
+.cmd-g{font:500 10.5px/1 "Jost";letter-spacing:.18em;text-transform:uppercase;color:var(--mudo);padding:12px 12px 6px}
+.cmd-it{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:left;padding:10px 12px;border-radius:12px;cursor:pointer;font:400 14.5px/1.3 "Jost";color:var(--cafe)}
+.cmd-it small{color:var(--mudo);font-size:12.5px;display:block}
+.cmd-it .av{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font:500 12px/1 "Jost";background:var(--t-caramelo);color:var(--caramelo);flex:none}
+.cmd-it .av.g{background:var(--t-salvia);color:var(--oliva)}.cmd-it .av.a{background:var(--bg);color:var(--texto)}
+.cmd-it.on{background:var(--t-caramelo)}
+.cmd-ft{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--mudo)}
+/* ficha da criança */
+.drawer.wide{width:min(860px,100%)}
+.ch-h{display:flex;gap:16px;align-items:center}
+.ch-av{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;font:500 20px/1 "Jost";background:var(--t-salvia);color:var(--oliva);flex:none}
+.ch-av.F{background:var(--t-argila);color:#9B4A35}.ch-av.M{background:#E2ECEF;color:#1A6A86}
+.tabs{display:flex;gap:4px;margin-top:16px;background:rgba(255,255,255,.5);padding:4px;border-radius:12px;width:max-content;max-width:100%;overflow-x:auto}
+.tabs button{border:0;background:none;padding:9px 16px;border-radius:9px;cursor:pointer;font:400 14px/1 "Jost";color:var(--texto);white-space:nowrap}
+.tabs button[aria-pressed="true"]{background:#fff;color:var(--cafe);box-shadow:0 1px 3px rgba(47,33,26,.12);font-weight:500}
+.gform{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.gcharts{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+.gc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 16px 8px;position:relative}
+.gc h4{font:500 14.5px/1.3 "Jost";margin:0 0 2px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.gc h4 span{font-weight:400;color:var(--mudo);font-size:13px}
+.gc h4 b{font-weight:500;color:var(--caramelo)}
+.gc svg{width:100%;height:auto;display:block}
+.gc .tip{position:absolute;pointer-events:none;background:var(--cafe);color:#fff;border-radius:10px;padding:8px 10px;font-size:12.5px;line-height:1.4;opacity:0;transition:opacity .12s;white-space:nowrap}
+.gtbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+.gtbl th{text-align:left;font:500 10.5px/1 "Jost";letter-spacing:.16em;text-transform:uppercase;color:var(--mudo);padding:8px 6px;border-bottom:1px solid var(--line)}
+.gtbl td{padding:9px 6px;border-bottom:1px solid var(--line)}
+.gtbl button{border:0;background:none;color:var(--mudo);cursor:pointer}
+.mages{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.mages button{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 11px;cursor:pointer;font:400 13px/1 "Jost";color:var(--texto);position:relative}
+.mages button[aria-pressed="true"]{background:var(--oliva);color:#fff;border-color:var(--oliva)}
+.mages button i{position:absolute;right:-4px;top:-4px;width:9px;height:9px;border-radius:50%;background:var(--caramelo)}
+.mdom{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 18px 10px;margin-bottom:10px}
+.mdom h5{font:500 14px/1 "Jost";margin:12px 0 4px;color:var(--oliva)}
+.mit{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.mdom h5+.mit{border-top:0}
+.ans2{display:inline-flex;background:var(--bg);border-radius:999px;padding:3px;gap:2px}
+.ans2 button{border:0;background:none;padding:7px 11px;border-radius:999px;font:400 12.5px/1 "Jost";color:var(--texto);cursor:pointer;white-space:nowrap}
+.ans2 button[aria-pressed="true"][data-v="sim"]{background:var(--oliva);color:#fff}
+.ans2 button[aria-pressed="true"][data-v="nao"]{background:var(--caramelo);color:#fff}
+.ans2 button[aria-pressed="true"][data-v="ns"]{background:#8A7566;color:#fff}
+.msum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.msum span{font-size:13px;padding:7px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.kids{display:flex;flex-direction:column;gap:8px}
+.kids button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 12px;cursor:pointer;font:400 14px/1.3 "Jost"}
+.kids button .av{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font:500 13px/1 "Jost";background:var(--t-salvia);color:var(--oliva)}
+.kids button small{display:block;color:var(--mudo);font-size:12.5px}
+/* planejamento */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px}
+.phase .ph{display:flex;align-items:center;gap:10px;font:500 11px/1 "Jost";letter-spacing:.18em;text-transform:uppercase;color:var(--caramelo);margin-bottom:14px}
+.phase .ph i{width:10px;height:10px;border-radius:50%;background:var(--caramelo)}
+.phase:nth-child(2) .ph{color:var(--oliva)}.phase:nth-child(2) .ph i{background:var(--oliva)}
+.phase:nth-child(3) .ph{color:#8A6A2A}.phase:nth-child(3) .ph i{background:var(--ouro)}
+.feat{padding:14px 0;border-top:1px solid var(--line)}
+.feat:first-of-type{border-top:0}
+.feat b{display:block;font:500 15.5px/1.3 "Jost"}
+.feat p{font-size:13.5px;color:var(--texto);margin-top:4px;line-height:1.5}
+.done{background:var(--t-salvia);border-radius:20px;padding:20px 22px;margin-bottom:16px}
+.done h3{font:500 16px/1.3 "Jost"!important;margin-bottom:10px}
+.done ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px}
+.done li{font-size:14px;display:flex;gap:8px;align-items:flex-start}
+.done li::before{content:"✓";color:var(--oliva);font-weight:500}
+/* app */
+.appw{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.phone{width:290px;height:590px;margin:0 auto;border-radius:44px;background:#1E1712;padding:12px;box-shadow:0 40px 80px -30px rgba(47,33,26,.6)}
+.phone .scr{width:100%;height:100%;border-radius:34px;overflow:hidden;position:relative;background:linear-gradient(160deg,#C9B8A3 0%,#8C9474 55%,#5B5A3C 100%);padding:54px 20px 20px}
+.phone .scr::before{content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%);width:96px;height:26px;border-radius:20px;background:#1E1712}
+.phone .clk{text-align:center;color:#fff;font:300 46px/1 "Jost";margin-bottom:6px}
+.phone .dt{text-align:center;color:rgba(255,255,255,.85);font-size:13px;margin-bottom:34px}
+.phone .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 10px}
+.phone .ap{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10.5px;color:#fff}
+.phone .ap i{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.28);display:block}
+.phone .ap.me i{background:url(/crm/icon-192.png) center/cover;box-shadow:0 8px 18px -6px rgba(0,0,0,.45);animation:pop 2.4s ease-in-out infinite}
+@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.steps2{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.steps2 div{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;font-size:15px}
+.steps2 b.n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--t-caramelo);color:var(--caramelo);font:500 15px/1 "Jost"}
+.osw{display:inline-flex;gap:4px;background:var(--surface);border:1px solid var(--line);padding:4px;border-radius:999px;margin-top:18px}
+.osw button{border:0;background:none;padding:9px 16px;border-radius:999px;cursor:pointer;font:400 14px/1 "Jost";color:var(--texto)}
+.osw button[aria-pressed="true"]{background:var(--oliva);color:#fff}
+.inst{margin-top:20px}
+@media(max-width:1100px){.hero-today,.tgrid,.appw{grid-template-columns:1fr}.kp{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:1fr}.done ul{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.gform{grid-template-columns:1fr 1fr}.done ul{grid-template-columns:1fr}.phone{transform:scale(.85);transform-origin:top center;margin-bottom:-80px}}
+
+@media(max-width:860px){.mnav{overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none}.mnav::-webkit-scrollbar{display:none}.mnav button{flex:none!important;min-width:72px}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-bear" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="17" r="7"/><circle cx="48" cy="17" r="7"/><circle cx="16" cy="17" r="3"/><circle cx="48" cy="17" r="3"/><circle cx="32" cy="35" r="20"/><ellipse cx="32" cy="43" rx="8" ry="6"/><path d="M29.5 41.5h5l-2.5 2.5z" fill="currentColor"/><path d="M32 44v2.5M29 47.5q3 2 6 0"/></g><circle cx="24.5" cy="32" r="1.8" fill="currentColor"/><circle cx="39.5" cy="32" r="1.8" fill="currentColor"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1z"/></g></symbol>
+<symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="17" cy="6" r="2"/><circle cx="14" cy="18" r="2"/></g></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 17.5h2"/></g></symbol>
 <symbol id="i-board" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></g></symbol>
 <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 19.5c1-3.5 3.5-5 6.5-5s5.5 1.5 6.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14c2.3 0 4 1.2 5 4"/></g></symbol>
@@ -374,11 +533,15 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
 <div id="app" hidden>
 <aside>
   <div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Agenda</small></div></div>
+  <button class="kbtn" id="kbtn"><svg><use href="#i-search"/></svg>Buscar<kbd>Ctrl K</kbd></button>
   <nav id="nav">
+    <button data-v="hoje"><svg><use href="#i-home"/></svg>Hoje</button>
     <button data-v="funil"><svg><use href="#i-board"/></svg>Funil<span class="badge" data-badge hidden></span></button>
     <button data-v="agenda"><svg><use href="#i-cal"/></svg>Agenda</button>
     <button data-v="contatos"><svg><use href="#i-users"/></svg>Contatos</button>
     <button data-v="horarios"><svg><use href="#i-clock"/></svg>Horários no site</button>
+    <button data-v="plano"><svg><use href="#i-plan"/></svg>Planejamento</button>
+    <button data-v="app"><svg><use href="#i-phone"/></svg>Baixar no celular</button>
   </nav>
   <div class="foot">
     <a href="/painel/"><svg><use href="#i-chart"/></svg>Voltar ao painel</a>
@@ -389,6 +552,70 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
 </aside>
 <main>
   <div class="mtop"><div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Agenda</small></div></div><a class="btn btn-line" href="/painel/" style="padding:10px 14px">Painel</a></div>
+
+  <!-- HOJE -->
+  <section class="page" id="v-hoje" hidden>
+    <div class="hero-today">
+      <div class="hello2"><div class="dt" id="hjDate"></div><h1 id="hjHello">Bom dia, Dra. Joice</h1><p id="hjSum">Carregando o seu dia…</p></div>
+      <div class="next" id="hjNext"></div>
+    </div>
+    <div class="kp" id="hjKp"></div>
+    <div class="tgrid">
+      <div>
+        <div class="panel"><h3>Agenda de hoje <small id="hjCount"></small></h3><div class="tl2" id="hjList"></div></div>
+        <div class="panel"><h3>Indicadores do mês</h3><div id="hjInd"></div></div>
+      </div>
+      <div>
+        <div class="panel"><h3>Para confirmar <a class="btn btn-line" href="#agenda" style="padding:8px 12px;font-size:10.5px">Agenda</a></h3><div id="hjConf"></div></div>
+        <div class="panel"><h3>Pedidos novos <a class="btn btn-line" href="#funil" style="padding:8px 12px;font-size:10.5px">Funil</a></h3><div id="hjNew"></div></div>
+        <div class="panel"><h3>Aniversários da semana</h3><div id="hjBday"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANEJAMENTO -->
+  <section class="page" id="v-plano" hidden>
+    <div class="top"><div><div class="s">Planejamento</div><h1>O que vem por aí no seu sistema</h1></div></div>
+    <div class="done"><h3>Já está funcionando</h3><ul>
+      <li>Site com agendamento e horários online</li><li>Funil de pacientes</li><li>Agenda semanal integrada ao site</li>
+      <li>Tela Hoje com indicadores</li><li>Busca rápida de famílias e crianças</li><li>Ficha da criança</li>
+      <li>Curvas de crescimento da OMS</li><li>Marcos do desenvolvimento por criança</li><li>Relatórios e mapa de calor do site</li>
+    </ul></div>
+    <div class="road">
+      <div class="phase"><div class="ph"><i></i>Próximas semanas</div>
+        <div class="feat"><b>Calendário de vacinas</b><p>Pela data de nascimento, o sistema mostra as próximas vacinas de cada criança e avisa a família.</p></div>
+        <div class="feat"><b>Documentos com o seu timbrado</b><p>Atestado, declaração de comparecimento, orientações e encaminhamento a terapeutas, prontos para imprimir ou enviar em PDF.</p></div>
+        <div class="feat"><b>Lista de espera</b><p>Quando alguém cancela, o sistema mostra quem estava esperando e oferece a vaga com um toque.</p></div>
+      </div>
+      <div class="phase"><div class="ph"><i></i>Em seguida</div>
+        <div class="feat"><b>Lembretes automáticos no WhatsApp</b><p>Consulta de amanhã, retorno do 6º mês, vacina chegando e aniversário, enviados sozinhos pelo WhatsApp oficial.</p></div>
+        <div class="feat"><b>Pesquisa de satisfação</b><p>Depois da consulta, a família dá uma nota e o sistema calcula o índice de satisfação do consultório.</p></div>
+      </div>
+      <div class="phase"><div class="ph"><i></i>Depois</div>
+        <div class="feat"><b>Financeiro simples</b><p>Valor de cada consulta, forma de pagamento, o que foi recebido e o faturamento do mês.</p></div>
+        <div class="feat"><b>Indicadores de retorno</b><p>Quanto cada canal (Instagram, Google, indicação) trouxe em consultas e em faturamento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP NO CELULAR -->
+  <section class="page" id="v-app" hidden>
+    <div class="top"><div><div class="s">No celular</div><h1>Tenha o seu sistema no celular</h1></div></div>
+    <div class="appw">
+      <div>
+        <div class="panel" style="padding:26px 28px">
+          <p style="font-size:16px;color:var(--texto);margin:0">Instale uma vez e abra direto da tela inicial do celular, como qualquer aplicativo, sem precisar digitar endereço nem procurar no navegador.</p>
+          <div class="osw" id="osw"><button data-v="android" aria-pressed="true">Android</button><button data-v="ios">iPhone</button></div>
+          <div id="osTxt"></div>
+          <div class="inst"><button class="btn btn-gold" id="instBtn" hidden>Instalar no celular</button></div>
+          <p class="hint" style="margin-top:18px">Abra <b>drajoice.com.br/crm</b> no celular para começar.</p>
+        </div>
+      </div>
+      <div><div class="phone"><div class="scr"><div class="clk" id="phClk">9:41</div><div class="dt" id="phDt"></div>
+        <div class="apps"><div class="ap"><i></i>Fotos</div><div class="ap"><i></i>Câmera</div><div class="ap"><i></i>Agenda</div><div class="ap"><i></i>Mapas</div>
+        <div class="ap"><i></i>Notas</div><div class="ap me"><i></i>Dra. Joice</div><div class="ap"><i></i>Clima</div><div class="ap"><i></i>Ajustes</div></div></div></div></div>
+    </div>
+  </section>
 
   <!-- FUNIL -->
   <section class="page" id="v-funil" hidden>
@@ -435,10 +662,13 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
   </section>
 </main>
 <nav class="mnav" id="mnav">
+  <button data-v="hoje"><svg><use href="#i-home"/></svg>Hoje</button>
   <button data-v="funil"><svg><use href="#i-board"/></svg>Funil</button>
   <button data-v="agenda"><svg><use href="#i-cal"/></svg>Agenda</button>
   <button data-v="contatos"><svg><use href="#i-users"/></svg>Contatos</button>
   <button data-v="horarios"><svg><use href="#i-clock"/></svg>Horários</button>
+  <button data-v="plano"><svg><use href="#i-plan"/></svg>Planos</button>
+  <button data-v="app"><svg><use href="#i-phone"/></svg>Celular</button>
 </nav>
 </div>
 
@@ -483,8 +713,8 @@ function origin(l){return l.kind==='guia'?['Guia','']:(l.source==='cadastro manu
 var leads=[],agCfg=null,cur='funil';
 
 /* ---------- navegação ---------- */
-function go(v){if(!/^(funil|agenda|contatos|horarios)$/.test(v))v='agenda';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
-  if(v==='funil'||v==='contatos')loadLeads();if(v==='agenda')loadCal();if(v==='horarios')loadAg()}
+function go(v){if(!/^(hoje|funil|agenda|contatos|horarios|plano|app)$/.test(v))v='hoje';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
+  if(v==='funil'||v==='contatos')loadLeads();if(v==='agenda')loadCal();if(v==='horarios')loadAg();if(v==='hoje')loadHoje();if(v==='app')appView()}
 $$('#nav button[data-v],#mnav button[data-v]').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
 $('#logout').onclick=function(){rpc('joice_logout',{p_token:token}).catch(function(){});try{localStorage.removeItem('jc_token')}catch(e){}location.href='/painel/'};
 
@@ -535,6 +765,7 @@ function openLead(id){
     h+='<div class="sec"><h3>WhatsApp</h3><div class="tpl"><a target="_blank" rel="noopener" href="'+wa(l.phone,msgFirst(l))+'" data-first><svg><use href="#i-wa"/></svg>Primeiro contato</a>'+
       (next?'<a target="_blank" rel="noopener" href="'+wa(l.phone,msgConfirm(l,next))+'"><svg><use href="#i-wa"/></svg>Confirmar consulta</a><a target="_blank" rel="noopener" href="'+wa(l.phone,msgRemind(l,next))+'"><svg><use href="#i-wa"/></svg>Lembrete</a>':'')+
       '<a target="_blank" rel="noopener" href="'+wa(l.phone,msgAfter(l))+'"><svg><use href="#i-wa"/></svg>Pós-consulta</a></div></div>';
+    h+='<div class="sec"><h3>Crianças</h3><div class="kids" id="dKids"><div class="skel" style="height:50px"></div></div></div>';
     h+='<div class="sec"><h3>Consultas</h3><div class="apl">'+((d.appts||[]).length?d.appts.map(function(a){return '<div data-ap="'+a.id+'"><span><b style="font-weight:500">'+esc(cap(whenTxt(a.starts_at)))+'</b>'+(a.origin==='site'?' <small style="color:var(--caramelo)">· escolhido no site</small>':'')+'</span><span class="pill"><i style="background:'+({pendente:'#A26B44',confirmado:'#5B5A3C',realizado:'#2F211A',faltou:'#B4543B',cancelado:'#B9A89A'})[a.status]+'"></i>'+APS[a.status]+'</span></div>'}).join(''):'<p class="hint">Nenhuma consulta marcada.</p>')+'</div></div>';
     h+='<form class="sec" id="dForm"><h3>Dados</h3><div class="grid2"><label class="field"><span>Responsável</span><input name="parent_name" value="'+esc(l.parent_name)+'"></label><label class="field"><span>WhatsApp</span><input name="phone" value="'+esc(fmtPhone(l.phone))+'" inputmode="tel"></label>'+
       '<label class="field"><span>Nome da criança</span><input name="child_name" value="'+esc(l.child_name||'')+'"></label><label class="field"><span>Idade</span><select name="child_age"><option value=""></option>'+IDADES.map(function(i){return '<option'+(i===l.child_age?' selected':'')+'>'+i+'</option>'}).join('')+(l.child_age&&IDADES.indexOf(l.child_age)<0?'<option selected>'+esc(l.child_age)+'</option>':'')+'</select></label></div>'+
@@ -547,6 +778,7 @@ function openLead(id){
     h+='<button class="btn btn-line" id="dDel" style="color:#9B3B2E;border-color:rgba(155,59,46,.3)">Excluir contato</button></div>';
     dr.innerHTML=h;
     $('[data-close]',dr).onclick=closeDrawer;
+    loadKids().then(function(){var ks=kids.filter(function(k){return k.lead_id===l.id}),el=$('#dKids');if(!el)return;el.innerHTML=ks.map(function(k){return '<button data-k="'+k.id+'"><span class="av">'+esc(ini(k.name))+'</span><span>'+esc(k.name)+'<small>'+esc(k.birth_date?ageTxt(k.birth_date):'abrir ficha')+'</small></span></button>'}).join('')+'<button data-new style="justify-content:center;color:var(--caramelo)">+ Adicionar criança</button>';$$('[data-k]',el).forEach(function(b){b.onclick=function(){openChild(b.dataset.k)}});$('[data-new]',el).onclick=function(){childForm({lead:l})}});
     $('#dSt').onchange=function(){var v=this.value;rpc('joice_lead_update',{p_token:token,p_id:l.id,p_status:v,p_notes:null}).then(function(){toast('Etapa atualizada.');loadLeads();if(v==='agendado'&&!next)apptModal({lead:l})})};
     $('#dAp').onclick=function(){apptModal({lead:l})};
     $('[data-first]',dr).addEventListener('click',function(){if(l.status==='novo')rpc('joice_lead_update',{p_token:token,p_id:l.id,p_status:'contatado',p_notes:null}).then(loadLeads)});
@@ -681,8 +913,207 @@ function preview(){var el=$('#prev2');el.innerHTML='<div class="skel" style="hei
     if(!(d.days||[]).length){el.innerHTML='<p class="hint">Nenhum horário livre no período configurado.</p>';return}
     el.innerHTML=d.days.slice(0,10).map(function(x){return '<div><b>'+WDS[wdOf(x.date)]+' '+fmtD(x.date)+'</b><span>'+x.slots.map(function(t){return '<i>'+t+'</i>'}).join('')+'</span></div>'}).join('')}).catch(function(){el.innerHTML='<p class="hint">Não foi possível carregar a prévia.</p>'})}
 
+
+/* ================= NOVOS MÓDULOS ================= */
+var M=[
+{k:'2m',n:'2',u:'meses',m:2,i:{soc:['Acalma-se quando você conversa com ele ou o pega no colo','Olha para o seu rosto','Parece feliz em ver você chegando perto','Sorri quando você fala ou sorri para ele'],lin:['Faz outros sons além do choro','Reage a sons altos'],cog:['Acompanha você com o olhar enquanto você se move','Olha para um brinquedo por alguns segundos'],mov:['Mantém a cabeça erguida quando está de bruços','Mexe os dois braços e as duas pernas','Abre as mãos por alguns instantes']}},
+{k:'4m',n:'4',u:'meses',m:4,i:{soc:['Sorri sozinho para chamar sua atenção','Dá risadinhas quando você tenta fazê-lo rir','Olha para você, se mexe ou faz sons para chamar ou manter sua atenção'],lin:['Faz sons como "oooo" e "aahh"','Faz sons quando você conversa com ele','Vira a cabeça na direção da sua voz'],cog:['Quando está com fome, abre a boca ao ver o peito ou a mamadeira','Olha para as próprias mãos com interesse'],mov:['Mantém a cabeça firme, sem apoio, quando está no colo','Segura um brinquedo colocado na mão dele','Usa os braços para balançar brinquedos','Leva as mãos à boca','De bruços, se apoia nos cotovelos ou antebraços e levanta o tronco']}},
+{k:'6m',n:'6',u:'meses',m:6,i:{soc:['Reconhece pessoas conhecidas','Gosta de se olhar no espelho','Dá risadas'],lin:['Alterna sons com você, como numa conversa','Faz "pum" com a boca, soprando e colocando a língua para fora','Solta gritinhos agudos'],cog:['Coloca objetos na boca para explorar','Estica o braço para pegar um brinquedo que quer','Fecha a boca para mostrar que não quer mais comida'],mov:['Rola de barriga para cima para barriga para baixo','De bruços, se apoia com os braços esticados','Apoia-se nas mãos quando está sentado']}},
+{k:'9m',n:'9',u:'meses',m:9,i:{soc:['Fica tímido, grudado ou com medo perto de estranhos','Mostra várias expressões, como feliz, triste, bravo e surpreso','Olha quando você o chama pelo nome','Reage quando você sai (olha, estica os braços ou chora)','Sorri ou ri quando você brinca de "cadê? achou!"'],lin:['Faz sons repetidos como "mamamama" e "babababa"','Levanta os braços para ser pego no colo'],cog:['Procura objetos que caíram e saíram da vista','Bate um objeto no outro'],mov:['Senta sozinho','Passa objetos de uma mão para a outra','Usa os dedos para puxar a comida para perto','Fica sentado sem apoio']}},
+{k:'12m',n:'1',u:'ano',m:12,i:{soc:['Brinca com você, como parceiro de brincadeira'],lin:['Dá tchau','Chama "mamã", "papá" ou outro nome especial','Entende o "não" (para um pouco quando você diz)'],cog:['Coloca um objeto dentro de outro, como um bloco no copo','Procura algo que viu você esconder, como um brinquedo embaixo do pano'],mov:['Puxa o corpo para ficar de pé','Anda segurando nos móveis','Bebe em copo sem tampa, com você segurando','Pega pequenos pedaços de comida com o polegar e o indicador']}},
+{k:'15m',n:'15',u:'meses',m:15,i:{soc:['Imita outras crianças enquanto brinca','Mostra para você um objeto de que gosta','Bate palmas quando fica animado','Abraça um bichinho de pelúcia ou outro brinquedo','Demonstra carinho com abraços ou beijos'],lin:['Tenta dizer uma ou duas palavras além de "mamã" e "papá"','Olha para um objeto conhecido quando você fala o nome dele','Segue pedidos feitos com gesto e palavras','Aponta para pedir algo ou para pedir ajuda'],cog:['Tenta usar objetos do jeito certo, como telefone, copo ou livro','Empilha pelo menos dois objetos pequenos, como blocos'],mov:['Dá alguns passos sozinho','Usa os dedos para comer sozinho']}},
+{k:'18m',n:'18',u:'meses',m:18,i:{soc:['Afasta-se de você, mas confere se você está por perto','Aponta para mostrar algo interessante','Estende as mãos para você lavar','Olha algumas páginas de um livro com você','Ajuda a se vestir, passando o braço pela manga ou levantando o pé'],lin:['Tenta dizer três ou mais palavras além de "mamã" e "papá"','Segue pedidos sem gesto, como "me dá o brinquedo"'],cog:['Imita você em tarefas, como varrer','Brinca de forma simples, como empurrar um carrinho'],mov:['Anda sem se segurar em nada nem em ninguém','Rabisca','Bebe em copo sem tampa, às vezes derramando','Come sozinho com os dedos','Tenta usar a colher','Sobe e desce do sofá ou da cadeira sem ajuda']}},
+{k:'24m',n:'2',u:'anos',m:24,i:{soc:['Percebe quando alguém está machucado ou triste','Olha para o seu rosto para saber como reagir em uma situação nova'],lin:['Aponta figuras de um livro quando você pergunta, como "cadê o urso?"','Junta pelo menos duas palavras, como "mais leite"','Aponta pelo menos duas partes do corpo quando você pede','Usa outros gestos além de dar tchau e apontar, como mandar beijo ou balançar a cabeça para dizer sim'],cog:['Tenta mexer em botões e interruptores de brinquedos','Brinca com mais de um brinquedo ao mesmo tempo, como pôr comidinha no pratinho','Segura algo com uma mão enquanto usa a outra, como segurar o pote e tirar a tampa'],mov:['Chuta uma bola','Corre','Sobe alguns degraus, com ou sem ajuda','Come com a colher']}},
+{k:'30m',n:'2½',u:'anos',m:30,i:{soc:['Brinca perto de outras crianças e às vezes com elas','Mostra o que sabe fazer dizendo "olha eu!"','Segue rotinas simples, como ajudar a guardar os brinquedos'],lin:['Fala cerca de 50 palavras','Junta duas ou mais palavras com uma ação, como "cachorro corre"','Nomeia figuras de um livro quando você aponta e pergunta "o que é isso?"','Usa palavras como "eu", "você" ou "nós"'],cog:['Brinca de faz de conta, como dar comida para a boneca','Resolve problemas simples, como subir num banquinho para alcançar algo','Segue pedidos de duas etapas, como "guarda o brinquedo e fecha a porta"','Conhece pelo menos uma cor'],mov:['Usa as mãos para girar coisas, como maçanetas ou tampas','Tira algumas roupas sozinho','Pula do chão com os dois pés','Vira as páginas do livro uma de cada vez']}},
+{k:'36m',n:'3',u:'anos',m:36,i:{soc:['Acalma-se em até 10 minutos depois que você o deixa na escola','Observa outras crianças e se junta a elas para brincar'],lin:['Conversa com você com pelo menos duas trocas de fala','Faz perguntas como "quem?", "o quê?", "onde?" ou "por quê?"','Diz o que está acontecendo em uma figura, como "comendo" ou "correndo"','Diz o primeiro nome quando perguntam','Fala bem o suficiente para outras pessoas entenderem, na maior parte do tempo'],cog:['Desenha um círculo depois que você mostra como','Evita tocar em coisas quentes, como o fogão, quando você avisa'],mov:['Enfia objetos grandes em um cordão, como contas ou macarrão','Veste algumas roupas sozinho','Usa o garfo']}},
+{k:'48m',n:'4',u:'anos',m:48,i:{soc:['Finge ser outra pessoa ou personagem ao brincar','Pede para brincar com outras crianças','Consola quem está triste ou machucado','Evita perigos, como pular de lugares altos','Gosta de ajudar','Muda o comportamento conforme o lugar (biblioteca, parquinho)'],lin:['Fala frases com quatro ou mais palavras','Diz algumas palavras de uma música, história ou parlenda','Conta pelo menos uma coisa que aconteceu no dia dele','Responde perguntas simples, como "para que serve o casaco?"'],cog:['Nomeia algumas cores','Conta o que vem depois em uma história conhecida','Desenha uma pessoa com três ou mais partes do corpo'],mov:['Pega uma bola grande na maioria das vezes','Serve a própria comida ou água, com supervisão','Desabotoa alguns botões','Segura o lápis entre os dedos e o polegar, e não com a mão fechada']}},
+{k:'60m',n:'5',u:'anos',m:60,i:{soc:['Segue regras e espera a vez nas brincadeiras','Canta, dança ou encena para você','Faz pequenas tarefas em casa, como separar meias ou tirar a mesa'],lin:['Conta uma história, ouvida ou inventada, com pelo menos dois acontecimentos','Responde perguntas simples sobre um livro ou história','Mantém uma conversa com mais de três trocas de fala','Usa ou reconhece rimas simples'],cog:['Conta até 10','Reconhece alguns números de 1 a 5','Usa palavras de tempo, como "ontem", "amanhã", "manhã" e "noite"','Presta atenção por 5 a 10 minutos em uma atividade','Escreve algumas letras do próprio nome','Reconhece algumas letras'],mov:['Abotoa alguns botões','Pula em um pé só']}}
+];
+var WHO=null;function loadWho(){return WHO?Promise.resolve(WHO):fetch('/crm/who.json').then(function(r){return r.json()}).then(function(d){WHO=d;return d})}
+var me={name:'Dra. Joice'},kids=[];
+function loadKids(){return rpc('joice_children_all',{p_token:token}).then(function(r){kids=r||[];return kids})}
+function ini(n){var p=String(n||'?').trim().split(/\s+/);return ((p[0]||'')[0]||'').toUpperCase()+((p.length>1?p[p.length-1][0]:'')||'').toUpperCase()}
+function nowSP(){var p=parts(new Date());return p}
+function greet(){var h=+nowSP().hour;return h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}
+function ageMonths(birth,at){var b=dayObj(birth),a=at?dayObj(at):dayObj(isoDay(new Date()));return (a-b)/86400000/30.4375}
+function ageTxt(birth,at){if(!birth)return '';var b=dayObj(birth),a=at?dayObj(at):dayObj(isoDay(new Date()));var days=Math.round((a-b)/86400000);if(days<0)return '';if(days<31)return days+(days===1?' dia':' dias');
+  var m=(a.getUTCFullYear()-b.getUTCFullYear())*12+(a.getUTCMonth()-b.getUTCMonth())-(a.getUTCDate()<b.getUTCDate()?1:0);if(m<24)return m+(m===1?' mês':' meses');var y=Math.floor(m/12),r=m%12;return y+' anos'+(r?' e '+r+(r===1?' mês':' meses'):'')}
+
+/* ---------- HOJE ---------- */
+var hjTimer=null,hjData=null;
+function loadHoje(){rpc('joice_today',{p_token:token}).then(function(T){hjData=T;renderHoje(T)}).catch(function(e){$('#hjSum').textContent=e.message})}
+function renderHoje(T){
+  var p=nowSP(),MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  $('#hjDate').textContent=WD[wdOf(isoDay(new Date()))]+', '+(+p.day)+' de '+MES[+p.month-1];
+  var nm=String(me.name||'').indexOf('Dra')===0?me.name:(me.role==='cliente'?'Dra. Joice':me.name);
+  $('#hjHello').textContent=greet()+', '+nm;
+  var td=(T.today||[]).filter(function(a){return a.kind!=='bloqueio'}),pend=td.filter(function(a){return a.status==='pendente'}).length;
+  $('#hjSum').innerHTML=td.length?('Você tem <b>'+td.length+(td.length===1?' consulta':' consultas')+'</b> hoje'+(pend?', '+pend+(pend===1?' ainda a confirmar':' ainda a confirmar'):'')+(T.new_count?' e '+T.new_count+(T.new_count===1?' pedido novo':' pedidos novos')+' esperando contato.':'.')):('Nenhuma consulta marcada para hoje'+(T.new_count?'. Há '+T.new_count+(T.new_count===1?' pedido novo':' pedidos novos')+' esperando contato.':'.'));
+  // próxima
+  function drawNext(){var nx=td.filter(function(a){return new Date(a.ends_at)>new Date()&&a.status!=='faltou'})[0],el=$('#hjNext');
+    if(!nx){el.innerHTML='<div><div class="lb">Próxima consulta</div><div class="nm">Agenda livre pelo resto do dia</div><div class="sub">Aproveite para responder os pedidos novos.</div></div><div class="cd2"><span></span><a class="btn" href="#agenda">Abrir agenda</a></div>';return}
+    var mins=Math.round((new Date(nx.starts_at)-new Date())/60000),ct=mins<=0?'Agora':mins<60?'em '+mins+' min':'em '+Math.floor(mins/60)+'h'+(mins%60?String(mins%60).padStart(2,'0'):'');
+    el.innerHTML='<div><div class="lb">Próxima consulta · '+hmTxt(nx.starts_at)+'</div><div class="nm">'+esc(nx.child_name||nx.parent_name||'Consulta')+'</div><div class="sub">'+esc([nx.child_name?nx.parent_name:'',KINDS[nx.kind],nx.reason].filter(Boolean).join(' · '))+'</div></div>'+
+      '<div class="cd2"><div class="count">'+ct+'<small>'+(nx.status==='pendente'?'ainda não confirmada':'confirmada')+'</small></div>'+(nx.phone?'<a class="btn" target="_blank" rel="noopener" href="'+wa(nx.phone,msgRemind({parent_name:nx.parent_name},nx))+'"><svg><use href="#i-wa"/></svg>Lembrar</a>':'')+'</div>'}
+  drawNext();clearInterval(hjTimer);hjTimer=setInterval(function(){if(cur==='hoje')drawNext()},30000);
+  var M=T.month||{},att=(M.realizado||0)+(M.faltou||0),rate=att?Math.round(M.realizado/att*100):null,W=T.week||{};
+  $('#hjKp').innerHTML='<div><div class="l">Consultas hoje</div><div class="v">'+td.length+'</div><div class="s">'+(pend?pend+' a confirmar':'todas confirmadas')+'</div></div>'+
+    '<div><div class="l">Nesta semana</div><div class="v">'+(W.total||0)+'</div><div class="s">'+(W.confirmado||0)+' confirmadas · '+(W.pendente||0)+' a confirmar</div></div>'+
+    '<div><div class="l">Pedidos novos</div><div class="v">'+(T.new_count||0)+'</div><div class="s">'+(T.month_leads||0)+' pedidos neste mês</div></div>'+
+    '<div><div class="l">Comparecimento no mês</div><div class="v">'+(rate===null?'—':rate+'<small>%</small>')+'</div><div class="s">'+(M.faltou||0)+(M.faltou===1?' falta':' faltas')+' no mês</div></div>';
+  $('#hjCount').textContent=td.length?td.length+(td.length===1?' consulta':' consultas'):'';
+  $('#hjList').innerHTML=(T.today||[]).length?(T.today||[]).map(function(a){var past=new Date(a.ends_at)<new Date();return '<div class="it'+(past?' past':'')+'" data-ap="'+a.id+'"><div class="hr">'+hm(a.starts_at)+'<small>até '+hm(a.ends_at)+'</small></div><div class="who"><b>'+esc(a.kind==='bloqueio'?(a.notes||'Horário bloqueado'):(a.child_name||a.parent_name||'Consulta'))+'</b><small>'+esc(a.kind==='bloqueio'?'Bloqueio':[a.child_name?a.parent_name:'',KINDS[a.kind],a.origin==='site'?'escolhido no site':''].filter(Boolean).join(' · '))+'</small></div><span class="tag '+(a.kind==='bloqueio'?'bloqueio':a.status)+'">'+(a.kind==='bloqueio'?'Bloqueio':APS[a.status])+'</span></div>'}).join(''):'<div class="empty2">Nenhuma consulta hoje. Clique em "Agenda" para marcar.</div>';
+  $$('#hjList [data-ap]').forEach(function(x){x.onclick=function(){var a=(T.today||[]).filter(function(y){return y.id===x.dataset.ap})[0];rpc('joice_appts',{p_token:token,p_from:a.starts_at,p_to:a.ends_at}).then(function(l){var f=l.filter(function(y){return y.id===a.id})[0];if(f)apptModal({appt:f})})}});
+  $('#hjConf').innerHTML=(T.to_confirm||[]).length?T.to_confirm.map(function(a){return '<div class="mini"><span class="av o">'+esc(ini(a.child_name||a.parent_name))+'</span><span class="tx"><b>'+esc(a.child_name||a.parent_name)+'</b><small>'+esc(cap(whenTxt(a.starts_at)))+(a.origin==='site'?' · pelo site':'')+'</small></span>'+(a.phone?'<a class="w" target="_blank" rel="noopener" title="Confirmar no WhatsApp" href="'+wa(a.phone,msgConfirm({parent_name:a.parent_name,child_name:a.child_name},a))+'"><svg><use href="#i-wa"/></svg></a>':'')+'</div>'}).join(''):'<div class="empty2">Tudo confirmado por aqui.</div>';
+  $('#hjNew').innerHTML=(T.new_leads||[]).length?T.new_leads.map(function(l){return '<div class="mini" data-l="'+l.id+'" style="cursor:pointer"><span class="av">'+esc(ini(l.parent_name))+'</span><span class="tx"><b>'+esc(l.parent_name)+'</b><small>'+esc([l.reason,ago(l.created_at)].filter(Boolean).join(' · '))+'</small></span><a class="w" target="_blank" rel="noopener" title="Chamar no WhatsApp" data-stop href="'+wa(l.phone,msgFirst(l))+'"><svg><use href="#i-wa"/></svg></a></div>'}).join(''):'<div class="empty2">Nenhum pedido esperando contato.</div>';
+  $$('#hjNew [data-l]').forEach(function(x){x.onclick=function(e){if(e.target.closest('[data-stop]')){rpc('joice_lead_update',{p_token:token,p_id:x.dataset.l,p_status:'contatado',p_notes:null}).then(loadHoje);return}openLead(x.dataset.l)}});
+  $('#hjBday').innerHTML=(T.birthdays||[]).length?T.birthdays.map(function(b){var turning=Math.round(ageMonths(b.birth_date,b.nb)/12);var when=b.dd===0?'hoje':b.dd===1?'amanhã':'em '+b.dd+' dias';return '<div class="mini" data-c="'+b.id+'" style="cursor:pointer"><span class="av g">'+esc(ini(b.name))+'</span><span class="tx"><b>'+esc(b.name)+'</b><small>Faz '+turning+(turning===1?' ano ':' anos ')+when+'</small></span>'+(b.phone?'<a class="w" target="_blank" rel="noopener" data-stop href="'+wa(b.phone,'Olá, '+first(b.parent_name)+'! A Dra. Joice e toda a equipe desejam um feliz aniversário para '+b.name+'! Que venha um ano cheio de descobertas.')+'"><svg><use href="#i-wa"/></svg></a>':'')+'</div>'}).join(''):'<div class="empty2">Nenhum aniversário nos próximos 7 dias.</div>';
+  $$('#hjBday [data-c]').forEach(function(x){x.onclick=function(e){if(e.target.closest('[data-stop]'))return;openChild(x.dataset.c)}});
+  var src=T.sources||[],mx=Math.max.apply(null,src.map(function(s){return s.n}).concat([1])),C=['#A26B44','#5B5A3C','#1A7BA0','#C2607A','#7A55A8'];
+  var circ=2*Math.PI*36,pct=rate||0;
+  $('#hjInd').innerHTML='<div class="rate"><svg class="ring" viewBox="0 0 84 84"><circle cx="42" cy="42" r="36" fill="none" stroke="#E6DACB" stroke-width="8"/><circle cx="42" cy="42" r="36" fill="none" stroke="#5B5A3C" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+(circ*pct/100)+' '+circ+'" transform="rotate(-90 42 42)"/></svg><div><b>'+(rate===null?'—':rate+'%')+'</b><p>de comparecimento nas consultas deste mês'+(att?' ('+M.realizado+' de '+att+')':'')+'.</p><p>'+(T.lead_to_appt_days!=null?'Em média, '+String(T.lead_to_appt_days).replace('.',',')+' dias entre o pedido e a consulta marcada.':'')+'</p></div></div>'+
+    (src.length?'<div class="hint" style="margin-top:16px">De onde vêm as famílias que consultaram</div><div class="bars2">'+src.slice(0,5).map(function(s,i){return '<div><span>'+esc(cap(s.source))+'</span><i><span style="width:'+(s.n/mx*100)+'%;background:'+C[i]+'"></span></i><em>'+s.n+'</em></div>'}).join('')+'</div>':'<p class="hint" style="margin-top:14px">A origem dos pacientes aparece aqui conforme as consultas forem confirmadas.</p>');
+}
+
+/* ---------- BUSCA RÁPIDA ---------- */
+var cmdEl=null,cmdSel=0,cmdItems=[];
+function openCmd(){if(cmdEl)return;cmdEl=document.createElement('div');cmdEl.className='cmd';cmdEl.innerHTML='<div class="cmd-box" role="dialog" aria-label="Busca rápida"><div class="cmd-in"><svg><use href="#i-search"/></svg><input id="cmdQ" placeholder="Buscar família, criança ou ação…" autocomplete="off"><kbd>Esc</kbd></div><div class="cmd-res" id="cmdR"></div><div class="cmd-ft"><span>↑ ↓ navegar</span><span>Enter abrir</span><span>Ctrl + K em qualquer tela</span></div></div>';
+  document.body.appendChild(cmdEl);cmdEl.addEventListener('click',function(e){if(e.target===cmdEl)closeCmd()});
+  var q=$('#cmdQ');q.focus();q.oninput=function(){cmdSel=0;drawCmd(q.value)};
+  q.onkeydown=function(e){if(e.key==='ArrowDown'){e.preventDefault();cmdSel=Math.min(cmdSel+1,cmdItems.length-1);hl()}else if(e.key==='ArrowUp'){e.preventDefault();cmdSel=Math.max(cmdSel-1,0);hl()}else if(e.key==='Enter'){e.preventDefault();var it=cmdItems[cmdSel];if(it){closeCmd();it.run()}}else if(e.key==='Escape'){closeCmd()}};
+  Promise.all([leads.length?Promise.resolve():loadLeads(),loadKids()]).then(function(){drawCmd(q.value)});drawCmd('')}
+function closeCmd(){if(cmdEl){cmdEl.remove();cmdEl=null}}
+function hl(){$$('.cmd-it',cmdEl).forEach(function(b,i){b.classList.toggle('on',i===cmdSel);if(i===cmdSel)b.scrollIntoView({block:'nearest'})})}
+function norm2(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
+function drawCmd(q){var nq=norm2(q.trim()),out=[],h='';
+  var acts=[['Marcar consulta','a',function(){apptModal({date:isoDay(new Date())})}],['Cadastrar família','a',newLead],['Ir para Hoje','a',function(){go('hoje')}],['Ir para Agenda','a',function(){go('agenda')}],['Ir para Funil','a',function(){go('funil')}],['Ir para Contatos','a',function(){go('contatos')}]];
+  if(nq){
+    var ks=kids.filter(function(c){return norm2([c.name,c.parent_name].join(' ')).indexOf(nq)>-1}).slice(0,6);
+    var ls=leads.filter(function(l){return norm2([l.parent_name,l.child_name,l.phone,l.reason].join(' ')).indexOf(nq)>-1||String(l.phone||'').indexOf(q.replace(/\D/g,'')||'§')>-1}).slice(0,6);
+    if(ks.length){h+='<div class="cmd-g">Crianças</div>';ks.forEach(function(c){out.push({run:function(){openChild(c.id)}});h+='<button class="cmd-it"><span class="av g">'+esc(ini(c.name))+'</span><span>'+esc(c.name)+'<small>'+esc([c.birth_date?ageTxt(c.birth_date):'',c.parent_name].filter(Boolean).join(' · '))+'</small></span></button>'})}
+    if(ls.length){h+='<div class="cmd-g">Famílias</div>';ls.forEach(function(l){out.push({run:function(){openLead(l.id)}});h+='<button class="cmd-it"><span class="av">'+esc(ini(l.parent_name))+'</span><span>'+esc(l.parent_name)+'<small>'+esc([l.child_name,fmtPhone(l.phone),STL[l.status]].filter(Boolean).join(' · '))+'</small></span></button>'})}
+    acts=acts.filter(function(a){return norm2(a[0]).indexOf(nq)>-1});
+    if(!ks.length&&!ls.length&&!acts.length)h+='<div class="cmd-g">Nada encontrado para "'+esc(q)+'"</div>';
+  }
+  if(acts.length){h+='<div class="cmd-g">Ações</div>';acts.forEach(function(a){out.push({run:a[2]});h+='<button class="cmd-it"><span class="av a">→</span><span>'+esc(a[0])+'</span></button>'})}
+  cmdItems=out;var r=$('#cmdR');r.innerHTML=h;$$('.cmd-it',r).forEach(function(b,i){b.onclick=function(){closeCmd();out[i].run()};b.onmousemove=function(){cmdSel=i;hl()}});hl()}
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();cmdEl?closeCmd():openCmd()}});
+
+/* ---------- CRIANÇAS ---------- */
+function childForm(o){var c=o.child||{},l=o.lead||{};
+  modal('<div class="mh"><div class="s">Ficha da criança</div><h2>'+(c.id?'Editar dados':'Nova criança')+'</h2><button class="btn-ic x" data-close><svg><use href="#i-x"/></svg></button></div><form id="cfF"><div class="mb">'+
+   '<div class="grid2"><label class="field"><span>Nome da criança</span><input name="name" required value="'+esc(c.name||l.child_name||'')+'"></label><label class="field"><span>Data de nascimento</span><input type="date" name="birth_date" value="'+esc(c.birth_date||'')+'" max="'+isoDay(new Date())+'"></label>'+
+   '<label class="field"><span>Sexo</span><select name="sex"><option value=""></option><option value="F"'+(c.sex==='F'?' selected':'')+'>Menina</option><option value="M"'+(c.sex==='M'?' selected':'')+'>Menino</option></select></label><label class="field"><span>Escola</span><input name="school" value="'+esc(c.school||'')+'"></label></div>'+
+   '<label class="field"><span>Alergias informadas pela família</span><input name="allergies" value="'+esc(c.allergies||'')+'" placeholder="Ex.: dipirona, amendoim"></label>'+
+   '<label class="field"><span>Terapias e profissionais que acompanham</span><input name="therapists" value="'+esc(c.therapists||'')+'" placeholder="Ex.: fonoaudióloga Ana, terapia ocupacional"></label>'+
+   '<label class="field"><span>Observações</span><textarea name="notes">'+esc(c.notes||'')+'</textarea></label><p class="hint" style="margin:0">Sexo e data de nascimento são usados nas curvas de crescimento.</p><div class="err" id="cfE"></div></div>'+
+   '<div class="mf">'+(c.id?'<button type="button" class="btn btn-line" id="cfDel" style="color:#9B3B2E">Excluir ficha</button>':'<span></span>')+'<button class="btn btn-solid" type="submit">Salvar</button></div></form>');
+  $('#cfF').onsubmit=function(e){e.preventDefault();var f=new FormData(this),p={id:c.id||null,lead_id:c.lead_id||l.id||null};f.forEach(function(v,k){p[k]=v});
+    rpc('joice_child_save',{p_token:token,p:p}).then(function(id){closeModal();toast('Ficha salva.');loadKids();openChild(id)}).catch(function(er){$('#cfE').textContent=er.message})};
+  var d=$('#cfDel');if(d)d.onclick=function(){if(!confirm('Excluir a ficha de '+c.name+', com medidas e marcos? Não dá para desfazer.'))return;rpc('joice_child_delete',{p_token:token,p_id:c.id}).then(function(){closeModal();closeDrawer();toast('Ficha excluída.');loadKids()})};
+}
+var chTab='cresc';
+function openChild(id){
+  curLead=null;dr.classList.add('wide');
+  openDrawer('<div class="dr-h"><div class="skel" style="height:70px"></div></div>');
+  Promise.all([rpc('joice_child_detail',{p_token:token,p_id:id}),loadWho()]).then(function(r){var D=r[0],c=D.child;if(!c){closeDrawer();return}
+    var h='<div class="dr-h"><button class="btn-ic x" data-close aria-label="Fechar"><svg><use href="#i-x"/></svg></button><div class="ch-h"><span class="ch-av '+(c.sex||'')+'">'+esc(ini(c.name))+'</span><div><h2 style="padding-right:50px">'+esc(c.name)+'</h2><div class="sub">'+esc([c.birth_date?ageTxt(c.birth_date)+' · nasceu em '+fmtD(c.birth_date)+'/'+c.birth_date.slice(0,4):'Data de nascimento não informada',c.sex==='F'?'menina':c.sex==='M'?'menino':''].filter(Boolean).join(' · '))+'</div>'+
+      (c.parent_name?'<div class="sub">Responsável: <a href="#" id="chLead" style="color:var(--caramelo)">'+esc(c.parent_name)+'</a>'+(c.phone?' · '+esc(fmtPhone(c.phone)):'')+'</div>':'')+'</div></div>'+
+      (c.allergies?'<div class="tag faltou" style="margin-top:12px">Alergias: '+esc(c.allergies)+'</div>':'')+
+      '<div class="tabs" id="chTabs"><button data-t="cresc">Crescimento</button><button data-t="dev">Desenvolvimento</button><button data-t="dados">Dados</button></div></div><div class="dr-b" id="chBody"></div>';
+    dr.innerHTML=h;$('[data-close]',dr).onclick=closeDrawer;
+    var cl=$('#chLead');if(cl)cl.onclick=function(e){e.preventDefault();dr.classList.remove('wide');openLead(c.lead_id)};
+    function tab(t){chTab=t;$$('#chTabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t===t)});if(t==='cresc')growthTab(c,D);if(t==='dev')devTab(c,D);if(t==='dados')dataTab(c)}
+    $$('#chTabs button').forEach(function(b){b.onclick=function(){tab(b.dataset.t)}});tab(chTab);
+  }).catch(function(e){toast(e.message);closeDrawer()});
+}
+var _close0=closeDrawer;closeDrawer=function(){_close0();setTimeout(function(){dr.classList.remove('wide')},300)};
+function dataTab(c){var b=$('#chBody');b.innerHTML='<div class="grid2">'+[['Escola',c.school],['Terapias e profissionais',c.therapists],['Alergias',c.allergies],['Observações',c.notes]].map(function(x){return '<div class="panel" style="margin:0"><div class="hint" style="margin:0 0 6px">'+x[0]+'</div><div>'+esc(x[1]||'—')+'</div></div>'}).join('')+'</div><div style="margin-top:16px"><button class="btn btn-solid" id="chEdit">Editar dados</button></div>';$('#chEdit').onclick=function(){childForm({child:c})}}
+
+/* curvas da OMS (padrões de crescimento infantil, 0 a 5 anos) */
+var ZP=[[-1.881,'P3'],[-1.036,'P15'],[0,'P50'],[1.036,'P85'],[1.881,'P97']];
+function lmsAt(tab,m){m=Math.max(0,Math.min(60,m));var i=Math.floor(m),f=m-i,a=tab[i],b=tab[Math.min(60,i+1)];return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f]}
+function valAt(tab,m,z){var t=lmsAt(tab,m),L=t[0],M=t[1],S=t[2];return Math.abs(L)<1e-6?M*Math.exp(S*z):M*Math.pow(1+L*S*z,1/L)}
+function zOf(tab,m,x){var t=lmsAt(tab,m),L=t[0],M=t[1],S=t[2];return Math.abs(L)<1e-6?Math.log(x/M)/S:(Math.pow(x/M,L)-1)/(L*S)}
+function phi(z){var t=1/(1+.2316419*Math.abs(z)),d=.3989423*Math.exp(-z*z/2),p=d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return z>0?1-p:p}
+function pctTxt(z){var p=phi(z)*100;if(z<-1.881)return 'abaixo do percentil 3';if(z>1.881)return 'acima do percentil 97';return 'percentil '+Math.max(1,Math.min(99,Math.round(p)))}
+function growthTab(c,D){var b=$('#chBody');
+  if(!c.birth_date||!c.sex){b.innerHTML='<div class="panel">Para desenhar as curvas de crescimento, informe a <b>data de nascimento</b> e o <b>sexo</b> da criança.<div style="margin-top:14px"><button class="btn btn-solid" id="chEdit2">Completar dados</button></div></div>';$('#chEdit2').onclick=function(){childForm({child:c})};return}
+  var age=ageMonths(c.birth_date),over=age>60;
+  var h='<form class="gform" id="gF"><label class="field"><span>Data da medida</span><input type="date" name="measured_on" value="'+isoDay(new Date())+'" max="'+isoDay(new Date())+'" min="'+c.birth_date+'" required></label><label class="field"><span>Peso (kg)</span><input name="weight_kg" inputmode="decimal" placeholder="Ex.: 10,4"></label><label class="field"><span>'+(age<24?'Comprimento':'Altura')+' (cm)</span><input name="height_cm" inputmode="decimal" placeholder="Ex.: 78,5"></label><label class="field"><span>Perímetro cefálico (cm)</span><input name="head_cm" inputmode="decimal" placeholder="Ex.: 46"></label><button class="btn btn-gold" type="submit">Adicionar</button></form>';
+  if(over)h+='<p class="hint" style="margin-top:10px">As curvas da OMS desta ficha vão até os 5 anos. As medidas continuam salvas no histórico.</p>';
+  h+='<div class="gcharts"><div class="gc" id="gW"></div><div class="gc" id="gH"></div><div class="gc" id="gC"></div></div>';
+  var G=D.growth||[];
+  h+=G.length?'<table class="gtbl"><thead><tr><th>Data</th><th>Idade</th><th>Peso</th><th>'+(age<24?'Comprimento':'Altura')+'</th><th>P. cefálico</th><th></th></tr></thead><tbody>'+G.slice().reverse().map(function(g){return '<tr><td>'+fmtD(g.measured_on)+'/'+g.measured_on.slice(2,4)+'</td><td>'+ageTxt(c.birth_date,g.measured_on)+'</td><td>'+(g.weight_kg!=null?String(+g.weight_kg).replace('.',',')+' kg':'—')+'</td><td>'+(g.height_cm!=null?String(+g.height_cm).replace('.',',')+' cm':'—')+'</td><td>'+(g.head_cm!=null?String(+g.head_cm).replace('.',',')+' cm':'—')+'</td><td><button data-g="'+g.id+'" title="Excluir medida">✕</button></td></tr>'}).join('')+'</tbody></table>':'';
+  h+='<p class="hint" style="margin-top:14px">Curvas de referência: Padrões de Crescimento Infantil da Organização Mundial da Saúde (0 a 5 anos), os mesmos da Caderneta da Criança. As faixas mostram do percentil 3 ao 97.</p>';
+  b.innerHTML=h;
+  var sx=c.sex,pts=function(k){return G.filter(function(g){return g[k]!=null}).map(function(g){return {m:ageMonths(c.birth_date,g.measured_on),v:+g[k],d:g.measured_on}}).filter(function(p){return p.m>=0&&p.m<=60})};
+  gChart($('#gW'),WHO['wfa_'+sx],pts('weight_kg'),'Peso por idade','kg',age);
+  gChart($('#gH'),WHO['lhfa_'+sx],pts('height_cm'),(age<24?'Comprimento':'Altura')+' por idade','cm',age);
+  gChart($('#gC'),WHO['hcfa_'+sx],pts('head_cm'),'Perímetro cefálico por idade','cm',age);
+  $('#gF').onsubmit=function(e){e.preventDefault();var f=new FormData(this),p={child_id:c.id};f.forEach(function(v,k){p[k]=String(v).replace(',','.').trim()});
+    if(!p.weight_kg&&!p.height_cm&&!p.head_cm){toast('Informe pelo menos uma medida.');return}
+    if((p.weight_kg&&(+p.weight_kg<.5||+p.weight_kg>60))||(p.height_cm&&(+p.height_cm<30||+p.height_cm>150))||(p.head_cm&&(+p.head_cm<20||+p.head_cm>65))){toast('Confira os valores: algum parece fora do normal para a idade.');return}
+    rpc('joice_growth_save',{p_token:token,p:p}).then(function(){toast('Medida adicionada.');openChild(c.id)}).catch(function(er){toast(er.message)})};
+  $$('[data-g]',b).forEach(function(x){x.onclick=function(){if(!confirm('Excluir esta medida?'))return;rpc('joice_growth_delete',{p_token:token,p_id:x.dataset.g}).then(function(){openChild(c.id)})}});
+}
+function gChart(el,tab,pts,title,unit,age){
+  var maxM=Math.min(60,Math.max(12,Math.ceil(Math.max(age,pts.length?pts[pts.length-1].m:0)/6)*6+6)),minM=0;
+  var W=720,H=300,pl=44,pr=46,pt=14,pb=34,iw=W-pl-pr,ih=H-pt-pb;
+  var lo=valAt(tab,minM,-2.4),hi=valAt(tab,maxM,2.4);pts.forEach(function(p){lo=Math.min(lo,p.v);hi=Math.max(hi,p.v)});
+  var rng=hi-lo,step=rng>60?10:rng>25?5:rng>10?2:1;lo=Math.floor(lo/step)*step;hi=Math.ceil(hi/step)*step;
+  function x(m){return pl+(m-minM)/(maxM-minM)*iw}function y(v){return pt+ih-(v-lo)/(hi-lo)*ih}
+  function line(z){var d='';for(var m=minM;m<=maxM+1e-9;m+=.5)d+=(d?'L':'M')+x(m).toFixed(1)+' '+y(valAt(tab,m,z)).toFixed(1);return d}
+  function band(z1,z2){var a=[],b=[];for(var m=minM;m<=maxM+1e-9;m+=.5){a.push(x(m).toFixed(1)+' '+y(valAt(tab,m,z1)).toFixed(1));b.unshift(x(m).toFixed(1)+' '+y(valAt(tab,m,z2)).toFixed(1))}return 'M'+a.join('L')+'L'+b.join('L')+'Z'}
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(title)+'"><g font-family="Jost" font-size="11" fill="#8A7566">';
+  for(var v=lo;v<=hi+1e-9;v+=step){s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#EFE7DC"/><text x="'+(pl-8)+'" y="'+(y(v)+4)+'" text-anchor="end">'+v+'</text>'}
+  var xs=maxM<=24?3:6;for(var m=0;m<=maxM;m+=xs){s+='<line x1="'+x(m)+'" x2="'+x(m)+'" y1="'+pt+'" y2="'+(pt+ih)+'" stroke="#F3ECE3"/><text x="'+x(m)+'" y="'+(H-12)+'" text-anchor="middle">'+(m<24?m+'m':(m%12?Math.floor(m/12)+'a'+(m%12)+'m':m/12+' anos'))+'</text>'}
+  s+='</g><path d="'+band(-1.881,1.881)+'" fill="#E7EADD"/><path d="'+band(-1.036,1.036)+'" fill="#D9DECB"/>';
+  ZP.forEach(function(z){s+='<path d="'+line(z[0])+'" fill="none" stroke="'+(z[0]===0?'#5B5A3C':'#A9AE93')+'" stroke-width="'+(z[0]===0?1.8:1)+'"'+(z[0]===0?'':' stroke-dasharray="4 4"')+'/><text x="'+(W-pr+6)+'" y="'+(y(valAt(tab,maxM,z[0]))+4)+'" font-family="Jost" font-size="11" fill="#5B5A3C">'+z[1]+'</text>'});
+  if(age<=maxM)s+='<line x1="'+x(age)+'" x2="'+x(age)+'" y1="'+pt+'" y2="'+(pt+ih)+'" stroke="#A26B44" stroke-opacity=".35" stroke-dasharray="2 4"/>';
+  if(pts.length>1)s+='<path d="'+pts.map(function(p,i){return (i?'L':'M')+x(p.m).toFixed(1)+' '+y(p.v).toFixed(1)}).join('')+'" fill="none" stroke="#A26B44" stroke-width="2.2" stroke-linejoin="round"/>';
+  pts.forEach(function(p,i){s+='<circle cx="'+x(p.m)+'" cy="'+y(p.v)+'" r="5.5" fill="#A26B44" stroke="#fff" stroke-width="2" data-i="'+i+'" style="cursor:pointer"/>'});
+  s+='</svg><div class="tip"></div>';
+  var last=pts[pts.length-1],head='<h4>'+esc(title)+(last?'<span>Última: <b>'+String(last.v).replace('.',',')+' '+unit+'</b> · '+pctTxt(zOf(tab,last.m,last.v))+'</span>':'<span>Sem medidas ainda</span>')+'</h4>';
+  el.innerHTML=head+s;var tip=$('.tip',el),svg=$('svg',el);
+  $$('circle[data-i]',el).forEach(function(cn){cn.onmouseenter=function(){var p=pts[+cn.dataset.i],r=svg.getBoundingClientRect(),sc=r.width/W;tip.innerHTML=fmtD(p.d)+'/'+p.d.slice(2,4)+' · '+(p.m<24?Math.floor(p.m)+' meses':Math.floor(p.m/12)+' anos e '+Math.floor(p.m%12)+' meses')+'<br><b>'+String(p.v).replace('.',',')+' '+unit+'</b> · '+pctTxt(zOf(tab,p.m,p.v));tip.style.opacity=1;tip.style.left=Math.min(x(p.m)*sc,r.width-200)+'px';tip.style.top=(y(p.v)*sc-30)+'px'};cn.onmouseleave=function(){tip.style.opacity=0}});
+}
+
+/* marcos por criança */
+var DOMS={soc:'Social e emocional',lin:'Linguagem e comunicação',cog:'Aprendizado e raciocínio',mov:'Movimento e corpo'},devAge=null;
+function devTab(c,D){var b=$('#chBody'),ans=D.milestones||{};
+  var age=c.birth_date?ageMonths(c.birth_date):null;
+  if(!devAge||devAge.c!==c.id){var pick=M[0];if(age!=null)M.forEach(function(a){if(a.m<=age+0.1)pick=a});devAge={c:c.id,k:pick.k}}
+  var sel=M.filter(function(a){return a.k===devAge.k})[0];
+  function has(k){return Object.keys(ans).some(function(x){return x.indexOf(k+'|')===0})}
+  var cnt={sim:0,nao:0,ns:0},tot=0;Object.keys(sel.i).forEach(function(d){sel.i[d].forEach(function(t){tot++;var v=ans[sel.k+'|'+t];if(v)cnt[v]++})});
+  var h='<div class="mages">'+M.map(function(a){return '<button data-k="'+a.k+'" aria-pressed="'+(a.k===sel.k)+'">'+a.n+' '+a.u+(has(a.k)?'<i></i>':'')+'</button>'}).join('')+'</div>';
+  h+='<div class="msum"><span>'+tot+' marcos de '+sel.n+' '+sel.u+'</span><span style="color:#4F5A15">'+cnt.sim+' alcançados</span><span style="color:#8B5530">'+cnt.nao+' ainda não</span><span>'+cnt.ns+' não observados</span>'+(age!=null?'<span>Idade atual: '+ageTxt(c.birth_date)+'</span>':'')+'</div>';
+  Object.keys(DOMS).forEach(function(d){h+='<div class="mdom"><h5>'+DOMS[d]+'</h5>'+sel.i[d].map(function(t){var k=sel.k+'|'+t,v=ans[k]||'';return '<div class="mit"><span>'+esc(t)+'</span><span class="ans2" data-k="'+esc(k)+'"><button data-v="sim" aria-pressed="'+(v==='sim')+'">Sim</button><button data-v="nao" aria-pressed="'+(v==='nao')+'">Ainda não</button><button data-v="ns" aria-pressed="'+(v==='ns')+'">Não sei</button></span></div>'}).join('')+'</div>'});
+  h+='<p class="hint">Marcos de referência da cartilha do CDC traduzida pela Sociedade Brasileira de Pediatria. Mostram o que a maioria das crianças faz em cada idade; não são diagnóstico.</p>';
+  b.innerHTML=h;
+  $$('.mages button',b).forEach(function(x){x.onclick=function(){devAge.k=x.dataset.k;devTab(c,D)}});
+  $$('.ans2',b).forEach(function(g){g.onclick=function(e){var bt=e.target.closest('button');if(!bt)return;var k=g.dataset.k,v=ans[k]===bt.dataset.v?'':bt.dataset.v;var it={};it[k]=v;
+    rpc('joice_milestones_set',{p_token:token,p_child:c.id,p_age:sel.k,p_items:it}).then(function(){if(v)ans[k]=v;else delete ans[k];D.milestones=ans;devTab(c,D)}).catch(function(er){toast(er.message)})}});
+}
+
+/* ---------- APP NO CELULAR ---------- */
+var deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var b=$('#instBtn');if(b)b.hidden=false});
+function appView(){var os=/iPhone|iPad|iPod/.test(navigator.userAgent)?'ios':'android';setOs(os);
+  var p=nowSP();$('#phClk').textContent=(+p.hour)+':'+p.minute;var MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];$('#phDt').textContent=cap(WD[wdOf(isoDay(new Date()))])+', '+(+p.day)+' de '+MES[+p.month-1];
+  $('#instBtn').hidden=!deferredPrompt;
+  if(window.matchMedia('(display-mode: standalone)').matches)$('#osTxt').innerHTML='<p style="margin-top:18px;color:var(--oliva);font-weight:500">Pronto! Você já está usando o sistema instalado.</p>';}
+function setOs(os){$$('#osw button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===os)});
+  $('#osTxt').innerHTML=os==='ios'?'<div class="steps2"><div><b class="n">1</b><span>Abra <b>drajoice.com.br/crm</b> no <b>Safari</b> do iPhone.</span></div><div><b class="n">2</b><span>Toque no botão <b>Compartilhar</b>, o quadrado com a seta para cima, na barra de baixo.</span></div><div><b class="n">3</b><span>Escolha <b>Adicionar à Tela de Início</b> e toque em <b>Adicionar</b>.</span></div><div><b class="n">4</b><span>Pronto: "Dra. Joice" aparece na tela do celular, ao lado dos outros aplicativos.</span></div></div>'
+   :'<div class="steps2"><div><b class="n">1</b><span>Abra <b>drajoice.com.br/crm</b> no <b>Chrome</b> do celular.</span></div><div><b class="n">2</b><span>Toque em <b>Instalar no celular</b>, aqui embaixo, ou no menu <b>⋮</b> e depois em <b>Instalar aplicativo</b>.</span></div><div><b class="n">3</b><span>Confirme em <b>Instalar</b>.</span></div><div><b class="n">4</b><span>Pronto: "Dra. Joice" aparece na tela do celular, ao lado dos outros aplicativos.</span></div></div>'}
+$$('#osw button').forEach(function(b){b.onclick=function(){setOs(b.dataset.v)}});
+$('#instBtn').onclick=function(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;$('#instBtn').hidden=true})};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/crm/sw.js',{scope:'/crm/'}).catch(function(){});
+
 /* ---------- início ---------- */
-rpc('joice_me',{p_token:token}).then(function(){$('#app').hidden=false;go(location.hash.slice(1)||'agenda');getCfg()});
+rpc('joice_me',{p_token:token}).then(function(r){if(r)me=r;$('#app').hidden=false;go(location.hash.slice(1)||'hoje');getCfg();loadLeads()});
+$('#kbtn').onclick=openCmd;
 window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(v&&v!==cur)go(v)});
 setInterval(function(){if(document.visibilityState==='visible'&&(cur==='funil'||cur==='contatos')&&!dr.classList.contains('on')&&$('#modal').hidden)loadLeads()},60000);
 })();
