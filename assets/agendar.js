@@ -7,6 +7,7 @@
     if (c && c.horarios) cfg.horarios = c.horarios;
     if (c && c.whatsapp) cfg.whatsapp = c.whatsapp;
     if (c && c.instagram) cfg.instagram = c.instagram;
+    cfg.online = !!(c && c.agenda_online);
   }).catch(function () {});
 
   var DIAS = { seg: 'Segunda', ter: 'Terça', qua: 'Quarta', qui: 'Quinta', sex: 'Sexta', sab: 'Sábado' };
@@ -114,6 +115,30 @@
         s._onchange = function () { body.querySelector('#jmN').disabled = !(s.idade && s.motivo); };
         bindChips(body, s); s._onchange();
         body.querySelector('#jmN').onclick = function () { s.det = body.querySelector('#jmDet').value; s.step = 2; render(b); };
+      } else if (s.step === 2 && cfg.online && !s.prefMode) {
+        body.innerHTML = '<span class="jm-l">Escolha o dia</span><div id="jmDays" class="jm-ch"><span class="jm-note" style="margin:0">Carregando horários livres…</span></div><span class="jm-l" id="jmHl" hidden>Horário</span><div id="jmTimes" class="jm-ch"></div>' +
+          '<p class="jm-note">Consulta presencial em Tatuí, SP. A equipe confirma o horário com você pelo WhatsApp.</p>' +
+          '<div class="jm-act"><button class="jm-btn g" id="jmB">← Voltar</button><button class="jm-btn p" id="jmN" disabled>Continuar</button></div><p class="jm-note" style="text-align:center"><a href="#" id="jmPref" style="color:#A26B44">Nenhum horário serve? Enviar minha preferência</a></p>';
+        var nb = body.querySelector('#jmN');
+        body.querySelector('#jmB').onclick = function () { s.step = 1; render(b); };
+        body.querySelector('#jmPref').onclick = function (e) { e.preventDefault(); s.prefMode = true; s.slot = null; render(b); };
+        nb.onclick = function () { s.step = 3; render(b); };
+        fetch('/api/slots').then(function (r) { return r.json(); }).then(function (d) {
+          if (!d || !d.enabled || !(d.days || []).length) { s.prefMode = true; render(b); return; }
+          s.days = d.days;
+          var wd = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+          var dz = body.querySelector('#jmDays');
+          dz.innerHTML = d.days.map(function (x, i) { var dt = new Date(x.date + 'T12:00:00Z'); return '<button type="button" aria-pressed="false" data-i="' + i + '">' + wd[dt.getUTCDay()] + ' ' + String(dt.getUTCDate()).padStart(2, '0') + '/' + String(dt.getUTCMonth() + 1).padStart(2, '0') + '</button>'; }).join('');
+          function pickDay(i) {
+            dz.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.i == i); });
+            var day = d.days[i]; body.querySelector('#jmHl').hidden = false;
+            body.querySelector('#jmTimes').innerHTML = day.slots.map(function (t) { var v = day.date + 'T' + t; return '<button type="button" aria-pressed="' + (s.slot === v) + '" data-v="' + v + '">' + t.replace(':00', 'h').replace(':', 'h') + '</button>'; }).join('');
+          }
+          dz.onclick = function (e) { var x = e.target.closest('button'); if (x) { pickDay(x.dataset.i); } };
+          body.querySelector('#jmTimes').onclick = function (e) { var x = e.target.closest('button'); if (!x) return; s.slot = x.dataset.v; body.querySelectorAll('#jmTimes button').forEach(function (y) { y.setAttribute('aria-pressed', y === x); }); nb.disabled = false; };
+          var pre = 0; if (s.slot) d.days.forEach(function (x, i) { if (s.slot.indexOf(x.date) === 0) pre = i; });
+          pickDay(pre); nb.disabled = !s.slot;
+        }).catch(function () { s.prefMode = true; render(b); });
       } else if (s.step === 2) {
         body.innerHTML = '<span class="jm-l">Dias que ficam melhor para você</span>' + chips('dias', dias, true) +
           '<span class="jm-l">Período</span>' + chips('periodos', pers, true) +
@@ -125,33 +150,36 @@
       } else if (s.step === 3) {
         body.innerHTML = '<label class="jm-f"><span>Seu nome</span><input type="text" id="jmNome" autocomplete="name" maxlength="80" value="' + esc(s.nome || '') + '"></label>' +
           '<label class="jm-f"><span>Seu WhatsApp</span><input type="tel" id="jmTel" autocomplete="tel" inputmode="tel" placeholder="(15) 99999-9999" value="' + esc(s.tel || '') + '"></label>' +
+          '<label class="jm-f"><span>Nome da criança (opcional)</span><input type="text" id="jmCri" maxlength="80" value="' + esc(s.cri || '') + '"></label>' +
           '<input class="jm-hp" type="text" id="jmHp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
           '<label class="jm-ok"><input type="checkbox" id="jmOk"><span>Autorizo a equipe da Dra. Joice a entrar em contato pelo WhatsApp sobre este pedido. Meus dados ficam protegidos, conforme a <a href="/privacidade" target="_blank">política de privacidade</a>.</span></label>' +
           '<div class="jm-err" id="jmErr" role="alert"></div>' +
           '<div class="jm-act"><button class="jm-btn g" id="jmB">← Voltar</button><button class="jm-btn p" id="jmN">Enviar pedido</button></div>';
         var tel = body.querySelector('#jmTel'); tel.addEventListener('input', function () { tel.value = maskPhone(tel.value); });
-        body.querySelector('#jmB').onclick = function () { s.nome = body.querySelector('#jmNome').value; s.tel = tel.value; s.step = 2; render(b); };
+        body.querySelector('#jmB').onclick = function () { s.nome = body.querySelector('#jmNome').value; s.tel = tel.value; s.cri = body.querySelector('#jmCri').value; s.step = 2; render(b); };
         body.querySelector('#jmN').onclick = function () {
           var btn = this, err = body.querySelector('#jmErr'); err.textContent = '';
-          s.nome = body.querySelector('#jmNome').value.trim(); s.tel = tel.value;
+          s.nome = body.querySelector('#jmNome').value.trim(); s.tel = tel.value; s.cri = body.querySelector('#jmCri').value.trim();
           if (s.nome.length < 2) { err.textContent = 'Escreva seu nome.'; return; }
           if (tel.value.replace(/\D/g, '').length < 10) { err.textContent = 'Confira o número de WhatsApp (com DDD).'; return; }
           if (!body.querySelector('#jmOk').checked) { err.textContent = 'Marque a autorização para podermos entrar em contato.'; return; }
           btn.disabled = true; btn.textContent = 'Enviando…';
           var i = ids(), pref = [s.dias.join(', '), s.periodos.join(', ')].filter(Boolean).join(' · ');
-          post({ kind: 'agendamento', parent_name: s.nome, phone: tel.value, child_age: s.idade, reason: s.motivo, details: s.det, prefer: pref, consent: true, website: body.querySelector('#jmHp').value, vid: i.vid, sid: i.sid, source: i.source, data: opts.data || null })
+          post({ kind: 'agendamento', parent_name: s.nome, phone: tel.value, child_name: s.cri, slot: (cfg.online && !s.prefMode) ? s.slot : null, child_age: s.idade, reason: s.motivo, details: s.det, prefer: pref, consent: true, website: body.querySelector('#jmHp').value, vid: i.vid, sid: i.sid, source: i.source, data: opts.data || null })
             .then(function (r) {
               if (!r.ok) throw new Error(r.error);
               track('Pedido de agendamento enviado');
               s.step = 4; render(b);
-            }).catch(function (e) { err.textContent = e.message || 'Não foi possível enviar agora. Tente de novo.'; btn.disabled = false; btn.textContent = 'Enviar pedido'; });
+            }).catch(function (e) { err.textContent = e.message || 'Não foi possível enviar agora. Tente de novo.'; btn.disabled = false; btn.textContent = 'Enviar pedido'; if (/horário/.test(e.message || '')) { s.slot = null; setTimeout(function () { s.step = 2; render(b); }, 1600); } });
         };
       } else {
         b.querySelector('#jmT').innerHTML = 'Pedido <em>recebido</em>';
-        var msg = 'Olá! Acabei de pedir um horário pelo site da Dra. Joice. Sou ' + s.nome + '. Criança: ' + s.idade + '. Motivo: ' + s.motivo + '.';
+        var when = '';
+        if (cfg.online && !s.prefMode && s.slot) { var sd = new Date(s.slot.slice(0, 10) + 'T12:00:00Z'); when = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'][sd.getUTCDay()] + ', ' + s.slot.slice(8, 10) + '/' + s.slot.slice(5, 7) + ' às ' + s.slot.slice(11, 16).replace(':00', 'h').replace(':', 'h'); }
+        var msg = 'Olá! Acabei de ' + (when ? 'reservar um horário (' + when + ')' : 'pedir um horário') + ' pelo site da Dra. Joice. Sou ' + s.nome + '. Criança: ' + s.idade + '. Motivo: ' + s.motivo + '.';
         var wa = waLink(msg);
         body.innerHTML = '<div class="jm-done"><div class="ic">' + CHECK + '</div><h2>Obrigada, <em>' + esc(s.nome.split(' ')[0]) + '</em>.</h2>' +
-          '<p>A equipe da Dra. Joice vai chamar você no WhatsApp para confirmar o dia e o horário da consulta.</p>' +
+          (when ? '<p>Seu horário está reservado para <b>' + when + '</b>. A equipe da Dra. Joice vai chamar você no WhatsApp para confirmar.</p>' : '<p>A equipe da Dra. Joice vai chamar você no WhatsApp para confirmar o dia e o horário da consulta.</p>') +
           (wa ? '<a class="jm-btn w" href="' + wa + '" target="_blank" rel="noopener">Prefiro chamar agora no WhatsApp</a>' :
             '<a class="jm-btn w" href="https://www.instagram.com/' + esc(cfg.instagram) + '/" target="_blank" rel="noopener">Falar também pelo Instagram</a>') +
           '<div><button class="jm-btn g" id="jmC" style="margin:12px auto 0;padding-left:26px">Fechar</button></div></div>';

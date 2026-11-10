@@ -373,6 +373,7 @@ html,body{overflow-x:hidden}
     <nav id="nav">
       <button data-tab="geral"><svg><use href="#i-chart"/></svg>Visão geral</button>
       <button data-tab="pedidos"><svg><use href="#i-inbox"/></svg>Pedidos<span class="badge" data-badge hidden></span></button>
+      <button onclick="location.href='/crm/'"><svg><use href="#i-user"/></svg>CRM e agenda</button>
       <button data-tab="calor"><svg><use href="#i-heat"/></svg>Mapa de calor</button>
       <button data-tab="editar"><svg><use href="#i-pen"/></svg>Editar site</button>
       <button data-tab="conta"><svg><use href="#i-user"/></svg>Minha conta</button>
@@ -557,6 +558,7 @@ $('#loginForm').onsubmit=function(e){e.preventDefault();var b=$('#lBtn');b.disab
 $('#logout').onclick=function(){if(confirmLeave())logout()};$('#logout2').onclick=function(){if(confirmLeave())logout()};
 
 function start(){
+  if(/[?&]next=crm/.test(location.search)){location.replace('/crm/');return}
   $('#login').hidden=true;$('#app').hidden=false;
   var first=(me&&me.name||'').replace(/^Dra\.\s*/,'');
   $('#who').innerHTML=me&&me.role==='cliente'?'Dra. <em>'+esc(first)+'</em>':'<em>'+esc(me.name)+'</em>';

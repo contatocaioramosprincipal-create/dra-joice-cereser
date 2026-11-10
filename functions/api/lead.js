@@ -1,5 +1,5 @@
 import { SB, KEY } from '../_lib.js';
-const MSG = { consentimento: 'Marque a autorização para podermos entrar em contato.', telefone_invalido: 'Confira o número de WhatsApp (com DDD).', nome_invalido: 'Escreva seu nome.', muitos_pedidos: 'Recebemos vários pedidos seguidos. Aguarde alguns minutos.' };
+const MSG = { consentimento: 'Marque a autorização para podermos entrar em contato.', telefone_invalido: 'Confira o número de WhatsApp (com DDD).', nome_invalido: 'Escreva seu nome.', muitos_pedidos: 'Recebemos vários pedidos seguidos. Aguarde alguns minutos.', horario_indisponivel: 'Esse horário acabou de ser reservado. Escolha outro, por favor.' };
 function device(ua) { return /iPad|Tablet/i.test(ua) ? 'tablet' : /Mobi|Android|iPhone/i.test(ua) ? 'celular' : 'computador'; }
 export async function onRequestPost(ctx) {
   let p;
