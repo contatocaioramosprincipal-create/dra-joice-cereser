@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://drajoice.com.br/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://drajoice.com.br/</loc><lastmod>2026-11-10</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://drajoice.com.br/desenvolvimento/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/</loc><lastmod>2026-11-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/sinais-de-autismo-em-bebes/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/meu-filho-nao-fala/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/tdah-na-infancia/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/marcos-do-desenvolvimento/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/autismo-ou-atraso-de-fala/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/artigos/pediatra-em-tatui/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drajoice.com.br/privacidade</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
 </urlset>

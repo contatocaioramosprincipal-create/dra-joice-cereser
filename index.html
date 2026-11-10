@@ -320,6 +320,53 @@ footer .wrap{padding-block:46px 96px;display:flex;flex-wrap:wrap;justify-content
 footer b{font:400 34px/1 var(--script);color:var(--linho)}
 footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-weight:500}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Com que idade posso levar meu filho à Dra. Joice?", "acceptedAnswer": {"@type": "Answer", "text": "A pediatria acompanha a criança desde os primeiros dias de vida até a adolescência. Quanto antes começa o acompanhamento, mais cedo é possível perceber qualquer sinal que mereça atenção."}}, {"@type": "Question", "name": "Preciso de encaminhamento para uma avaliação do desenvolvimento?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Se você percebeu algum sinal que preocupa, como atraso na fala, pouco contato visual ou perda de habilidades, pode pedir um horário diretamente."}}, {"@type": "Question", "name": "Os sinais de atenção significam que meu filho tem autismo?", "acceptedAnswer": {"@type": "Answer", "text": "Não necessariamente. Os sinais indicam que a criança merece uma avaliação cuidadosa. O diagnóstico só pode ser feito por um profissional, depois de uma consulta completa."}}, {"@type": "Question", "name": "Como funciona a consulta de desenvolvimento?", "acceptedAnswer": {"@type": "Answer", "text": "A consulta começa ouvindo a família, sem pressa. Depois, a criança é examinada e observada enquanto brinca e interage. No final, você recebe explicações claras e os próximos passos."}}, {"@type": "Question", "name": "O que devo levar na primeira consulta?", "acceptedAnswer": {"@type": "Answer", "text": "Leve a caderneta de vacinação, exames e relatórios anteriores, relatórios da escola ou de terapeutas, se houver, e a sua lista de dúvidas."}}, {"@type": "Question", "name": "Como funciona o agendamento pelo site?", "acceptedAnswer": {"@type": "Answer", "text": "Você conta a idade da criança, o motivo da consulta e o melhor período. A equipe da Dra. Joice chama você no WhatsApp para confirmar o dia e o horário."}}]}</script>
+<style>
+/* ferramentas para pais */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px;margin:34px auto 0;text-align:left}
+.tool{position:relative;display:grid;grid-template-columns:52px 1fr;column-gap:16px;row-gap:4px;align-items:start;padding:24px 26px;border-radius:22px;background:var(--linho);text-decoration:none;color:var(--cafe);border:1px solid rgba(91,90,60,.18);box-shadow:0 22px 40px -30px rgba(47,33,26,.45);transition:transform .25s,box-shadow .25s;cursor:pointer;font:inherit}
+.tool:hover{transform:translateY(-3px);box-shadow:0 30px 50px -30px rgba(47,33,26,.55)}
+.tool .ti{grid-row:span 3;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--salvia);color:var(--oliva)}
+.tool .ti svg{width:24px;height:24px}
+.tool b{font:400 26px/1.1 var(--display)}
+.tool span{font-size:15px;line-height:1.55;color:var(--texto)}
+.tool i{font:500 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--caramelo);font-style:normal;margin-top:10px}
+.tool.alt{background:var(--cafe);color:var(--linho);border-color:transparent}
+.tool.alt span{color:rgba(245,237,226,.75)} .tool.alt .ti{background:rgba(227,197,158,.16);color:var(--ouro)} .tool.alt i{color:var(--ouro)}
+@media(max-width:760px){.tools{grid-template-columns:1fr}}
+/* dúvidas */
+.duvidas{background:var(--areia);padding:110px 0}
+.duvidas .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
+.duvidas .dh{position:sticky;top:110px}
+.duvidas h2{font-size:clamp(36px,4.4vw,56px);margin:18px 0 18px}
+.duvidas h2 em{color:var(--caramelo)}
+.duvidas .dh p{color:var(--texto);margin-bottom:28px;max-width:26em}
+.qas{display:flex;flex-direction:column;gap:12px}
+.qa{background:var(--linho);border-radius:20px;padding:4px 26px;border:1px solid rgba(47,33,26,.08);transition:background .2s}
+.qa[open]{background:#FBF6EF}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:20px 0;font:400 23px/1.2 var(--display);color:var(--cafe)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid rgba(162,107,68,.5);position:relative;transition:transform .3s}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--caramelo);transform:translate(-50%,-50%)}
+.qa summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+.qa[open] summary i::after{transform:translate(-50%,-50%) rotate(0)}
+.qa p{padding:0 0 22px;color:var(--texto);font-size:16.5px}
+@media(max-width:900px){.duvidas{padding:80px 0}.duvidas .wrap{grid-template-columns:1fr;gap:34px}.duvidas .dh{position:static}.qa{padding:2px 20px}.qa summary{font-size:20px}}
+/* leituras */
+.leituras{background:var(--linho);padding:100px 0;text-align:center}
+.leituras .eyebrow{justify-content:center}.leituras .eyebrow::after{content:"";width:34px;height:1px;background:currentColor;opacity:.6}
+.leituras h2{font-size:clamp(34px,4vw,52px);margin:18px 0 40px}.leituras h2 em{color:var(--caramelo)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:38px;text-align:left}
+.lc{display:flex;flex-direction:column;gap:12px;padding:28px 26px;border-radius:24px 24px 24px 6px;background:#FBF6EF;border:1px solid rgba(47,33,26,.08);text-decoration:none;color:var(--cafe);min-height:220px;transition:transform .25s,box-shadow .25s}
+.lc:hover{transform:translateY(-3px);box-shadow:0 26px 46px -30px rgba(47,33,26,.5)}
+.lc small{font:500 11px/1 var(--body);letter-spacing:.26em;text-transform:uppercase;color:var(--oliva)}
+.lc b{font:400 26px/1.15 var(--display);flex:1}
+.lc i{font:500 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--caramelo);font-style:normal}
+@media(max-width:900px){.cards{grid-template-columns:1fr}.leituras{padding:80px 0}}
+.ag-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.agendar .ag-ctas{margin-top:48px}.agendar .ag-ctas .btn-solid{margin-top:0}.agendar .btn-line{border-color:rgba(245,237,226,.4);color:var(--linho)}.agendar .btn-line:hover{background:rgba(245,237,226,.08)}
+footer .fl{display:flex;gap:18px;flex-wrap:wrap}footer .fl a{text-decoration:none;opacity:.8}footer .fl a:hover{opacity:1}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -347,6 +394,7 @@ footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-wei
 <a class="l" data-edit="topo-04" href="#sinais">Sinais de atenção</a>
 <a class="l" data-edit="topo-05" href="#primeira">Primeira consulta</a>
 <a class="l" data-edit="topo-06" href="#formacao">Formação</a>
+<a class="l" data-edit="topo-08" href="/artigos/">Conteúdos</a>
 <a class="btn btn-solid" data-edit="topo-07" href="#agendar">Agendar</a>
 </nav>
 </div>
@@ -443,6 +491,11 @@ footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-wei
 <div class="age any"><div class="when"><b data-edit="sinais-19">Em qualquer idade</b></div><p data-edit="sinais-20">Perda de fala, de balbucio ou de habilidades sociais que a criança já tinha.</p></div>
 </div>
 <div class="note"><svg fill="none" height="22" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg><span data-edit="sinais-21">Esses sinais não são um diagnóstico. Eles indicam que a criança merece uma avaliação, e quanto antes ela acontece, melhor para o desenvolvimento.</span></div>
+<div class="tools">
+<a class="tool" href="/desenvolvimento/"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M6 8l.8.8L8.5 7"/></svg></span><b data-edit="sinais-t1">Checklist do desenvolvimento</b><span data-edit="sinais-t2">Marque o que seu filho já faz, de 2 meses a 5 anos, e veja se vale conversar com a pediatra.</span><i>Fazer o checklist →</i></a>
+<a class="tool alt" href="#guia" data-guia><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h5"/></svg></span><b data-edit="sinais-t3">Guia gratuito: Os primeiros sinais</b><span data-edit="sinais-t4">Um material para guardar no celular, com o que observar em cada fase e quando agir.</span><i>Receber o guia →</i></a>
+</div>
+
 </div>
 </section>
 <section class="primeira" data-sec="primeira" id="primeira">
@@ -508,6 +561,36 @@ footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-wei
 <p class="foot" data-edit="vida-05">Um bom livro, um gato no colo e <em>quem ela ama</em> por perto.</p>
 </div>
 </section>
+<section class="duvidas" data-sec="duvidas" id="duvidas">
+<div class="wrap">
+<div class="dh">
+<div class="eyebrow" data-edit="duvidas-01">Dúvidas frequentes</div>
+<h2 data-edit="duvidas-02">O que as famílias <em>costumam perguntar</em></h2>
+<p data-edit="duvidas-03">Se a sua dúvida não estiver aqui, é só mandar uma mensagem. Nenhuma pergunta sobre um filho é pequena demais.</p>
+<a class="btn btn-solid" href="#agendar" data-agendar data-edit="duvidas-04">Pedir um horário</a>
+</div>
+<div class="qas">
+<details class="qa"><summary><span data-edit="duvidas-q1">Com que idade posso levar meu filho à Dra. Joice?</span><i aria-hidden="true"></i></summary><p data-edit="duvidas-a1">A pediatria acompanha a criança desde os primeiros dias de vida até a adolescência. Quanto antes começa o acompanhamento, mais cedo é possível perceber qualquer sinal que mereça atenção.</p></details>
+<details class="qa"><summary><span data-edit="duvidas-q2">Preciso de encaminhamento para uma avaliação do desenvolvimento?</span><i aria-hidden="true"></i></summary><p data-edit="duvidas-a2">Não. Se você percebeu algum sinal que preocupa, como atraso na fala, pouco contato visual ou perda de habilidades, pode pedir um horário diretamente.</p></details>
+<details class="qa"><summary><span data-edit="duvidas-q3">Os sinais de atenção significam que meu filho tem autismo?</span><i aria-hidden="true"></i></summary><p data-edit="duvidas-a3">Não necessariamente. Os sinais indicam que a criança merece uma avaliação cuidadosa. O diagnóstico só pode ser feito por um profissional, depois de uma consulta completa.</p></details>
+<details class="qa"><summary><span data-edit="duvidas-q4">Como funciona a consulta de desenvolvimento?</span><i aria-hidden="true"></i></summary><p data-edit="duvidas-a4">A consulta começa ouvindo a família, sem pressa. Depois, a criança é examinada e observada enquanto brinca e interage. No final, você recebe explicações claras e os próximos passos.</p></details>
+<details class="qa"><summary><span data-edit="duvidas-q5">O que devo levar na primeira consulta?</span><i aria-hidden="true"></i></summary><p data-edit="duvidas-a5">Leve a caderneta de vacinação, exames e relatórios anteriores, relatórios da escola ou de terapeutas, se houver, e a sua lista de dúvidas.</p></details>
+<details class="qa"><summary><span data-edit="duvidas-q6">Como funciona o agendamento pelo site?</span><i aria-hidden="true"></i></summary><p data-edit="duvidas-a6">Você conta a idade da criança, o motivo da consulta e o melhor período. A equipe da Dra. Joice chama você no WhatsApp para confirmar o dia e o horário.</p></details>
+</div>
+</div>
+</section>
+<section class="leituras" data-sec="leituras" id="leituras">
+<div class="wrap">
+<div class="eyebrow" data-edit="leituras-01">Para ler com calma</div>
+<h2 data-edit="leituras-02">Conteúdos para <em>pais atentos</em></h2>
+<div class="cards">
+<a class="lc" href="/artigos/sinais-de-autismo-em-bebes/"><small>Autismo</small><b>Sinais de autismo em bebês: o que observar até os 2 anos</b><i>Ler →</i></a>
+<a class="lc" href="/artigos/meu-filho-nao-fala/"><small>Fala</small><b>Meu filho de 2 anos ainda não fala. Quando me preocupar?</b><i>Ler →</i></a>
+<a class="lc" href="/artigos/tdah-na-infancia/"><small>TDAH</small><b>TDAH na infância: agitação normal ou sinal de atenção?</b><i>Ler →</i></a>
+</div>
+<a class="btn btn-line" href="/artigos/" data-edit="leituras-03">Ver todos os conteúdos</a>
+</div>
+</section>
 <section class="agendar" data-sec="agendar" id="agendar">
 <div class="wrap">
 <div>
@@ -518,7 +601,8 @@ footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-wei
 <div class="info"><small data-edit="agendar-04">Local</small><span data-edit="agendar-05">Tatuí · SP</span></div>
 <div class="info"><small data-edit="agendar-06">Instagram</small><span data-edit="agendar-07">@dra.joicecereser</span></div>
 </div>
-<a class="btn btn-solid" data-edit="agendar-08" data-edit-href="link-agendamento" href="https://www.instagram.com/dra.joicecereser/" rel="noopener" target="_blank">Agendar pelo Instagram →</a>
+<div class="ag-ctas"><a class="btn btn-solid" href="#agendar" data-agendar data-edit="agendar-09">Pedir um horário</a>
+<a class="btn btn-line" data-edit="agendar-08" data-edit-href="link-agendamento" href="https://www.instagram.com/dra.joicecereser/" rel="noopener" target="_blank">Agendar pelo Instagram →</a></div>
 </div>
 <div class="archbox">
 <div class="ill moon float"><svg><use href="#i-moon"></use></svg></div>
@@ -533,9 +617,11 @@ footer .reg{letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-wei
 <b data-edit="rodape-01">Joice Cereser</b>
 <span class="reg" data-edit="rodape-02">Médica Pediatra · CRM-SP 174512 · RQE 119336</span>
 <span data-edit="rodape-03">Tatuí · SP</span>
+<nav class="fl"><a href="/artigos/">Conteúdos</a><a href="/desenvolvimento/">Checklist do desenvolvimento</a><a href="/privacidade">Privacidade</a></nav>
 </div>
 </footer>
 <a class="fab" href="#agendar"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24" width="18"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Agendar</a>
-<script src="/assets/s.js?v=2" defer></script>
+<script src="/assets/s.js?v=3" defer></script>
+<script src="/assets/agendar.js?v=1" defer></script>
 </body>
 </html>

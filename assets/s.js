@@ -31,6 +31,8 @@
   }
 
   /* ---------- estatísticas próprias (anônimas, sem cookies) ---------- */
+  W.jcTrack = function () {};
+  W.jcIds = function () { return { vid: lsGet('jc_v'), sid: ssGet('jc_s'), source: ssGet('jc_src') }; };
   if (inFrame || lsGet('jc_admin') === '1' || /bot|crawl|spider|headless/i.test(N.userAgent)) return;
   var vid = lsGet('jc_v'); if (!vid) { vid = rid(); lsSet('jc_v', vid); }
   var sid = ssGet('jc_s'); if (!sid) { sid = rid(); ssSet('jc_s', sid); }
@@ -92,6 +94,10 @@
     if (lead || q.length >= 10) { leave(); }
   }, true);
 
+  W.jcTrack = function (label, isLead, secId) {
+    var c = base('click'); c.section = secId || null; c.target = String(label || '').slice(0, 80); c.is_lead = !!isLead;
+    q.push(c); leave();
+  };
   function leave() {
     var l = base('leave'); l.dur_ms = dur; l.depth = depth; l.data = { sec: sec };
     q.push(l); send();
