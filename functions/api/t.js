@@ -15,6 +15,8 @@ function os(ua) { return /iPhone|iPad|Mac OS X/.test(ua) ? (/iPhone|iPad/.test(u
 export async function onRequestPost(ctx) {
   const ua = ctx.request.headers.get('user-agent') || '';
   if (BOT.test(ua)) return new Response(null, { status: 204 });
+  const org = String((ctx.request.cf || {}).asOrganization || '');
+  if (/amazon|google|microsoft|azure|digitalocean|ovh|hetzner|linode|akamai|oracle|alibaba|tencent|contabo|vultr|scaleway|leaseweb/i.test(org)) return new Response(null, { status: 204 });
   let body;
   try { body = JSON.parse(await ctx.request.text()); } catch (e) { return new Response(null, { status: 400 }); }
   const list = Array.isArray(body) ? body.slice(0, 60) : [];

@@ -239,6 +239,43 @@ main{min-width:0}
   .grid2,.frow{grid-template-columns:1fr}
   .wkd{grid-template-columns:1fr}
 }
+/* ===== tema limpo ===== */
+:root{--linho:#F7F3EE;--papel:#FFFFFF;--linha:rgba(47,33,26,.09)}
+body{background:#F7F3EE}
+aside{background:#FFFFFF!important;color:var(--cafe)!important;border-right:1px solid var(--linha)}
+aside::after{display:none!important}
+aside .brand{border-bottom:1px solid var(--linha)!important}
+aside .brand b{color:var(--cafe)!important}
+aside .brand svg,aside .brand small{color:var(--caramelo)!important}
+aside nav button{color:var(--texto)!important}
+aside nav button svg{color:#B8A595}
+aside nav button:hover{background:#F7F3EE!important;color:var(--cafe)!important}
+aside nav button[aria-current="page"]{background:#F3ECE4!important;color:var(--cafe)!important;box-shadow:inset 3px 0 0 var(--caramelo)}
+aside nav button[aria-current="page"] svg{color:var(--caramelo)!important}
+aside .foot{border-top:1px solid var(--linha)!important}
+aside .foot a,aside .foot button{color:var(--mudo)!important}
+aside .foot a:hover,aside .foot button:hover{color:var(--cafe)!important;background:#F7F3EE!important}
+aside .axis{color:#C2B2A4!important}
+.card{box-shadow:0 1px 2px rgba(47,33,26,.04);border-color:var(--linha)}
+.grain::before,.grain::after{display:none!important}
+.toys{background-image:none!important}
+.mnav{background:#FFFFFF!important;border-top:1px solid var(--linha);box-shadow:0 -6px 20px -14px rgba(47,33,26,.25)}
+.mnav button{color:var(--mudo)!important}
+.mnav button[aria-current="page"]{color:var(--caramelo)!important;background:#F3ECE4!important}
+.seg{background:#FFFFFF}
+.col{background:#EFE9E1!important}
+.col.over{background:#E6EADB!important}
+.cd{box-shadow:0 1px 2px rgba(47,33,26,.06)!important}
+.cd:hover{box-shadow:0 10px 24px -16px rgba(47,33,26,.35)!important}
+.cal-wrap{background:#FFFFFF}
+.cal-head div{background:#FFFFFF}
+.dr-h,.mh{background:#F3ECE4!important}
+.drawer{background:#FBF8F4}
+.mbox{background:#FBF8F4}
+.tbl{background:#FFFFFF}
+.tbl th{background:#FAF6F1!important}
+.sw{background:#F7F3EE}
+.mtop .brand b{color:var(--cafe)}
 </style>
 </head>
 <body>
