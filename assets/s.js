@@ -1,6 +1,6 @@
 /* Estatísticas do site + aviso de cookies */
 (function () {
-  var CLARITY_ID = '';
+  var CLARITY_ID = 'zb89u3m2s1';
   var W = window, D = document, N = navigator;
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
