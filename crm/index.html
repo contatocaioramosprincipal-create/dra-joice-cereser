@@ -579,7 +579,7 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
     <div class="done"><h3>Já está funcionando</h3><ul>
       <li>Site com agendamento e horários online</li><li>Funil de pacientes</li><li>Agenda semanal integrada ao site</li>
       <li>Tela Hoje com indicadores</li><li>Busca rápida de famílias e crianças</li><li>Ficha da criança</li>
-      <li>Curvas de crescimento da OMS</li><li>Marcos do desenvolvimento por criança</li><li>Relatórios e mapa de calor do site</li>
+      <li>Curvas de crescimento da OMS</li><li>App da família no celular</li><li>Marcos do desenvolvimento por criança</li><li>Relatórios e mapa de calor do site</li>
     </ul></div>
     <div class="road">
       <div class="phase"><div class="ph"><i></i>Próximas semanas</div>
@@ -1091,12 +1091,12 @@ function devTab(c,D){var b=$('#chBody'),ans=D.milestones||{};
   var cnt={sim:0,nao:0,ns:0},tot=0;Object.keys(sel.i).forEach(function(d){sel.i[d].forEach(function(t){tot++;var v=ans[sel.k+'|'+t];if(v)cnt[v]++})});
   var h='<div class="mages">'+M.map(function(a){return '<button data-k="'+a.k+'" aria-pressed="'+(a.k===sel.k)+'">'+a.n+' '+a.u+(has(a.k)?'<i></i>':'')+'</button>'}).join('')+'</div>';
   h+='<div class="msum"><span>'+tot+' marcos de '+sel.n+' '+sel.u+'</span><span style="color:#4F5A15">'+cnt.sim+' alcançados</span><span style="color:#8B5530">'+cnt.nao+' ainda não</span><span>'+cnt.ns+' não observados</span>'+(age!=null?'<span>Idade atual: '+ageTxt(c.birth_date)+'</span>':'')+'</div>';
-  Object.keys(DOMS).forEach(function(d){h+='<div class="mdom"><h5>'+DOMS[d]+'</h5>'+sel.i[d].map(function(t){var k=sel.k+'|'+t,v=ans[k]||'';return '<div class="mit"><span>'+esc(t)+'</span><span class="ans2" data-k="'+esc(k)+'"><button data-v="sim" aria-pressed="'+(v==='sim')+'">Sim</button><button data-v="nao" aria-pressed="'+(v==='nao')+'">Ainda não</button><button data-v="ns" aria-pressed="'+(v==='ns')+'">Não sei</button></span></div>'}).join('')+'</div>'});
+  Object.keys(DOMS).forEach(function(d){h+='<div class="mdom"><h5>'+DOMS[d]+'</h5>'+sel.i[d].map(function(t){var k=sel.k+'|'+t,v=ans[k]||'';var fam=(D.milestones_family||[]).indexOf(k)>-1;return '<div class="mit"><span>'+esc(t)+(fam?' <small style="color:var(--caramelo);font-size:11.5px;white-space:nowrap">· marcado pela família</small>':'')+'</span><span class="ans2" data-k="'+esc(k)+'"><button data-v="sim" aria-pressed="'+(v==='sim')+'">Sim</button><button data-v="nao" aria-pressed="'+(v==='nao')+'">Ainda não</button><button data-v="ns" aria-pressed="'+(v==='ns')+'">Não sei</button></span></div>'}).join('')+'</div>'});
   h+='<p class="hint">Marcos de referência da cartilha do CDC traduzida pela Sociedade Brasileira de Pediatria. Mostram o que a maioria das crianças faz em cada idade; não são diagnóstico.</p>';
   b.innerHTML=h;
   $$('.mages button',b).forEach(function(x){x.onclick=function(){devAge.k=x.dataset.k;devTab(c,D)}});
   $$('.ans2',b).forEach(function(g){g.onclick=function(e){var bt=e.target.closest('button');if(!bt)return;var k=g.dataset.k,v=ans[k]===bt.dataset.v?'':bt.dataset.v;var it={};it[k]=v;
-    rpc('joice_milestones_set',{p_token:token,p_child:c.id,p_age:sel.k,p_items:it}).then(function(){if(v)ans[k]=v;else delete ans[k];D.milestones=ans;devTab(c,D)}).catch(function(er){toast(er.message)})}});
+    rpc('joice_milestones_set',{p_token:token,p_child:c.id,p_age:sel.k,p_items:it}).then(function(){if(v)ans[k]=v;else delete ans[k];D.milestones=ans;D.milestones_family=(D.milestones_family||[]).filter(function(x){return x!==k});devTab(c,D)}).catch(function(er){toast(er.message)})}});
 }
 
 /* ---------- APP NO CELULAR ---------- */
