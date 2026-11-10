@@ -316,50 +316,101 @@ main{min-width:0}
 html,body{overflow-x:hidden}
 .mtop{display:none;align-items:center;justify-content:space-between;padding:16px 18px 0}
 .mtop .brand b{font-size:26px} .mtop .brand svg{width:34px;height:34px}
-/* ===== tema limpo ===== */
-:root{--linho:#F7F3EE;--papel:#FFFFFF;--linha:rgba(47,33,26,.09)}
-body{background:#F7F3EE}
-aside{background:#FFFFFF!important;color:var(--cafe)!important;border-right:1px solid var(--linha)}
-aside::after{display:none!important}
-aside .brand{border-bottom:1px solid var(--linha)!important}
-aside .brand b{color:var(--cafe)!important}
-aside .brand svg,aside .brand small{color:var(--caramelo)!important}
-aside nav button{color:var(--texto)!important}
-aside nav button svg{color:#B8A595}
-aside nav button:hover{background:#F7F3EE!important;color:var(--cafe)!important}
-aside nav button[aria-current="page"]{background:#F3ECE4!important;color:var(--cafe)!important;box-shadow:inset 3px 0 0 var(--caramelo)}
-aside nav button[aria-current="page"] svg{color:var(--caramelo)!important}
-aside .foot{border-top:1px solid var(--linha)!important}
-aside .foot a,aside .foot button{color:var(--mudo)!important}
-aside .foot a:hover,aside .foot button:hover{color:var(--cafe)!important;background:#F7F3EE!important}
-aside .axis{color:#C2B2A4!important}
-.card{box-shadow:0 1px 2px rgba(47,33,26,.04);border-color:var(--linha)}
+/* ===== tema: cores da Dra. Joice, visual limpo ===== */
+:root{
+  --bg:#F3EDE4;--sidebg:#EAE0D2;--surface:#FFFDF9;--line:#E6DACB;
+  --linho:#F3EDE4;--papel:#FFFDF9;--linha:#E6DACB;
+  --t-salvia:#E7EADD;--t-caramelo:#F4E6D7;--t-argila:#F5E4DC;--t-ouro:#F7EEDC;--t-oliva:#E2E3D3;
+  --display:"Jost",system-ui,sans-serif;--script:"Jost",system-ui,sans-serif;
+}
+body{background:var(--bg)!important;font-family:"Jost",system-ui,sans-serif}
+h1,h2,h3{font-family:"Jost",system-ui,sans-serif!important;font-weight:500!important;letter-spacing:-.01em}
+h1 em,h2 em,h3 em,.big em{font-style:normal!important;color:inherit!important}
 .grain::before,.grain::after{display:none!important}
 .toys{background-image:none!important}
-.mnav{background:#FFFFFF!important;border-top:1px solid var(--linha);box-shadow:0 -6px 20px -14px rgba(47,33,26,.25)}
-.mnav button{color:var(--mudo)!important}
-.mnav button[aria-current="page"]{color:var(--caramelo)!important;background:#F3ECE4!important}
-.seg{background:#FFFFFF}
-.story{background:#FFFFFF!important;color:var(--cafe)!important;border:1px solid var(--linha)!important}
-.story .arcs{opacity:.12!important}
-.story .arcs path{stroke:var(--caramelo)}
-.story .eyebrow{color:var(--caramelo)!important}
-.story .big b,.story .big em{color:var(--caramelo)!important}
-.story .sub{color:var(--texto)!important}
-.story .sub b{color:var(--caramelo)!important}
-.reading{background:#FFFFFF!important;border:1px solid var(--linha)!important}
-.reading .eyebrow{color:var(--caramelo)!important}
-.reading li .ic{background:#F3ECE4!important;color:var(--caramelo)!important}
-.kpi.lead{background:#FFFFFF!important;color:var(--cafe)!important;border:1px solid var(--linha)!important;box-shadow:inset 0 3px 0 var(--caramelo)}
-.kpi.lead .val{color:var(--caramelo)!important}
-.kpi.lead .lbl,.kpi.lead .delta{color:var(--mudo)!important}
+.arcs,svg.arcs,.story .arcs{display:none!important}
+
+/* menu lateral */
+aside{background:var(--sidebg)!important;color:var(--cafe)!important;border-right:0!important}
+aside::after{display:none!important}
+.brand{border-bottom:1px solid rgba(47,33,26,.1)!important;align-items:center!important}
+.brand>svg{display:none!important}
+.brand::before{content:"JC";flex:none;width:42px;height:42px;border-radius:12px;background:var(--caramelo);color:#fff;display:grid;place-items:center;font:500 15px/1 "Jost";letter-spacing:.06em}
+.brand b{font:500 17px/1.2 "Jost"!important;color:var(--cafe)!important;letter-spacing:0}
+.brand small{font:500 10px/1 "Jost"!important;letter-spacing:.18em!important;color:var(--oliva)!important;margin-top:5px!important;padding:0!important}
+aside nav button{color:#5A4A3E!important;font-weight:400;border-radius:12px!important}
+aside nav button svg{color:#8E7A69!important}
+aside nav button:hover{background:rgba(255,255,255,.45)!important;color:var(--cafe)!important}
+aside nav button[aria-current="page"]{background:var(--caramelo)!important;color:#fff!important;box-shadow:0 8px 18px -10px rgba(162,107,68,.8)!important}
+aside nav button[aria-current="page"] svg{color:#fff!important}
+aside nav .badge{background:var(--oliva)!important}
+aside nav button[aria-current="page"] .badge{background:#fff!important;color:var(--caramelo)!important}
+aside .foot{border-top:1px solid rgba(47,33,26,.1)!important}
+aside .foot a,aside .foot button{color:#7A6656!important}
+aside .foot a:hover,aside .foot button:hover{background:rgba(255,255,255,.45)!important;color:var(--cafe)!important}
+aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
+
+/* cabeçalho das páginas */
+.hello .s,.top .s{font:500 11px/1 "Jost"!important;letter-spacing:.2em;text-transform:uppercase;color:var(--caramelo)!important;margin-bottom:8px}
+.hello h1,.top h1{font-size:clamp(26px,2.6vw,32px)!important;color:var(--cafe)!important;line-height:1.15!important}
+.hello p{color:var(--mudo)!important;font-size:14px}
+.eyebrow{font:500 11px/1 "Jost"!important;letter-spacing:.18em!important}
+.eyebrow::before{display:none!important}
+
+/* superfícies */
+.card{background:var(--surface)!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:0 1px 2px rgba(47,33,26,.04)}
+.card h2{font-size:17px!important;color:var(--cafe)!important}
+.card .hint{font-size:13px}
+.seg{background:var(--surface)!important;border-color:var(--line)!important}
+.seg button[aria-pressed="true"]{background:var(--oliva)!important;color:#fff!important}
+.btn-solid{background:var(--cafe)}
+.btn-line{background:var(--surface)!important;border-color:var(--line)!important}
+
+/* resumo */
+.story{background:var(--oliva)!important;color:#fff!important;border:0!important;min-height:0!important}
+.story .eyebrow{color:var(--ouro)!important}
+.story .big{font:400 clamp(24px,2.4vw,30px)/1.3 "Jost"!important;max-width:24em!important}
+.story .big b{font-weight:500!important;color:var(--ouro)!important}
+.story .sub{color:rgba(255,255,255,.82)!important;font-size:14.5px}
+.story .sub b{color:var(--ouro)!important}
+.reading{background:var(--t-salvia)!important;border:0!important}
+.reading .eyebrow{color:var(--oliva)!important}
+.reading li{font-size:14.5px}
+.reading li .ic{background:#fff!important;color:var(--oliva)!important}
+
+/* indicadores */
+.kpi{border:0!important}
+.g-kpi .kpi:nth-child(1){background:var(--t-caramelo)!important}
+.g-kpi .kpi:nth-child(2){background:var(--t-salvia)!important}
+.g-kpi .kpi:nth-child(3){background:var(--t-ouro)!important}
+.g-kpi .kpi:nth-child(4){background:var(--t-argila)!important}
+.kpi .lbl{font:500 11px/1.3 "Jost"!important;letter-spacing:.14em!important;color:#7A6656!important}
+.kpi .val{font:300 40px/1 "Jost"!important;color:var(--cafe)!important;letter-spacing:-.02em}
+.kpi .val small{font-size:16px}
+.kpi.lead{color:var(--cafe)!important;box-shadow:none!important}
+.kpi.lead .val{color:var(--cafe)!important}
+.kpi.lead .lbl{color:#5B6040!important}
+.kpi.lead .delta{color:#6E6A55!important}
 .kpi.lead .delta.up{color:#4B6B2A!important}
-.pipe div.on{background:#FFFFFF!important;border-color:var(--linha)!important;box-shadow:inset 0 3px 0 var(--oliva)}
-.pipe div.on b{color:var(--oliva)!important}.pipe div.on span{color:var(--mudo)!important}
-.help{background:#FFFFFF!important;color:var(--cafe)!important;border:1px solid var(--linha)!important}
-.help h2{color:var(--cafe)!important}.help p{color:var(--texto)!important}.help .eyebrow{color:var(--caramelo)!important}
-.hm-stage{background:#EFE8DF!important}
-.chip.ok{background:#EEF0E4!important;color:#4F5A15!important}
+.pipe div{background:var(--surface)!important;border:1px solid var(--line)!important}
+.pipe b{font:300 32px/1 "Jost"!important}
+.pipe div.on{background:var(--t-salvia)!important;border-color:transparent!important}
+.pipe div.on b{color:var(--oliva)!important}.pipe div.on span{color:#6E6A55!important}
+.sec-row .pos{font:500 18px/1 "Jost"!important}
+.sec-row .tm{font:300 22px/1 "Jost"!important}
+.funnel .col .p{font:300 22px/1 "Jost"!important}
+.city .pin{background:var(--t-caramelo)!important}
+.help{background:var(--oliva)!important;color:#fff!important;border:0!important}
+.help h2{color:#fff!important}.help p{color:rgba(255,255,255,.82)!important}.help .eyebrow{color:var(--ouro)!important}
+.chip.ok{background:var(--t-salvia)!important;color:#4F5A15!important}
+.hm-stage{background:var(--sidebg)!important}
+.ld .nm{font:500 19px/1.2 "Jost"!important}
+.empty b{font:500 16px/1.3 "Jost"!important;font-style:normal!important}
+.toast{background:var(--oliva)!important}
+.mnav{background:var(--sidebg)!important;border-top:0!important}
+.mnav button{color:#7A6656!important}
+.mnav button[aria-current="page"]{background:var(--caramelo)!important;color:#fff!important}
+.mtop .brand b{color:var(--cafe)!important}
 </style>
 </head>
 <body>
