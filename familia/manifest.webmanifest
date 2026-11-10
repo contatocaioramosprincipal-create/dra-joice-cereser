@@ -1,0 +1,17 @@
+{
+  "name": "Dra. Joice · Família",
+  "short_name": "Dra. Joice",
+  "description": "O aplicativo da sua família no consultório da Dra. Joice Cereser.",
+  "start_url": "/familia/#inicio",
+  "scope": "/familia/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3EDE4",
+  "theme_color": "#5B5A3C",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/familia/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/familia/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/familia/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

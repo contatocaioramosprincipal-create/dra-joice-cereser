@@ -766,6 +766,7 @@ function openLead(id){
       (next?'<a target="_blank" rel="noopener" href="'+wa(l.phone,msgConfirm(l,next))+'"><svg><use href="#i-wa"/></svg>Confirmar consulta</a><a target="_blank" rel="noopener" href="'+wa(l.phone,msgRemind(l,next))+'"><svg><use href="#i-wa"/></svg>Lembrete</a>':'')+
       '<a target="_blank" rel="noopener" href="'+wa(l.phone,msgAfter(l))+'"><svg><use href="#i-wa"/></svg>Pós-consulta</a></div></div>';
     h+='<div class="sec"><h3>Crianças</h3><div class="kids" id="dKids"><div class="skel" style="height:50px"></div></div></div>';
+    h+='<div class="sec"><h3>App da família</h3><div id="dFam" class="panel" style="margin:0;padding:16px 18px"><div class="skel" style="height:40px"></div></div></div>';
     h+='<div class="sec"><h3>Consultas</h3><div class="apl">'+((d.appts||[]).length?d.appts.map(function(a){return '<div data-ap="'+a.id+'"><span><b style="font-weight:500">'+esc(cap(whenTxt(a.starts_at)))+'</b>'+(a.origin==='site'?' <small style="color:var(--caramelo)">· escolhido no site</small>':'')+'</span><span class="pill"><i style="background:'+({pendente:'#A26B44',confirmado:'#5B5A3C',realizado:'#2F211A',faltou:'#B4543B',cancelado:'#B9A89A'})[a.status]+'"></i>'+APS[a.status]+'</span></div>'}).join(''):'<p class="hint">Nenhuma consulta marcada.</p>')+'</div></div>';
     h+='<form class="sec" id="dForm"><h3>Dados</h3><div class="grid2"><label class="field"><span>Responsável</span><input name="parent_name" value="'+esc(l.parent_name)+'"></label><label class="field"><span>WhatsApp</span><input name="phone" value="'+esc(fmtPhone(l.phone))+'" inputmode="tel"></label>'+
       '<label class="field"><span>Nome da criança</span><input name="child_name" value="'+esc(l.child_name||'')+'"></label><label class="field"><span>Idade</span><select name="child_age"><option value=""></option>'+IDADES.map(function(i){return '<option'+(i===l.child_age?' selected':'')+'>'+i+'</option>'}).join('')+(l.child_age&&IDADES.indexOf(l.child_age)<0?'<option selected>'+esc(l.child_age)+'</option>':'')+'</select></label></div>'+
@@ -779,6 +780,7 @@ function openLead(id){
     dr.innerHTML=h;
     $('[data-close]',dr).onclick=closeDrawer;
     loadKids().then(function(){var ks=kids.filter(function(k){return k.lead_id===l.id}),el=$('#dKids');if(!el)return;el.innerHTML=ks.map(function(k){return '<button data-k="'+k.id+'"><span class="av">'+esc(ini(k.name))+'</span><span>'+esc(k.name)+'<small>'+esc(k.birth_date?ageTxt(k.birth_date):'abrir ficha')+'</small></span></button>'}).join('')+'<button data-new style="justify-content:center;color:var(--caramelo)">+ Adicionar criança</button>';$$('[data-k]',el).forEach(function(b){b.onclick=function(){openChild(b.dataset.k)}});$('[data-new]',el).onclick=function(){childForm({lead:l})}});
+    famBox(l);
     $('#dSt').onchange=function(){var v=this.value;rpc('joice_lead_update',{p_token:token,p_id:l.id,p_status:v,p_notes:null}).then(function(){toast('Etapa atualizada.');loadLeads();if(v==='agendado'&&!next)apptModal({lead:l})})};
     $('#dAp').onclick=function(){apptModal({lead:l})};
     $('[data-first]',dr).addEventListener('click',function(){if(l.status==='novo')rpc('joice_lead_update',{p_token:token,p_id:l.id,p_status:'contatado',p_notes:null}).then(loadLeads)});
@@ -1110,6 +1112,18 @@ function setOs(os){$$('#osw button').forEach(function(b){b.setAttribute('aria-pr
 $$('#osw button').forEach(function(b){b.onclick=function(){setOs(b.dataset.v)}});
 $('#instBtn').onclick=function(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;$('#instBtn').hidden=true})};
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/crm/sw.js',{scope:'/crm/'}).catch(function(){});
+
+
+/* ---------- convite para o app da família ---------- */
+function famBox(l){var el=$('#dFam');if(!el)return;
+  rpc('joice_family_status',{p_token:token,p_lead:l.id}).then(function(st){
+    el.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><b style="font-weight:500">'+(st?(st.last_login?'Família já usa o app':'Acesso enviado'):'Ainda sem acesso')+'</b><div class="hint" style="margin:2px 0 0">'+(st?'Enviado '+ago(st.created_at)+(st.last_login?' · último acesso '+ago(st.last_login):''):'A família confirma consultas e acompanha o crescimento pelo celular.')+'</div></div><button class="btn btn-gold" id="famInv"><svg><use href="#i-wa"/></svg>'+(st?'Enviar novo código':'Enviar acesso')+'</button></div><div id="famCode"></div>';
+    $('#famInv').onclick=function(){if(!l.phone){toast('Cadastre o WhatsApp da família primeiro.');return}var w=window.open('about:blank','_blank');
+      rpc('joice_family_invite',{p_token:token,p_lead:l.id}).then(function(code){var kid=(kids.filter(function(k){return k.lead_id===l.id})[0]||{}).name||l.child_name;
+        var msg='Olá, '+first(l.parent_name)+'! Este é o aplicativo da família no consultório da Dra. Joice Cereser. Por ele você confirma as consultas'+(kid?' e acompanha o crescimento e o desenvolvimento de '+first(kid):' e acompanha o crescimento e o desenvolvimento do seu filho')+'.\n\nAcesse: https://drajoice.com.br/familia/?t='+String(l.phone).replace(/\D/g,'').replace(/^55(?=\d{10,11}$)/,'')+'\nSeu código de acesso: '+code+'\n\nDica: depois de entrar, adicione o aplicativo à tela inicial do celular.';
+        var url=wa(l.phone,msg);if(w)w.location=url;else window.open(url,'_blank');
+        $('#famCode').innerHTML='<p class="hint" style="margin:12px 0 0">Código enviado: <b style="font-size:16px;letter-spacing:.2em;color:var(--cafe)">'+code+'</b>. Ele vale até um novo ser gerado.</p>'}).catch(function(e){if(w)w.close();toast(e.message)})};
+  }).catch(function(){el.innerHTML='<p class="hint">Não foi possível carregar.</p>'})}
 
 /* ---------- início ---------- */
 rpc('joice_me',{p_token:token}).then(function(r){if(r)me=r;$('#app').hidden=false;go(location.hash.slice(1)||'hoje');getCfg();loadLeads()});

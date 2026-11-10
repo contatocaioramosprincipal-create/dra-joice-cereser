@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Dra. Joice · Família</title>
+<link rel="manifest" href="/familia/manifest.webmanifest">
+<meta name="theme-color" content="#5B5A3C">
+<link rel="apple-touch-icon" href="/familia/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dra. Joice">
+<link rel="icon" href="/familia/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap">
+<style>
+:root{--bg:#F3EDE4;--surface:#FFFDF9;--line:#E6DACB;--cafe:#2F211A;--caramelo:#A26B44;--oliva:#5B5A3C;--salvia:#DCE0D0;--argila:#D9A898;--ouro:#E3C59E;--texto:#5A463A;--mudo:#8A7566;
+  --t-salvia:#E7EADD;--t-caramelo:#F4E6D7;--t-argila:#F5E4DC;--t-ouro:#F7EEDC;color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{background:#E9E1D5;color:var(--cafe);font:400 15px/1.5 "Jost",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.01em}
+[hidden]{display:none!important}
+.shell{max-width:480px;min-height:100dvh;margin:0 auto;background:var(--bg);position:relative;box-shadow:0 0 60px -30px rgba(47,33,26,.4)}
+:focus-visible{outline:2px solid var(--caramelo);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:14px;padding:15px 18px;font:500 15px/1 "Jost";cursor:pointer;text-decoration:none;transition:transform .15s,opacity .15s}
+.btn:active{transform:scale(.98)}
+.btn svg{width:18px;height:18px}
+.btn-p{background:var(--caramelo);color:#fff}
+.btn-o{background:var(--oliva);color:#fff}
+.btn-w{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.btn-l{background:var(--surface);color:var(--cafe);border:1px solid var(--line)}
+.btn-wa{background:#2F7D4E;color:#fff}
+.full{width:100%}
+/* login */
+#login{min-height:100dvh;display:flex;flex-direction:column}
+.lg-top{background:var(--oliva);color:#fff;padding:calc(56px + env(safe-area-inset-top,0px)) 28px 70px;border-radius:0 0 36px 36px;position:relative;overflow:hidden}
+.lg-top::after{content:"";position:absolute;right:-60px;bottom:-90px;width:240px;height:240px;border-radius:50%;background:rgba(227,197,158,.14)}
+.lg-top::before{content:"";position:absolute;right:40px;top:40px;width:90px;height:90px;border-radius:50%;background:rgba(162,107,68,.35)}
+.mono{width:62px;height:62px;border-radius:18px;background:var(--caramelo);display:grid;place-items:center;font:500 22px/1 "Jost";color:#F7F3EE;position:relative;z-index:1;box-shadow:0 12px 24px -12px rgba(0,0,0,.5)}
+.lg-top h1{font-size:30px;line-height:1.15;margin-top:26px;position:relative;z-index:1}
+.lg-top p{color:rgba(255,255,255,.8);margin:10px 0 0;position:relative;z-index:1;max-width:22em}
+.lg-card{margin:-38px 18px 0;background:var(--surface);border-radius:24px;padding:24px 22px;box-shadow:0 20px 40px -26px rgba(47,33,26,.45);position:relative;z-index:2}
+.field{display:block;margin-bottom:14px}
+.field span{display:block;font:500 11px/1 "Jost";letter-spacing:.14em;text-transform:uppercase;color:var(--mudo);margin-bottom:8px}
+.field input{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:var(--bg);font-size:17px}
+.field input:focus{outline:none;border-color:var(--caramelo);box-shadow:0 0 0 4px rgba(162,107,68,.14)}
+.code{letter-spacing:.5em;text-align:center;font-weight:500}
+.err{color:#9B3B2E;font-size:14px;min-height:20px;margin:6px 0}
+.lg-foot{padding:24px 26px 40px;text-align:center;color:var(--mudo);font-size:14px}
+.lg-foot a{color:var(--caramelo);font-weight:500}
+/* app */
+.hd{padding:calc(22px + env(safe-area-inset-top,0px)) 22px 8px;display:flex;align-items:center;justify-content:space-between}
+.hd .dt{font:500 11px/1 "Jost";letter-spacing:.16em;text-transform:uppercase;color:var(--caramelo)}
+.hd h1{font-size:26px;margin-top:6px}
+.hd .mono{width:46px;height:46px;border-radius:14px;font-size:16px}
+.view{padding:10px 18px calc(110px + env(safe-area-inset-bottom,0px))}
+.next{background:var(--oliva);color:#fff;border-radius:24px;padding:22px;position:relative;overflow:hidden;margin-top:8px}
+.next::after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(227,197,158,.12)}
+.next .lb{font:500 11px/1 "Jost";letter-spacing:.16em;text-transform:uppercase;color:var(--ouro)}
+.next .when{font:500 26px/1.15 "Jost";margin-top:12px;position:relative;z-index:1}
+.next .who{color:rgba(255,255,255,.82);margin-top:6px;font-size:14.5px}
+.next .st{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font:500 12px/1 "Jost";padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.14)}
+.next .st.ok{background:rgba(220,224,208,.25);color:#E9F0D5}
+.next .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;position:relative;z-index:1}
+.next .acts .btn{padding:13px 10px;font-size:14px}
+.next .acts .btn.wide{grid-column:1/-1;background:var(--ouro);color:var(--cafe)}
+.sect{margin-top:22px}
+.sect h2{font-size:17px;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center}
+.sect h2 a{font:400 13px/1 "Jost";color:var(--caramelo);text-decoration:none}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{border:0;border-radius:18px;padding:16px 12px 14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:22px;text-decoration:none;color:var(--cafe);min-height:104px}
+.tile svg{width:24px;height:24px}
+.tile b{font:500 13.5px/1.25 "Jost"}
+.tile:nth-child(1){background:var(--t-caramelo)}.tile:nth-child(1) svg{color:var(--caramelo)}
+.tile:nth-child(2){background:var(--t-salvia)}.tile:nth-child(2) svg{color:var(--oliva)}
+.tile:nth-child(3){background:var(--t-ouro)}.tile:nth-child(3) svg{color:#8A6A2A}
+.tile:nth-child(4){background:var(--t-argila)}.tile:nth-child(4) svg{color:#9B4A35}
+.tile:nth-child(5){background:#E2ECEF}.tile:nth-child(5) svg{color:#1A6A86}
+.tile:nth-child(6){background:var(--surface);border:1px solid var(--line)}.tile:nth-child(6) svg{color:#2F7D4E}
+.kid{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:10px;cursor:pointer;width:100%;text-align:left}
+.kid .av{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font:500 17px/1 "Jost";background:var(--t-salvia);color:var(--oliva);flex:none}
+.kid .av.F{background:var(--t-argila);color:#9B4A35}.kid .av.M{background:#E2ECEF;color:#1A6A86}
+.kid b{display:block;font:500 16px/1.3 "Jost"}
+.kid small{color:var(--mudo);font-size:13px}
+.kid .go{margin-left:auto;color:var(--mudo)}
+.obs{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px}
+.obs .h{font:500 11px/1 "Jost";letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);margin-bottom:10px}
+.obs li{margin:8px 0;font-size:14.5px}
+.obs ul{padding-left:18px;margin:0}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:20px;padding:22px;text-align:center;color:var(--mudo);font-size:14.5px}
+/* filhos */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 16px;cursor:pointer;font:500 14px/1 "Jost";color:var(--texto)}
+.chips button[aria-pressed="true"]{background:var(--oliva);border-color:var(--oliva);color:#fff}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--surface);border:1px solid var(--line);padding:4px;border-radius:14px;margin:14px 0}
+.seg button{border:0;background:none;padding:11px;border-radius:10px;cursor:pointer;font:500 14px/1 "Jost";color:var(--texto)}
+.seg button[aria-pressed="true"]{background:var(--caramelo);color:#fff}
+.gc{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px 12px 6px;margin-bottom:12px;position:relative}
+.gc h4{font:500 15px/1.3 "Jost";margin:0 4px 2px}
+.gc .sub{font-size:13px;color:var(--mudo);margin:0 4px 6px}
+.gc .sub b{color:var(--caramelo);font-weight:500}
+.gc svg{width:100%;height:auto;display:block}
+.note{font-size:12.5px;color:var(--mudo);margin-top:10px;line-height:1.5}
+.ages{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.ages::-webkit-scrollbar{display:none}
+.ages button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 12px;cursor:pointer;font:400 13px/1 "Jost";color:var(--texto)}
+.ages button[aria-pressed="true"]{background:var(--oliva);color:#fff;border-color:var(--oliva)}
+.dom{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 16px 10px;margin-top:10px}
+.dom h5{font:500 14px/1 "Jost";color:var(--oliva);margin:14px 0 4px}
+.it{padding:12px 0;border-top:1px solid var(--line);font-size:14.5px}
+.dom h5+.it{border-top:0}
+.ans{display:flex;gap:6px;margin-top:9px}
+.ans button{flex:1;border:1px solid var(--line);background:var(--bg);padding:9px 6px;border-radius:10px;cursor:pointer;font:500 12.5px/1 "Jost";color:var(--texto)}
+.ans button[aria-pressed="true"][data-v="sim"]{background:var(--oliva);color:#fff;border-color:var(--oliva)}
+.ans button[aria-pressed="true"][data-v="nao"]{background:var(--caramelo);color:#fff;border-color:var(--caramelo)}
+.ans button[aria-pressed="true"][data-v="ns"]{background:#8A7566;color:#fff;border-color:#8A7566}
+.prog{display:flex;align-items:center;gap:12px;background:var(--t-salvia);border-radius:16px;padding:14px 16px;margin-top:12px;font-size:14px}
+.prog .bar{flex:1;height:8px;border-radius:9px;background:rgba(91,90,60,.15);overflow:hidden}
+.prog .bar i{display:block;height:100%;background:var(--oliva);border-radius:9px}
+/* conteúdos */
+.art{display:block;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:10px;text-decoration:none}
+.art small{font:500 10.5px/1 "Jost";letter-spacing:.16em;text-transform:uppercase;color:var(--oliva)}
+.art b{display:block;font:500 16px/1.3 "Jost";margin-top:8px}
+.art span{display:block;font-size:13px;color:var(--mudo);margin-top:6px}
+.art.hl{background:var(--caramelo);border:0;color:#fff}.art.hl small{color:var(--ouro)}.art.hl span{color:rgba(255,255,255,.8)}
+/* contato */
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;text-align:center}
+.doc .mono{margin:0 auto}
+.doc h2{font-size:20px;margin-top:14px}
+.doc p{color:var(--mudo);margin:6px 0 0;font-size:14px}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:20px;margin-top:12px;overflow:hidden}
+.list a,.list button{display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;border:0;background:none;border-top:1px solid var(--line);text-decoration:none;cursor:pointer;font:400 15px/1.3 "Jost";text-align:left}
+.list>:first-child{border-top:0}
+.list svg{width:20px;height:20px;color:var(--caramelo);flex:none}
+.list small{display:block;color:var(--mudo);font-size:12.5px}
+/* barra inferior */
+.tabbar{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);background:rgba(255,253,249,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(10px + env(safe-area-inset-bottom,0px));z-index:20}
+.tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:4px;font:500 11px/1 "Jost";color:var(--mudo);padding:7px 4px;border-radius:14px;cursor:pointer}
+.tabbar svg{width:23px;height:23px}
+.tabbar button[aria-current="page"]{color:var(--caramelo);background:var(--t-caramelo)}
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--oliva);color:#fff;padding:13px 20px;border-radius:999px;font-size:14px;opacity:0;transition:all .3s;z-index:60;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.skel{background:linear-gradient(90deg,rgba(47,33,26,.05),rgba(47,33,26,.09),rgba(47,33,26,.05));background-size:200% 100%;animation:sk 1.2s infinite;border-radius:20px;height:180px}
+@keyframes sk{to{background-position:-200% 0}}
+.fade{animation:fd .35s ease both}@keyframes fd{from{opacity:0;transform:translateY(6px)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="i-kids" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="7.5" r="3"/><path d="M3.5 19c.8-3.3 3-5 5.5-5s4.7 1.7 5.5 5"/><circle cx="17" cy="10" r="2.2"/><path d="M15.5 14.6c2.4-.4 4.4 1 5 4"/></g></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></g></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+<symbol id="i-grow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 16l4-5 3 3 5-7"/><path d="M15 7h3v3"/></g></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.5 5.2 5.7.8-4.1 4 1 5.6L12 16.4 6.9 19.1l1-5.6-4.1-4 5.7-.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></g></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.4L3 21l4.7-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.8 8.2c.2-.4.5-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .5.6 1 1.4 1.8 2.5 2.3.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.6.8c.2.1.4.2.4.4 0 .6-.2 1.3-.9 1.7-.6.3-1.4.4-2.6-.1-1.9-.7-3.4-2.3-4.3-4-.6-1.2-.5-2.2.1-3z" fill="currentColor"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".8" fill="currentColor"/></g></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2" fill="currentColor"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="shell">
+<!-- LOGIN -->
+<section id="login" hidden>
+  <div class="lg-top"><div class="mono">JC</div><h1>O aplicativo da sua família no consultório</h1><p>Consultas, crescimento e desenvolvimento do seu filho, tudo em um só lugar, com a Dra. Joice Cereser.</p></div>
+  <form class="lg-card" id="lgF">
+    <label class="field"><span>Seu WhatsApp</span><input id="lgTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(15) 99999-9999" required></label>
+    <label class="field"><span>Código de acesso</span><input id="lgCode" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required></label>
+    <div class="err" id="lgErr" role="alert"></div>
+    <button class="btn btn-p full" type="submit" id="lgBtn">Entrar</button>
+    <p style="font-size:13px;color:var(--mudo);margin:14px 0 0;text-align:center">O código é enviado pela equipe da Dra. Joice no seu WhatsApp.</p>
+  </form>
+  <div class="lg-foot">Ainda não é paciente? <a href="/?agendar=1">Pedir um horário</a></div>
+</section>
+
+<!-- APP -->
+<div id="app" hidden>
+  <header class="hd"><div><div class="dt" id="hdDate"></div><h1 id="hdHello">Olá</h1></div><div class="mono">JC</div></header>
+  <main class="view" id="view"></main>
+  <nav class="tabbar" id="tabs">
+    <button data-v="inicio"><svg><use href="#i-home"/></svg>Início</button>
+    <button data-v="filhos"><svg><use href="#i-kids"/></svg>Meus filhos</button>
+    <button data-v="ler"><svg><use href="#i-book"/></svg>Para ler</button>
+    <button data-v="equipe"><svg><use href="#i-chat"/></svg>Consultório</button>
+  </nav>
+</div>
+<div class="toast" id="toast"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var SB='https://phjhedoavxicpsvuxmls.supabase.co',KEY='sb_publishable_3luHSKJnQcijOLhelysNxA_bYwnqTB1',TZ='America/Sao_Paulo';
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+var ft=ls('jc_fam'),D=null,cfg={whatsapp:'',instagram:'dra.joicecereser'},view='inicio',kidSel=null,kidTab='cresc';
+var ERR={acesso_invalido:'WhatsApp ou código não conferem. Peça um novo código à equipe.',muitas_tentativas:'Muitas tentativas. Aguarde 15 minutos.',sessao_invalida:'Sessão expirada.'};
+function rpc(fn,b){return fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(b||{})}).then(function(r){return r.text().then(function(t){if(!r.ok){var m='';try{m=JSON.parse(t).message}catch(e){}if(m==='sessao_invalida'){ls('jc_fam',null);ft=null;showLogin()}throw new Error(ERR[m]||'Não foi possível agora. Tente de novo.')}return t?JSON.parse(t):null})})}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},2400)}
+function parts(d){var o={};new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(d)).forEach(function(p){o[p.type]=p.value});if(o.hour==='24')o.hour='00';return o}
+function isoDay(d){var p=parts(d);return p.year+'-'+p.month+'-'+p.day}
+function dayObj(i){return new Date(i+'T12:00:00Z')}
+var WD=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'],MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function hmTxt(d){var p=parts(d);return (+p.hour)+'h'+(p.minute!=='00'?p.minute:'')}
+function whenLong(ts){var i=isoDay(ts),d=dayObj(i);return WD[d.getUTCDay()]+', '+d.getUTCDate()+' de '+MES[d.getUTCMonth()]+' às '+hmTxt(ts)}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function ini(n){var p=String(n||'?').trim().split(/\s+/);return ((p[0]||'')[0]||'').toUpperCase()+((p.length>1?p[p.length-1][0]:'')||'').toUpperCase()}
+function first(n){return String(n||'').trim().split(' ')[0]}
+function ageMonths(b,at){var a=at?dayObj(at):dayObj(isoDay(new Date()));return (a-dayObj(b))/86400000/30.4375}
+function ageTxt(b,at){if(!b)return '';var B=dayObj(b),A=at?dayObj(at):dayObj(isoDay(new Date())),days=Math.round((A-B)/86400000);if(days<31)return days+(days===1?' dia':' dias');var m=(A.getUTCFullYear()-B.getUTCFullYear())*12+(A.getUTCMonth()-B.getUTCMonth())-(A.getUTCDate()<B.getUTCDate()?1:0);if(m<24)return m+(m===1?' mês':' meses');var y=Math.floor(m/12),r=m%12;return y+' anos'+(r?' e '+r+(r===1?' mês':' meses'):'')}
+function waLink(msg){var n=String(cfg.whatsapp||'').replace(/\D/g,'');if(!n)return 'https://www.instagram.com/'+cfg.instagram+'/';if(n.length<=11)n='55'+n;return 'https://wa.me/'+n+'?text='+encodeURIComponent(msg)}
+fetch('/api/config').then(function(r){return r.json()}).then(function(c){if(c){cfg.whatsapp=c.whatsapp||'';cfg.instagram=c.instagram||cfg.instagram}}).catch(function(){});
+
+/* login */
+function maskPhone(v){v=v.replace(/\D/g,'').slice(0,11);if(v.length>10)return '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);if(v.length>6)return '('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);if(v.length>2)return '('+v.slice(0,2)+') '+v.slice(2);return v}
+$('#lgTel').addEventListener('input',function(){this.value=maskPhone(this.value)});
+var qp=new URLSearchParams(location.search);if(qp.get('t'))$('#lgTel').value=maskPhone(qp.get('t'));
+function showLogin(){$('#app').hidden=true;$('#login').hidden=false}
+$('#lgF').onsubmit=function(e){e.preventDefault();var b=$('#lgBtn');b.disabled=true;b.textContent='Entrando…';$('#lgErr').textContent='';
+  rpc('joice_family_login',{p_phone:$('#lgTel').value,p_code:$('#lgCode').value}).then(function(r){ft=r.token;ls('jc_fam',ft);start()}).catch(function(er){$('#lgErr').textContent=er.message}).then(function(){b.disabled=false;b.textContent='Entrar'})};
+
+function start(){rpc('joice_family_me',{p_ftoken:ft}).then(function(d){D=d;$('#login').hidden=true;$('#app').hidden=false;
+  var p=parts(new Date()),h=+p.hour,d0=dayObj(isoDay(new Date()));$('#hdDate').textContent=WD[d0.getUTCDay()].split('-')[0]+', '+d0.getUTCDate()+' de '+MES[d0.getUTCMonth()];
+  $('#hdHello').textContent=(h<12?'Bom dia':h<18?'Boa tarde':'Boa noite')+', '+first(d.parent&&d.parent.name);
+  if(!kidSel&&d.children&&d.children[0])kidSel=d.children[0].id;go(location.hash.slice(1)||'inicio')}).catch(function(){showLogin()})}
+function go(v){if(!/^(inicio|filhos|ler|equipe)$/.test(v))v='inicio';view=v;$$('#tabs button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);window.scrollTo(0,0);
+  ({inicio:vInicio,filhos:vFilhos,ler:vLer,equipe:vEquipe})[v]()}
+$$('#tabs button').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
+
+/* ---------- início ---------- */
+function ics(a){function z(d){return new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}
+  var s='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Dra Joice Cereser//PT\r\nBEGIN:VEVENT\r\nUID:'+a.id+'@drajoice.com.br\r\nDTSTAMP:'+z(Date.now())+'\r\nDTSTART:'+z(a.starts_at)+'\r\nDTEND:'+z(a.ends_at)+'\r\nSUMMARY:Consulta com a Dra. Joice Cereser'+(a.child_name?' - '+a.child_name:'')+'\r\nLOCATION:Consultório Dra. Joice Cereser - Tatuí\\, SP\r\nBEGIN:VALARM\r\nTRIGGER:-PT2H\r\nACTION:DISPLAY\r\nDESCRIPTION:Consulta com a Dra. Joice\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR';
+  var u=URL.createObjectURL(new Blob([s],{type:'text/calendar'})),l=document.createElement('a');l.href=u;l.download='consulta-dra-joice.ics';document.body.appendChild(l);l.click();l.remove();setTimeout(function(){URL.revokeObjectURL(u)},2000)}
+function vInicio(){var v=$('#view'),nx=(D.next||[])[0],h='';
+  if(nx){h+='<div class="next fade"><div class="lb">Sua próxima consulta</div><div class="when">'+esc(cap(whenLong(nx.starts_at)))+'</div><div class="who">'+esc([nx.child_name,'Dra. Joice Cereser','Tatuí, SP'].filter(Boolean).join(' · '))+'</div>'+
+    (nx.status==='confirmado'?'<span class="st ok"><svg width="14" height="14"><use href="#i-check"/></svg>Presença confirmada</span>':'<span class="st">Aguardando sua confirmação</span>')+
+    '<div class="acts">'+(nx.status==='pendente'?'<button class="btn wide" id="cfBtn"><svg><use href="#i-check"/></svg>Confirmar presença</button>':'')+'<button class="btn btn-w" id="icsBtn"><svg><use href="#i-cal"/></svg>No calendário</button><a class="btn btn-w" target="_blank" rel="noopener" href="'+waLink('Olá! Sou '+D.parent.name+' e preciso remarcar a consulta de '+whenLong(nx.starts_at)+'.')+'">Remarcar</a></div></div>'}
+  else h+='<div class="next fade"><div class="lb">Consultas</div><div class="when">Nenhuma consulta marcada</div><div class="who">Quando for a hora do próximo acompanhamento, é só pedir por aqui.</div><div class="acts"><button class="btn wide" data-agendar>Pedir um horário</button></div></div>';
+  h+='<div class="sect"><h2>Atalhos</h2><div class="tiles">'+
+    '<button class="tile" data-go="cresc"><svg><use href="#i-grow"/></svg><b>Curva de crescimento</b></button>'+
+    '<button class="tile" data-go="dev"><svg><use href="#i-star"/></svg><b>Diário do desenvolvimento</b></button>'+
+    '<button class="tile" data-agendar><svg><use href="#i-cal"/></svg><b>Nova consulta</b></button>'+
+    '<a class="tile" href="/guia/os-primeiros-sinais.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg><b>Guia: os primeiros sinais</b></a>'+
+    '<button class="tile" data-tab="ler"><svg><use href="#i-book"/></svg><b>Para ler com calma</b></button>'+
+    '<a class="tile" target="_blank" rel="noopener" href="'+waLink('Olá! Sou '+D.parent.name+' e tenho uma dúvida.')+'"><svg><use href="#i-wa"/></svg><b>Falar com a equipe</b></a></div></div>';
+  var kids=D.children||[];
+  h+='<div class="sect"><h2>Seus filhos</h2>'+(kids.length?kids.map(function(c){var g=(c.growth||[]).slice(-1)[0];return '<button class="kid" data-k="'+c.id+'"><span class="av '+(c.sex||'')+'">'+esc(ini(c.name))+'</span><span><b>'+esc(c.name)+'</b><small>'+esc([c.birth_date?ageTxt(c.birth_date):'',g&&g.weight_kg?String(+g.weight_kg).replace('.',',')+' kg':'',g&&g.height_cm?String(+g.height_cm).replace('.',',')+' cm':''].filter(Boolean).join(' · '))+'</small></span><svg class="go" width="18" height="18"><use href="#i-r"/></svg></button>'}).join(''):'<div class="empty">A ficha do seu filho aparece aqui depois da primeira consulta.</div>')+'</div>';
+  var c0=kids.filter(function(c){return c.birth_date})[0];
+  if(c0){var am=ageMonths(c0.birth_date),pick=null;M.forEach(function(a){if(a.m>am-0.1&&!pick)pick=a});if(!pick)pick=M[M.length-1];
+    var its=[].concat(pick.i.soc.slice(0,1),pick.i.lin.slice(0,2),pick.i.mov.slice(0,1));
+    h+='<div class="sect"><h2>Para observar em '+esc(first(c0.name))+'</h2><div class="obs"><div class="h">Próxima fase: '+pick.n+' '+pick.u+'</div><ul>'+its.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul><p class="note">Marcos da cartilha do CDC traduzida pela Sociedade Brasileira de Pediatria. Cada criança tem o seu ritmo; leve suas observações para a consulta.</p></div></div>'}
+  v.innerHTML=h;
+  var cf=$('#cfBtn');if(cf)cf.onclick=function(){cf.disabled=true;rpc('joice_family_confirm',{p_ftoken:ft,p_appt:nx.id}).then(function(){nx.status='confirmado';toast('Presença confirmada. Até lá!');vInicio()}).catch(function(e){toast(e.message);cf.disabled=false})};
+  var ib=$('#icsBtn');if(ib)ib.onclick=function(){ics(nx)};
+  $$('[data-k]',v).forEach(function(b){b.onclick=function(){kidSel=b.dataset.k;kidTab='cresc';go('filhos')}});
+  $$('[data-go]',v).forEach(function(b){b.onclick=function(){kidTab=b.dataset.go;go('filhos')}});
+  $$('[data-tab]',v).forEach(function(b){b.onclick=function(){go(b.dataset.tab)}});
+}
+
+/* ---------- filhos ---------- */
+function vFilhos(){var v=$('#view'),kids=D.children||[];
+  if(!kids.length){v.innerHTML='<div class="empty fade" style="margin-top:10px">A ficha do seu filho é criada pela equipe da Dra. Joice na consulta. Depois disso, a curva de crescimento e o diário do desenvolvimento aparecem aqui.</div>';return}
+  var c=kids.filter(function(k){return k.id===kidSel})[0]||kids[0];kidSel=c.id;
+  var h=(kids.length>1?'<div class="chips">'+kids.map(function(k){return '<button data-k="'+k.id+'" aria-pressed="'+(k.id===c.id)+'">'+esc(first(k.name))+'</button>'}).join('')+'</div>':'')+
+    '<div class="kid" style="cursor:default;margin-top:'+(kids.length>1?'12px':'4px')+'"><span class="av '+(c.sex||'')+'">'+esc(ini(c.name))+'</span><span><b>'+esc(c.name)+'</b><small>'+esc(c.birth_date?ageTxt(c.birth_date)+' · nasceu em '+dayObj(c.birth_date).toLocaleDateString('pt-BR',{timeZone:'UTC'}):'')+'</small></span></div>'+
+    '<div class="seg"><button data-t="cresc" aria-pressed="'+(kidTab==='cresc')+'">Crescimento</button><button data-t="dev" aria-pressed="'+(kidTab==='dev')+'">Desenvolvimento</button></div><div id="kidBody"></div>';
+  v.innerHTML=h;
+  $$('.chips button',v).forEach(function(b){b.onclick=function(){kidSel=b.dataset.k;vFilhos()}});
+  $$('.seg button',v).forEach(function(b){b.onclick=function(){kidTab=b.dataset.t;vFilhos()}});
+  if(kidTab==='cresc')growth(c);else dev(c);
+}
+function growth(c){var b=$('#kidBody');
+  if(!c.birth_date||!c.sex){b.innerHTML='<div class="empty">A curva aparece depois que a equipe completar a ficha na consulta.</div>';return}
+  loadWho().then(function(){var G=c.growth||[],age=ageMonths(c.birth_date);
+    if(!G.length){b.innerHTML='<div class="empty">As medidas de peso, altura e perímetro cefálico são lançadas pela Dra. Joice nas consultas. Elas aparecem aqui, na curva da OMS.</div>';return}
+    b.innerHTML='<div class="gc" id="gW"></div><div class="gc" id="gH"></div><div class="gc" id="gC"></div><p class="note">Curvas da Organização Mundial da Saúde, as mesmas da Caderneta da Criança. A faixa verde mostra o intervalo esperado para a maioria das crianças. As medidas são registradas pela Dra. Joice nas consultas; dúvidas sobre elas, converse na próxima consulta.</p>';
+    var pts=function(k){return G.filter(function(g){return g[k]!=null}).map(function(g){return {m:ageMonths(c.birth_date,g.measured_on),v:+g[k],d:g.measured_on}}).filter(function(p){return p.m>=0&&p.m<=60})};
+    gChart($('#gW'),WHO['wfa_'+c.sex],pts('weight_kg'),'Peso','kg',age);
+    gChart($('#gH'),WHO['lhfa_'+c.sex],pts('height_cm'),age<24?'Comprimento':'Altura','cm',age);
+    gChart($('#gC'),WHO['hcfa_'+c.sex],pts('head_cm'),'Perímetro cefálico','cm',age);
+  })}
+var devK={};
+function dev(c){var b=$('#kidBody'),ans=c.milestones||{},age=c.birth_date?ageMonths(c.birth_date):null;
+  if(!devK[c.id]){var pick=M[0];if(age!=null)M.forEach(function(a){if(a.m<=age+0.1)pick=a});devK[c.id]=pick.k}
+  var sel=M.filter(function(a){return a.k===devK[c.id]})[0],tot=0,yes=0;
+  Object.keys(sel.i).forEach(function(d){sel.i[d].forEach(function(t){tot++;if(ans[sel.k+'|'+t]==='sim')yes++})});
+  var h='<div class="ages">'+M.map(function(a){return '<button data-k="'+a.k+'" aria-pressed="'+(a.k===sel.k)+'">'+a.n+' '+a.u+'</button>'}).join('')+'</div>'+
+    '<div class="prog"><span>'+yes+' de '+tot+'</span><div class="bar"><i style="width:'+(tot?yes/tot*100:0)+'%"></i></div><span>alcançados</span></div>';
+  var DOMS={soc:'Social e emocional',lin:'Linguagem e comunicação',cog:'Aprendizado',mov:'Movimento'};
+  Object.keys(DOMS).forEach(function(d){h+='<div class="dom"><h5>'+DOMS[d]+'</h5>'+sel.i[d].map(function(t){var k=sel.k+'|'+t,v=ans[k]||'';return '<div class="it">'+esc(t)+'<div class="ans" data-k="'+esc(k)+'"><button data-v="sim" aria-pressed="'+(v==='sim')+'">Já faz</button><button data-v="nao" aria-pressed="'+(v==='nao')+'">Ainda não</button><button data-v="ns" aria-pressed="'+(v==='ns')+'">Não sei</button></div></div>'}).join('')+'</div>'});
+  h+='<p class="note">O que você marcar aqui aparece para a Dra. Joice na ficha do seu filho, para conversarem na consulta. Não é um diagnóstico: cada criança tem o seu ritmo.</p>';
+  b.innerHTML=h;
+  $$('.ages button',b).forEach(function(x){x.onclick=function(){devK[c.id]=x.dataset.k;dev(c)}});
+  $$('.ans',b).forEach(function(g){g.onclick=function(e){var bt=e.target.closest('button');if(!bt)return;var k=g.dataset.k,v=ans[k]===bt.dataset.v?'':bt.dataset.v,it={};it[k]=v;
+    rpc('joice_family_milestone',{p_ftoken:ft,p_child:c.id,p_age:sel.k,p_items:it}).then(function(){if(v)ans[k]=v;else delete ans[k];c.milestones=ans;dev(c)}).catch(function(er){toast(er.message)})}});
+}
+
+/* ---------- para ler ---------- */
+function vLer(){$('#view').innerHTML='<div class="sect fade" style="margin-top:6px"><h2>Para ler com calma</h2>'+
+  '<a class="art hl" href="/guia/os-primeiros-sinais.pdf" target="_blank" rel="noopener"><small>Guia gratuito</small><b>Os primeiros sinais: guia para pais</b><span>O que observar de 2 meses a 5 anos e quando agir.</span></a>'+
+  [['Desenvolvimento','Marcos do desenvolvimento: guia de 2 meses a 5 anos','marcos-do-desenvolvimento'],['Autismo','Sinais de autismo em bebês: o que observar até os 2 anos','sinais-de-autismo-em-bebes'],['Fala','Meu filho de 2 anos ainda não fala. Quando me preocupar?','meu-filho-nao-fala'],['Autismo','Autismo, atraso de fala ou timidez: como diferenciar','autismo-ou-atraso-de-fala'],['TDAH','TDAH na infância: agitação normal ou sinal de atenção?','tdah-na-infancia'],['Consulta','Como é a consulta com a Dra. Joice','pediatra-em-tatui']].map(function(a){return '<a class="art" href="/artigos/'+a[2]+'/" target="_blank" rel="noopener"><small>'+a[0]+'</small><b>'+a[1]+'</b><span>Ler no site →</span></a>'}).join('')+
+  '<a class="art" href="/desenvolvimento/" target="_blank" rel="noopener"><small>Ferramenta</small><b>Checklist do desenvolvimento</b><span>Marque o que seu filho já faz em cada idade.</span></a></div>'}
+
+/* ---------- consultório ---------- */
+function vEquipe(){$('#view').innerHTML='<div class="doc fade" style="margin-top:6px"><div class="mono">JC</div><h2>Dra. Joice Cereser</h2><p>Médica pediatra · neurodesenvolvimento infantil</p><p>CRM-SP 174512 · RQE 119336</p></div>'+
+  '<div class="list"><a target="_blank" rel="noopener" href="'+waLink('Olá! Sou '+D.parent.name+' e tenho uma dúvida.')+'"><svg><use href="#i-wa"/></svg><span>Falar com a equipe<small>WhatsApp do consultório</small></span></a>'+
+  '<button data-agendar><svg><use href="#i-cal"/></svg><span>Pedir uma nova consulta<small>Escolha o melhor dia e período</small></span></button>'+
+  '<a target="_blank" rel="noopener" href="https://www.instagram.com/'+esc(cfg.instagram)+'/"><svg><use href="#i-ig"/></svg><span>Instagram<small>@'+esc(cfg.instagram)+'</small></span></a>'+
+  '<a target="_blank" rel="noopener" href="/"><svg><use href="#i-pin"/></svg><span>Consultório em Tatuí, SP<small>drajoice.com.br</small></span></a></div>'+
+  '<div class="list"><button id="outBtn"><svg><use href="#i-out"/></svg><span>Sair do aplicativo</span></button></div>'+
+  '<p class="note" style="text-align:center">Seus dados ficam protegidos e só a equipe da Dra. Joice tem acesso. <a href="/privacidade" style="color:var(--caramelo)">Privacidade</a></p>';
+  $('#outBtn').onclick=function(){if(!confirm('Sair do aplicativo?'))return;rpc('joice_family_logout',{p_ftoken:ft}).catch(function(){});ls('jc_fam',null);ft=null;showLogin()}}
+
+
+/* curvas */
+var WHO=null;function loadWho(){return WHO?Promise.resolve(WHO):fetch('/crm/who.json').then(function(r){return r.json()}).then(function(d){WHO=d})}
+var M=[
+{k:'2m',n:'2',u:'meses',m:2,i:{soc:['Acalma-se quando você conversa com ele ou o pega no colo','Olha para o seu rosto','Parece feliz em ver você chegando perto','Sorri quando você fala ou sorri para ele'],lin:['Faz outros sons além do choro','Reage a sons altos'],cog:['Acompanha você com o olhar enquanto você se move','Olha para um brinquedo por alguns segundos'],mov:['Mantém a cabeça erguida quando está de bruços','Mexe os dois braços e as duas pernas','Abre as mãos por alguns instantes']}},
+{k:'4m',n:'4',u:'meses',m:4,i:{soc:['Sorri sozinho para chamar sua atenção','Dá risadinhas quando você tenta fazê-lo rir','Olha para você, se mexe ou faz sons para chamar ou manter sua atenção'],lin:['Faz sons como "oooo" e "aahh"','Faz sons quando você conversa com ele','Vira a cabeça na direção da sua voz'],cog:['Quando está com fome, abre a boca ao ver o peito ou a mamadeira','Olha para as próprias mãos com interesse'],mov:['Mantém a cabeça firme, sem apoio, quando está no colo','Segura um brinquedo colocado na mão dele','Usa os braços para balançar brinquedos','Leva as mãos à boca','De bruços, se apoia nos cotovelos ou antebraços e levanta o tronco']}},
+{k:'6m',n:'6',u:'meses',m:6,i:{soc:['Reconhece pessoas conhecidas','Gosta de se olhar no espelho','Dá risadas'],lin:['Alterna sons com você, como numa conversa','Faz "pum" com a boca, soprando e colocando a língua para fora','Solta gritinhos agudos'],cog:['Coloca objetos na boca para explorar','Estica o braço para pegar um brinquedo que quer','Fecha a boca para mostrar que não quer mais comida'],mov:['Rola de barriga para cima para barriga para baixo','De bruços, se apoia com os braços esticados','Apoia-se nas mãos quando está sentado']}},
+{k:'9m',n:'9',u:'meses',m:9,i:{soc:['Fica tímido, grudado ou com medo perto de estranhos','Mostra várias expressões, como feliz, triste, bravo e surpreso','Olha quando você o chama pelo nome','Reage quando você sai (olha, estica os braços ou chora)','Sorri ou ri quando você brinca de "cadê? achou!"'],lin:['Faz sons repetidos como "mamamama" e "babababa"','Levanta os braços para ser pego no colo'],cog:['Procura objetos que caíram e saíram da vista','Bate um objeto no outro'],mov:['Senta sozinho','Passa objetos de uma mão para a outra','Usa os dedos para puxar a comida para perto','Fica sentado sem apoio']}},
+{k:'12m',n:'1',u:'ano',m:12,i:{soc:['Brinca com você, como parceiro de brincadeira'],lin:['Dá tchau','Chama "mamã", "papá" ou outro nome especial','Entende o "não" (para um pouco quando você diz)'],cog:['Coloca um objeto dentro de outro, como um bloco no copo','Procura algo que viu você esconder, como um brinquedo embaixo do pano'],mov:['Puxa o corpo para ficar de pé','Anda segurando nos móveis','Bebe em copo sem tampa, com você segurando','Pega pequenos pedaços de comida com o polegar e o indicador']}},
+{k:'15m',n:'15',u:'meses',m:15,i:{soc:['Imita outras crianças enquanto brinca','Mostra para você um objeto de que gosta','Bate palmas quando fica animado','Abraça um bichinho de pelúcia ou outro brinquedo','Demonstra carinho com abraços ou beijos'],lin:['Tenta dizer uma ou duas palavras além de "mamã" e "papá"','Olha para um objeto conhecido quando você fala o nome dele','Segue pedidos feitos com gesto e palavras','Aponta para pedir algo ou para pedir ajuda'],cog:['Tenta usar objetos do jeito certo, como telefone, copo ou livro','Empilha pelo menos dois objetos pequenos, como blocos'],mov:['Dá alguns passos sozinho','Usa os dedos para comer sozinho']}},
+{k:'18m',n:'18',u:'meses',m:18,i:{soc:['Afasta-se de você, mas confere se você está por perto','Aponta para mostrar algo interessante','Estende as mãos para você lavar','Olha algumas páginas de um livro com você','Ajuda a se vestir, passando o braço pela manga ou levantando o pé'],lin:['Tenta dizer três ou mais palavras além de "mamã" e "papá"','Segue pedidos sem gesto, como "me dá o brinquedo"'],cog:['Imita você em tarefas, como varrer','Brinca de forma simples, como empurrar um carrinho'],mov:['Anda sem se segurar em nada nem em ninguém','Rabisca','Bebe em copo sem tampa, às vezes derramando','Come sozinho com os dedos','Tenta usar a colher','Sobe e desce do sofá ou da cadeira sem ajuda']}},
+{k:'24m',n:'2',u:'anos',m:24,i:{soc:['Percebe quando alguém está machucado ou triste','Olha para o seu rosto para saber como reagir em uma situação nova'],lin:['Aponta figuras de um livro quando você pergunta, como "cadê o urso?"','Junta pelo menos duas palavras, como "mais leite"','Aponta pelo menos duas partes do corpo quando você pede','Usa outros gestos além de dar tchau e apontar, como mandar beijo ou balançar a cabeça para dizer sim'],cog:['Tenta mexer em botões e interruptores de brinquedos','Brinca com mais de um brinquedo ao mesmo tempo, como pôr comidinha no pratinho','Segura algo com uma mão enquanto usa a outra, como segurar o pote e tirar a tampa'],mov:['Chuta uma bola','Corre','Sobe alguns degraus, com ou sem ajuda','Come com a colher']}},
+{k:'30m',n:'2½',u:'anos',m:30,i:{soc:['Brinca perto de outras crianças e às vezes com elas','Mostra o que sabe fazer dizendo "olha eu!"','Segue rotinas simples, como ajudar a guardar os brinquedos'],lin:['Fala cerca de 50 palavras','Junta duas ou mais palavras com uma ação, como "cachorro corre"','Nomeia figuras de um livro quando você aponta e pergunta "o que é isso?"','Usa palavras como "eu", "você" ou "nós"'],cog:['Brinca de faz de conta, como dar comida para a boneca','Resolve problemas simples, como subir num banquinho para alcançar algo','Segue pedidos de duas etapas, como "guarda o brinquedo e fecha a porta"','Conhece pelo menos uma cor'],mov:['Usa as mãos para girar coisas, como maçanetas ou tampas','Tira algumas roupas sozinho','Pula do chão com os dois pés','Vira as páginas do livro uma de cada vez']}},
+{k:'36m',n:'3',u:'anos',m:36,i:{soc:['Acalma-se em até 10 minutos depois que você o deixa na escola','Observa outras crianças e se junta a elas para brincar'],lin:['Conversa com você com pelo menos duas trocas de fala','Faz perguntas como "quem?", "o quê?", "onde?" ou "por quê?"','Diz o que está acontecendo em uma figura, como "comendo" ou "correndo"','Diz o primeiro nome quando perguntam','Fala bem o suficiente para outras pessoas entenderem, na maior parte do tempo'],cog:['Desenha um círculo depois que você mostra como','Evita tocar em coisas quentes, como o fogão, quando você avisa'],mov:['Enfia objetos grandes em um cordão, como contas ou macarrão','Veste algumas roupas sozinho','Usa o garfo']}},
+{k:'48m',n:'4',u:'anos',m:48,i:{soc:['Finge ser outra pessoa ou personagem ao brincar','Pede para brincar com outras crianças','Consola quem está triste ou machucado','Evita perigos, como pular de lugares altos','Gosta de ajudar','Muda o comportamento conforme o lugar (biblioteca, parquinho)'],lin:['Fala frases com quatro ou mais palavras','Diz algumas palavras de uma música, história ou parlenda','Conta pelo menos uma coisa que aconteceu no dia dele','Responde perguntas simples, como "para que serve o casaco?"'],cog:['Nomeia algumas cores','Conta o que vem depois em uma história conhecida','Desenha uma pessoa com três ou mais partes do corpo'],mov:['Pega uma bola grande na maioria das vezes','Serve a própria comida ou água, com supervisão','Desabotoa alguns botões','Segura o lápis entre os dedos e o polegar, e não com a mão fechada']}},
+{k:'60m',n:'5',u:'anos',m:60,i:{soc:['Segue regras e espera a vez nas brincadeiras','Canta, dança ou encena para você','Faz pequenas tarefas em casa, como separar meias ou tirar a mesa'],lin:['Conta uma história, ouvida ou inventada, com pelo menos dois acontecimentos','Responde perguntas simples sobre um livro ou história','Mantém uma conversa com mais de três trocas de fala','Usa ou reconhece rimas simples'],cog:['Conta até 10','Reconhece alguns números de 1 a 5','Usa palavras de tempo, como "ontem", "amanhã", "manhã" e "noite"','Presta atenção por 5 a 10 minutos em uma atividade','Escreve algumas letras do próprio nome','Reconhece algumas letras'],mov:['Abotoa alguns botões','Pula em um pé só']}}
+];
+function lmsAt(t,m){m=Math.max(0,Math.min(60,m));var i=Math.floor(m),f=m-i,a=t[i],b=t[Math.min(60,i+1)];return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f]}
+function valAt(t,m,z){var q=lmsAt(t,m),L=q[0],Mm=q[1],S=q[2];return Math.abs(L)<1e-6?Mm*Math.exp(S*z):Mm*Math.pow(1+L*S*z,1/L)}
+function gChart(el,tab,pts,title,unit,age){
+  var maxM=Math.min(60,Math.max(12,Math.ceil(Math.max(age,pts.length?pts[pts.length-1].m:0)/6)*6+3));
+  var W=360,H=220,pl=30,pr=10,pt=10,pb=26,iw=W-pl-pr,ih=H-pt-pb;
+  var lo=valAt(tab,0,-2.3),hi=valAt(tab,maxM,2.3);pts.forEach(function(p){lo=Math.min(lo,p.v);hi=Math.max(hi,p.v)});
+  var rng=hi-lo,step=rng>60?10:rng>25?5:rng>10?2:1;lo=Math.floor(lo/step)*step;hi=Math.ceil(hi/step)*step;
+  function x(m){return pl+m/maxM*iw}function y(v){return pt+ih-(v-lo)/(hi-lo)*ih}
+  function band(z1,z2){var a=[],b=[];for(var m=0;m<=maxM+1e-9;m+=.5){a.push(x(m).toFixed(1)+' '+y(valAt(tab,m,z1)).toFixed(1));b.unshift(x(m).toFixed(1)+' '+y(valAt(tab,m,z2)).toFixed(1))}return 'M'+a.join('L')+'L'+b.join('L')+'Z'}
+  function line(z){var d='';for(var m=0;m<=maxM+1e-9;m+=.5)d+=(d?'L':'M')+x(m).toFixed(1)+' '+y(valAt(tab,m,z)).toFixed(1);return d}
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(title)+'"><g font-family="Jost" font-size="9.5" fill="#8A7566">';
+  for(var v=lo;v<=hi+1e-9;v+=step*(rng>20?2:1)){s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#EFE7DC"/><text x="'+(pl-5)+'" y="'+(y(v)+3)+'" text-anchor="end">'+v+'</text>'}
+  var xs=maxM<=24?6:12;for(var m=0;m<=maxM;m+=xs)s+='<text x="'+x(m)+'" y="'+(H-8)+'" text-anchor="middle">'+(m<24?m+'m':m/12+'a')+'</text>';
+  s+='</g><path d="'+band(-1.881,1.881)+'" fill="#E7EADD"/><path d="'+band(-1.036,1.036)+'" fill="#D9DECB"/><path d="'+line(0)+'" fill="none" stroke="#5B5A3C" stroke-width="1.5"/>';
+  if(pts.length>1)s+='<path d="'+pts.map(function(p,i){return (i?'L':'M')+x(p.m).toFixed(1)+' '+y(p.v).toFixed(1)}).join('')+'" fill="none" stroke="#A26B44" stroke-width="2.2" stroke-linejoin="round"/>';
+  pts.forEach(function(p){s+='<circle cx="'+x(p.m)+'" cy="'+y(p.v)+'" r="4.5" fill="#A26B44" stroke="#fff" stroke-width="1.8"/>'});
+  var last=pts[pts.length-1];
+  el.innerHTML='<h4>'+esc(title)+'</h4><div class="sub">'+(last?'Última medida: <b>'+String(last.v).replace('.',',')+' '+unit+'</b> em '+dayObj(last.d).toLocaleDateString('pt-BR',{timeZone:'UTC'}):'Sem medidas ainda')+'</div>'+s+'</svg>';
+}
+
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/familia/sw.js',{scope:'/familia/'}).catch(function(){});
+if(ft)start();else showLogin();
+window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(D&&v&&v!==view)go(v)});
+})();
+</script>
+<script src="/assets/agendar.js?v=2" defer></script>
+</body>
+</html>
