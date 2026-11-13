@@ -229,5 +229,5 @@
     if (a.hasAttribute('data-guia')) guia();
     else agendar({ motivo: a.getAttribute('data-motivo') || '', idade: a.getAttribute('data-idade') || '' });
   });
-  if (/[?&]agendar=1/.test(location.search)) setTimeout(function () { agendar(); }, 400);
+  if ((/[?&]agendar=1/.test(location.search) || location.hash === '#agendar') && W.self === W.top) setTimeout(function () { agendar(); }, 400);
 })();
