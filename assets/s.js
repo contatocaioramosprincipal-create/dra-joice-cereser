@@ -85,6 +85,7 @@
     else if (e.target.tagName === 'IMG') label = 'Foto: ' + (e.target.getAttribute('alt') || '').slice(0, 50);
     else if (ed) label = (ed.textContent || '').replace(/\s+/g, ' ').trim();
     var lead = !!(a && a.href && /instagram\.com|wa\.me|whatsapp|api\.whatsapp|tel:|doctoralia|agend/i.test(a.href) && a.href.indexOf(location.host) < 0);
+    if (a && a.href) { if (/wa\.me|whatsapp/i.test(a.href)) dl('jc_whatsapp', label); else if (/^tel:/i.test(a.href)) dl('jc_ligacao', label); }
     var c = base('click');
     c.section = s.getAttribute('data-sec');
     c.rx = Math.round((e.clientX - r.left) / r.width * 1000) / 1000;
@@ -94,7 +95,9 @@
     if (lead || q.length >= 10) { leave(); }
   }, true);
 
+  function dl(ev, label) { try { (W.dataLayer = W.dataLayer || []).push({ event: ev, jc_label: String(label || '').slice(0, 80) }); } catch (e) {} }
   W.jcTrack = function (label, isLead, secId) {
+    if (isLead) dl(/agendamento/i.test(label) ? 'jc_pedido' : 'jc_lead', label);
     var c = base('click'); c.section = secId || null; c.target = String(label || '').slice(0, 80); c.is_lead = !!isLead;
     q.push(c); leave();
   };
