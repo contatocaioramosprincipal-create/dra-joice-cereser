@@ -18,7 +18,7 @@ fs.mkdirSync(DEBUG, { recursive: true });
 const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const UMA_VEZ = process.argv.includes('--uma-vez');
-const VERSAO = '1.6';
+const VERSAO = '1.7';
 const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
 
 function log(...a) {
@@ -164,7 +164,7 @@ async function chegarNaAgenda(page) {
 /* ---------- leitura do calendário ---------- */
 // funções que enxergam dentro dos componentes (shadow DOM) do site
 const DEEP = `
-  window.__deepAll = root => { const out = []; const st = [root]; while (st.length) { const r = st.pop();
+  window.__deepAll = root => { const out = []; const st = [root]; if (root.shadowRoot) st.push(root.shadowRoot); while (st.length) { const r = st.pop();
     for (const el of r.querySelectorAll('*')) { out.push(el); if (el.shadowRoot) st.push(el.shadowRoot); } } return out; };
   window.__up = el => el.parentElement || (el.getRootNode && el.getRootNode().host) || null;
   window.__txt = el => { let t = el.textContent || ''; for (const x of window.__deepAll(el)) if (x.shadowRoot) t += ' ' + x.shadowRoot.textContent; return t.replace(/\s+/g, ' ').trim(); };
