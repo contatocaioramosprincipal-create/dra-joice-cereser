@@ -727,8 +727,8 @@ var leads=[],agCfg=null,cur='funil';
 /* ---------- navegação ---------- */
 function go(v){if(!/^(hoje|funil|agenda|contatos|horarios|plano|app|site)$/.test(v))v='hoje';cur=v;$$('[id^="v-"]').forEach(function(p){p.hidden=p.id!=='v-'+v});$$('#nav button,#mnav button').forEach(function(b){if(b.dataset.v===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});history.replaceState(null,'','#'+v);
   if(v==='funil'||v==='contatos')loadLeads();if(v==='agenda')loadCal();if(v==='horarios')loadAg();if(v==='hoje')loadHoje();if(v==='app')appView();if(v==='site'){var f=$('#siteFrame');if(!f.getAttribute('src'))f.src='/painel/?embed=crm#geral'}}
-$('#nav button[data-v],#mnav button[data-v]').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
-$('[data-site-tab]').forEach(function(b){b.onclick=function(){var tab=b.dataset.siteTab;$('[data-site-tab]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});$('#siteFrame').contentWindow.location.hash=tab}});
+$$('#nav button[data-v],#mnav button[data-v]').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
+$$('[data-site-tab]').forEach(function(b){b.onclick=function(){var tab=b.dataset.siteTab;$$('[data-site-tab]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});$('#siteFrame').contentWindow.location.hash=tab}});
 $('#logout').onclick=function(){rpc('joice_logout',{p_token:token}).catch(function(){});try{localStorage.removeItem('jc_token')}catch(e){}location.href='/painel/'};
 
 /* ---------- funil ---------- */
