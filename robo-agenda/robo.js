@@ -18,7 +18,7 @@ fs.mkdirSync(DEBUG, { recursive: true });
 const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const UMA_VEZ = process.argv.includes('--uma-vez');
-const VERSAO = '1.4';
+const VERSAO = '1.5';
 const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
 
 function log(...a) {
@@ -162,35 +162,43 @@ async function chegarNaAgenda(page) {
 }
 
 /* ---------- leitura do calendário ---------- */
-// Marca os dias do calendário com data-robo-dia="AAAA-MM-DD" e devolve a lista.
-async function marcarDias(page) {
-  return page.evaluate((MESES) => {
-    const all = [...document.querySelectorAll('body *')];
-    const titulo = all.find(el => el.children.length === 0 && /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-z]*\.?,?\s+\d{4}$/i.test(el.textContent.trim()));
-    if (!titulo) return { erro: 'mes_nao_encontrado' };
-    const m = titulo.textContent.trim().match(/^([a-z]{3})[a-z]*\.?,?\s+(\d{4})$/i);
-    const mes = MESES.indexOf(m[1].toLowerCase()), ano = +m[2];
-    let box = titulo.parentElement;
-    while (box && !/S[ÁA]B/.test(box.innerText)) box = box.parentElement;
-    if (!box) return { erro: 'calendario_nao_encontrado' };
-    // botão "próximo mês": último botão perto do título
-    let head = titulo.parentElement; let prox = null;
-    for (let k = 0; k < 3 && head && !prox; k++) { const bs = head.querySelectorAll('button,[role=button]'); if (bs.length) prox = bs[bs.length - 1]; head = head.parentElement; }
-    document.querySelectorAll('[data-robo-prox]').forEach(x => x.removeAttribute('data-robo-prox'));
-    if (prox) prox.setAttribute('data-robo-prox', '1');
+// funções que enxergam dentro dos componentes (shadow DOM) do site
+const DEEP = `
+  window.__deepAll = root => { const out = []; const st = [root]; while (st.length) { const r = st.pop();
+    for (const el of r.querySelectorAll('*')) { out.push(el); if (el.shadowRoot) st.push(el.shadowRoot); } } return out; };
+  window.__up = el => el.parentElement || (el.getRootNode && el.getRootNode().host) || null;
+  window.__txt = el => { let t = el.textContent || ''; for (const x of window.__deepAll(el)) if (x.shadowRoot) t += ' ' + x.shadowRoot.textContent; return t.replace(/\s+/g, ' ').trim(); };
+  true;
+`;
 
-    document.querySelectorAll('[data-robo-dia]').forEach(x => x.removeAttribute('data-robo-dia'));
-    const cells = [...box.querySelectorAll('*')].filter(el => el.children.length === 0 && /^\d{1,2}$/.test(el.textContent.trim()));
-    // sequência: dias antes do 1º "1" são do mês anterior; depois de chegar no fim, o "1" seguinte é do próximo mês
+async function marcarDias(page) {
+  await page.evaluate(DEEP);
+  return page.evaluate((MESES) => {
+    const all = window.__deepAll(document);
+    all.forEach(x => { x.removeAttribute && x.removeAttribute('data-robo-dia'); x.removeAttribute && x.removeAttribute('data-robo-prox'); });
+    const reT = /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-zç]*\.?,?\s+(de\s+)?\d{4}$/i;
+    const titulo = all.find(el => el.children.length === 0 && reT.test((el.textContent || '').trim()));
+    if (!titulo) return { erro: 'mes_nao_encontrado' };
+    const m = titulo.textContent.trim().match(/^([a-z]{3})[a-zç]*\.?,?\s+(?:de\s+)?(\d{4})$/i);
+    const mes = MESES.indexOf(m[1].toLowerCase()), ano = +m[2];
+    const ehDia = el => el.children.length === 0 && /^\d{1,2}$/.test((el.textContent || '').trim());
+    let box = window.__up(titulo), k = 0;
+    while (box && k < 12 && window.__deepAll(box).filter(ehDia).length < 28) { box = window.__up(box); k++; }
+    if (!box) return { erro: 'calendario_nao_encontrado' };
+    let head = window.__up(titulo), prox = null;
+    for (let i = 0; i < 4 && head && !prox; i++) { const bs = window.__deepAll(head).filter(x => x.tagName === 'BUTTON' || x.getAttribute('role') === 'button'); if (bs.length >= 2) prox = bs[bs.length - 1]; head = window.__up(head); }
+    if (prox) prox.setAttribute('data-robo-prox', '1');
+    const cells = window.__deepAll(box).filter(ehDia);
     let fase = -1, ult = 0; const dias = [];
     for (const el of cells) {
       const n = +el.textContent.trim();
       if (fase === -1 && n === 1) fase = 0; else if (fase === 0 && n < ult) fase = 1;
       ult = n;
       if (fase !== 0) continue;
-      const alvo = el.closest('button,[role=button],td,li') || el;
+      let alvo = el; for (let i = 0; i < 3; i++) { if (alvo.tagName === 'BUTTON' || alvo.getAttribute('role') === 'button' || alvo.tagName === 'TD') break; const u = window.__up(alvo); if (!u) break; alvo = u; }
+      if (!(alvo.tagName === 'BUTTON' || alvo.getAttribute('role') === 'button' || alvo.tagName === 'TD')) alvo = el;
       const st = getComputedStyle(el), stA = getComputedStyle(alvo);
-      const desabilitado = alvo.disabled || alvo.getAttribute('aria-disabled') === 'true' || stA.pointerEvents === 'none';
+      const desabilitado = alvo.disabled || alvo.getAttribute('aria-disabled') === 'true' || stA.pointerEvents === 'none' || /disabled/i.test(alvo.className || '');
       const negrito = Math.max(+st.fontWeight || 400, +stA.fontWeight || 400) >= 600;
       const iso = ano + '-' + String(mes + 1).padStart(2, '0') + '-' + String(n).padStart(2, '0');
       alvo.setAttribute('data-robo-dia', iso);
@@ -201,20 +209,37 @@ async function marcarDias(page) {
 }
 
 async function lerHorariosDoDia(page) {
-  return page.evaluate((unidade) => {
+  await page.evaluate(DEEP);
+  return page.evaluate(() => {
     const re = /^(\d{2}:\d{2})(\s*E)?$/;
-    const norm = s => (s || '').replace(/\s+/g, ' ').trim();
-    let raiz = document.querySelector('main') || document.body;
-    // se houver mais de uma unidade na tela, usa só o bloco da unidade configurada
-    const blocos = [...raiz.querySelectorAll('*')].filter(el => new RegExp(unidade, 'i').test(el.textContent) && [...el.querySelectorAll('button,[role=button]')].some(b => re.test(norm(b.innerText))));
-    if (blocos.length) raiz = blocos.sort((a, b) => a.querySelectorAll('*').length - b.querySelectorAll('*').length)[0];
     const vistos = new Map();
-    raiz.querySelectorAll('button,[role=button]').forEach(b => {
-      const t = norm(b.innerText); const m = t.match(re);
-      if (m && !b.disabled && b.getAttribute('aria-disabled') !== 'true') vistos.set(m[1], !!m[2]);
-    });
+    for (const b of window.__deepAll(document.querySelector('main') || document.body)) {
+      if (!(b.tagName === 'BUTTON' || b.getAttribute('role') === 'button')) continue;
+      const m = window.__txt(b).match(re);
+      if (m && !b.disabled && b.getAttribute('aria-disabled') !== 'true') vistos.set(m[1], vistos.get(m[1]) || !!m[2]);
+    }
     return [...vistos.entries()].map(([h, e]) => ({ h, e }));
-  }, CFG.unidade);
+  });
+}
+
+// espera a busca terminar e, se aparecer a escolha de hospital, escolhe a unidade
+async function prepararAgenda(page) {
+  for (let i = 0; i < 3; i++) {
+    await page.getByText(/sua busca pode demorar/i).first().waitFor({ state: 'hidden', timeout: 150000 }).catch(() => {});
+    await espera(1500);
+    const escolha = page.getByText(/selecione entre os hospitais/i).filter({ visible: true });
+    if (!(await escolha.count())) return;
+    log('escolhendo a unidade na lista de hospitais');
+    await despejar(page, 'hospitais');
+    const caixa = page.locator('cura-checkbox').filter({ hasText: new RegExp(CFG.unidade, 'i') });
+    const caixa2 = page.locator('cura-checkbox[label*="' + CFG.unidade + '" i]');
+    if (await caixa2.count()) await caixa2.first().click();
+    else if (await caixa.count()) await caixa.first().click();
+    else await page.locator('cura-checkbox[label="Selecionar Todos"]').first().click();
+    await espera(800);
+    await botaoProssiga(page);
+    await espera(2000);
+  }
 }
 
 async function lerAgenda(page) {
@@ -272,7 +297,9 @@ async function rodada() {
   const t0 = Date.now();
   try {
     await chegarNaAgenda(page);
-    await espera(2500);
+    await prepararAgenda(page);
+    await foto(page, 'agenda');
+    await despejar(page, 'agenda');
     const r = await lerAgenda(page);
     const res = await rpc('joice_ext_sync', { p_key: CFG.robo_key, p_from: r.inicio, p_to: r.fim, p_slots: r.slots, p_info: { versao: VERSAO, dias: r.diasLidos, seg: Math.round((Date.now() - t0) / 1000) } });
     log(`OK: ${r.slots.length} horário(s) livres de ${r.inicio} a ${r.fim} enviados (${res && res.slots} gravados).`);
