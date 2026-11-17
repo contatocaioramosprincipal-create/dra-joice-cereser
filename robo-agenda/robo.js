@@ -18,7 +18,7 @@ fs.mkdirSync(DEBUG, { recursive: true });
 const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const UMA_VEZ = process.argv.includes('--uma-vez');
-const VERSAO = '1.2';
+const VERSAO = '1.3';
 const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
 
 function log(...a) {
@@ -32,6 +32,24 @@ const somaDias = (iso, n) => { const d = new Date(iso + 'T12:00:00Z'); d.setUTCD
 
 async function foto(page, nome) {
   try { await page.screenshot({ path: path.join(DEBUG, nome + '.png'), fullPage: true }); } catch (e) {}
+}
+
+// guarda texto/estrutura da tela (inclusive dentro dos componentes) para diagnóstico
+async function despejar(page, nome) {
+  try {
+    const txt = await page.evaluate(() => {
+      const out = [];
+      const walk = (root, d) => { for (const el of root.querySelectorAll('*')) {
+        const t = (el.childElementCount === 0 ? (el.textContent || '').trim() : '');
+        const at = ['role','placeholder','label','name','value','aria-label','class'].map(a => el.getAttribute && el.getAttribute(a) ? a + '="' + String(el.getAttribute(a)).slice(0,60) + '"' : '').filter(Boolean).join(' ');
+        if (el.tagName.includes('-') || t || /^(SELECT|OPTION|LI|BUTTON|INPUT)$/.test(el.tagName)) out.push(el.tagName.toLowerCase() + ' ' + at + (t ? ' :: ' + t.slice(0,80) : ''));
+        if (el.shadowRoot) { out.push('#shadow-root'); walk(el.shadowRoot, d + 1); }
+      } };
+      walk(document.querySelector('main') || document.body, 0);
+      return out.join('\n');
+    });
+    fs.writeFileSync(path.join(DEBUG, nome + '.txt'), txt);
+  } catch (e) {}
 }
 
 async function cliqueSeVisivel(loc, ms = 1200) {
@@ -80,6 +98,7 @@ async function chegarNaAgenda(page) {
     const e = etapa(page);
     log('etapa:', e);
     await foto(page, 'entrou-' + e);
+    await despejar(page, 'entrou-' + e);
     if (e === 'agendar-consulta') return;
 
     if (e === 'local') {
@@ -95,14 +114,18 @@ async function chegarNaAgenda(page) {
       await espera(500);
       await page.keyboard.press('Tab');
       await espera(500);
-      // sexo: <select> (mesmo dentro do componente) ou lista do próprio site
+      // sexo: componente do site (cura-select / lista) ou <select>
+      const campoSexo = page.locator('[placeholder*="sexo" i], [label*="sexo" i]').first();
       const sel = page.locator('select');
       if (await sel.count()) {
         await sel.first().selectOption({ label: CFG.sexo_ficticio }).catch(async () => { await sel.first().selectOption({ index: 1 }); });
       } else {
-        await page.getByText(/selecione o sexo/i).last().click();
-        await espera(600);
-        await page.getByText(CFG.sexo_ficticio, { exact: true }).last().click();
+        if (await campoSexo.count()) await campoSexo.click(); else await page.getByText(/selecione o sexo/i).last().click();
+        await espera(900);
+        await despejar(page, 'opcoes-sexo');
+        const opc = page.getByText(new RegExp('^\\s*' + CFG.sexo_ficticio + '\\s*$', 'i')).filter({ visible: true });
+        if (await opc.count()) await opc.last().click();
+        else { await page.keyboard.press('ArrowDown'); await espera(300); await page.keyboard.press('Enter'); }
       }
       await espera(800);
       await foto(page, 'passo-paciente');
@@ -241,6 +264,7 @@ async function rodada() {
   } catch (e) {
     log('ERRO:', e.message);
     await foto(page, 'erro-' + etapa(page));
+    await despejar(page, 'erro-' + etapa(page));
     try { await rpc('joice_ext_error', { p_key: CFG.robo_key, p_error: e.message, p_info: { versao: VERSAO, etapa: etapa(page) } }); } catch (x) {}
   } finally {
     try { fs.writeFileSync(path.join(DEBUG, 'websocket.txt'), frames.join('\n\n----\n\n')); } catch (e) {}
