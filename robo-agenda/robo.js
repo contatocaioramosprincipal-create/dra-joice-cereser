@@ -18,7 +18,7 @@ fs.mkdirSync(DEBUG, { recursive: true });
 const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const UMA_VEZ = process.argv.includes('--uma-vez');
-const VERSAO = '1.1';
+const VERSAO = '1.2';
 const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
 
 function log(...a) {
@@ -46,7 +46,7 @@ async function fecharAvisos(page) {
 
 async function botaoProssiga(page) {
   const b = page.getByRole('button', { name: /^(prossiga|continuar|avançar|avancar)$/i });
-  if (await b.count()) { try { await b.first().click({ timeout: 5000 }); return true; } catch (e) {} }
+  if (await b.count()) { try { await b.last().click({ timeout: 5000 }); return true; } catch (e) {} }
   return false;
 }
 
@@ -79,6 +79,7 @@ async function chegarNaAgenda(page) {
     await fecharAvisos(page);
     const e = etapa(page);
     log('etapa:', e);
+    await foto(page, 'entrou-' + e);
     if (e === 'agendar-consulta') return;
 
     if (e === 'local') {
@@ -86,19 +87,25 @@ async function chegarNaAgenda(page) {
       await espera(800);
       await botaoProssiga(page);
     } else if (e === 'paciente') {
-      const nasc = page.getByPlaceholder(/dd\/mm\/aaaa/i).first();
+      // componentes do site (cura-*): clica no campo e digita pelo teclado
+      const nasc = page.locator('cura-input-text[placeholder="dd/mm/aaaa"], [placeholder="dd/mm/aaaa"]').first();
       await nasc.click();
-      await nasc.fill('');
-      await nasc.pressSequentially(CFG.nascimento_ficticio.replace(/\D/g, ''), { delay: 50 });
-      // sexo: <select> nativo ou lista do próprio site
+      await espera(300);
+      await page.keyboard.type(CFG.nascimento_ficticio.replace(/\D/g, ''), { delay: 80 });
+      await espera(500);
+      await page.keyboard.press('Tab');
+      await espera(500);
+      // sexo: <select> (mesmo dentro do componente) ou lista do próprio site
       const sel = page.locator('select');
       if (await sel.count()) {
         await sel.first().selectOption({ label: CFG.sexo_ficticio }).catch(async () => { await sel.first().selectOption({ index: 1 }); });
       } else {
-        await page.getByText(/selecione o sexo/i).first().click();
-        await page.getByText(CFG.sexo_ficticio, { exact: true }).first().click();
+        await page.getByText(/selecione o sexo/i).last().click();
+        await espera(600);
+        await page.getByText(CFG.sexo_ficticio, { exact: true }).last().click();
       }
-      await espera(600);
+      await espera(800);
+      await foto(page, 'passo-paciente');
       await botaoProssiga(page);
     } else if (e === 'pagamento') {
       await page.getByText(new RegExp('^\\s*' + CFG.pagamento + '\\s*$', 'i')).first().click({ timeout: 15000 });
