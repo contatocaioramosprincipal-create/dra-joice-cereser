@@ -95,7 +95,11 @@
     if (lead || q.length >= 10) { leave(); }
   }, true);
 
-  function dl(ev, label) { try { (W.dataLayer = W.dataLayer || []).push({ event: ev, jc_label: String(label || '').slice(0, 80) }); } catch (e) {} }
+  function dl(ev, label) { try { (W.dataLayer = W.dataLayer || []).push({ event: ev, jc_label: String(label || '').slice(0, 80) }); } catch (e) {} conv(ev); }
+  var AW = 'AW-18580636200', AWL = AW + '/pboJCMD3kbodEKiE-JtF';
+  try { W.dataLayer = W.dataLayer || []; W.gtag = W.gtag || function () { W.dataLayer.push(arguments); }; W.gtag('js', new Date()); W.gtag('config', AW);
+    var gs = document.createElement('script'); gs.async = true; gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + AW; document.head.appendChild(gs); } catch (e) {}
+  function conv(ev) { if (!/^jc_(pedido|whatsapp|ligacao)$/.test(ev)) return; try { W.gtag('event', 'conversion', { send_to: AWL, value: 1.0, currency: 'BRL' }); } catch (e) {} }
   W.jcTrack = function (label, isLead, secId) {
     if (isLead) dl(/agendamento/i.test(label) ? 'jc_pedido' : 'jc_lead', label);
     var c = base('click'); c.section = secId || null; c.target = String(label || '').slice(0, 80); c.is_lead = !!isLead;
