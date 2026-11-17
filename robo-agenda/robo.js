@@ -18,7 +18,7 @@ fs.mkdirSync(DEBUG, { recursive: true });
 const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const UMA_VEZ = process.argv.includes('--uma-vez');
-const VERSAO = '1.3';
+const VERSAO = '1.4';
 const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
 
 function log(...a) {
@@ -50,6 +50,17 @@ async function despejar(page, nome) {
     });
     fs.writeFileSync(path.join(DEBUG, nome + '.txt'), txt);
   } catch (e) {}
+}
+
+// abre um cura-select e escolhe a opção pelo texto (ou a primeira, se não achar)
+async function escolherOpcao(page, campo, texto) {
+  await campo.click();
+  await espera(900);
+  const ops = page.locator('cura-select-option').filter({ visible: true });
+  const alvo = ops.filter({ hasText: new RegExp('^\\s*' + texto + '\\s*$', 'i') });
+  if (await alvo.count()) await alvo.first().click();
+  else if (await ops.count()) { await despejar(page, 'opcoes-' + texto); await ops.first().click(); }
+  else throw new Error('Lista sem opções visíveis');
 }
 
 async function cliqueSeVisivel(loc, ms = 1200) {
@@ -131,11 +142,16 @@ async function chegarNaAgenda(page) {
       await foto(page, 'passo-paciente');
       await botaoProssiga(page);
     } else if (e === 'pagamento') {
-      await page.getByText(new RegExp('^\\s*' + CFG.pagamento + '\\s*$', 'i')).first().click({ timeout: 15000 });
-      await espera(1000);
-      // às vezes pede o "plano" logo em seguida: escolhe Particular de novo
-      await cliqueSeVisivel(page.getByText(new RegExp('^\\s*' + CFG.pagamento + '\\s*$', 'i')).nth(1), 1500);
-      await espera(600);
+      await escolherOpcao(page, page.locator('cura-select[label="Forma de pagamento"]').first(), CFG.pagamento);
+      // se aparecer mais uma lista (plano/convênio), escolhe "Particular" nela também
+      for (let k = 0; k < 3; k++) {
+        await espera(1200);
+        const vazio = page.locator('cura-select[value="unset"]').filter({ visible: true });
+        if (!(await vazio.count())) break;
+        await escolherOpcao(page, vazio.first(), CFG.pagamento);
+      }
+      await espera(800);
+      await foto(page, 'passo-pagamento');
       await botaoProssiga(page);
     } else {
       // etapa desconhecida: tenta só prosseguir
