@@ -453,12 +453,22 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
     <form class="card" id="loginForm" autocomplete="on">
       <div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Pediatria</small></div></div>
       <h1>Seu espaço, <em>Dra.</em></h1>
-      <p class="sub">Acompanhe quem visita o seu site e atualize fotos e textos quando quiser.</p>
+      <p class="sub">Sua agenda, seus pacientes e as visitas do seu site em um só lugar.</p>
       <label class="field"><span>Usuário</span><input id="lUser" name="username" autocomplete="username" required autocapitalize="none" spellcheck="false"></label>
       <label class="field"><span>Senha</span><div class="pw"><input id="lPass" name="password" type="password" autocomplete="current-password" required><button type="button" id="lShow">mostrar</button></div></label>
       <button class="btn btn-solid" type="submit" id="lBtn">Entrar</button>
       <div class="err" id="lErr" role="alert"></div>
       <div class="by">Painel desenvolvido por <b>AXIS</b></div>
+    </form>
+    <form class="card" id="firstForm" hidden autocomplete="off">
+      <div class="brand"><svg><use href="#i-bear"/></svg><div><b>Joice Cereser</b><small>Pediatria</small></div></div>
+      <h1>Crie sua <em>senha</em></h1>
+      <p class="sub">Este é o seu primeiro acesso. Troque a senha provisória por uma só sua para continuar.</p>
+      <label class="field" id="fOldWrap"><span>Senha provisória</span><input id="fOld" type="password" autocomplete="current-password"></label>
+      <label class="field"><span>Nova senha (mínimo 8 caracteres)</span><input id="fNew" type="password" autocomplete="new-password" minlength="8" required></label>
+      <label class="field"><span>Repita a nova senha</span><input id="fNew2" type="password" autocomplete="new-password" minlength="8" required></label>
+      <button class="btn btn-solid" type="submit" id="fBtn">Salvar e entrar</button>
+      <div class="err" id="fErr" role="alert"></div>
     </form>
   </div>
 </section>
@@ -584,7 +594,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k); if(v===nul
 var token=ls('jc_token'), me=null;
 var SEC={topo:'Menu do topo',inicio:'Abertura',manifesto:'Frase de destaque',sobre:'Sobre mim',atendimento:'Como eu atendo',sinais:'Sinais de atenção',primeira:'Primeira consulta',acompanho:'O que eu acompanho',formacao:'Formação',vida:'Fora do consultório',duvidas:'Dúvidas frequentes',leituras:'Conteúdos',agendar:'Agendamento',rodape:'Rodapé'};
 var SRC_COLORS=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'];
-var ERR={login_invalido:'Usuário ou senha incorretos.',muitas_tentativas:'Muitas tentativas. Aguarde 15 minutos e tente de novo.',senha_atual_incorreta:'A senha atual não confere.',senha_curta:'A nova senha precisa ter pelo menos 8 caracteres.',texto_muito_longo:'Um dos textos ficou longo demais.',imagem_muito_grande:'A foto é grande demais.',formato_invalido:'Formato de foto não aceito.'};
+var ERR={login_invalido:'Usuário ou senha incorretos.',muitas_tentativas:'Muitas tentativas. Aguarde 15 minutos e tente de novo.',senha_atual_incorreta:'A senha atual não confere.',senha_curta:'A nova senha precisa ter pelo menos 8 caracteres.',senha_igual:'Escolha uma senha diferente da atual.',texto_muito_longo:'Um dos textos ficou longo demais.',imagem_muito_grande:'A foto é grande demais.',formato_invalido:'Formato de foto não aceito.'};
 
 function rpc(fn,body){
   return fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(body||{})})
@@ -607,11 +617,22 @@ function showLogin(){$('#app').hidden=true;$('#login').hidden=false;setTimeout(f
 function logout(silent){if(token&&!silent)rpc('joice_logout',{p_token:token}).catch(function(){});token=null;ls('jc_token',null);showLogin()}
 $('#lShow').onclick=function(){var i=$('#lPass');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'mostrar':'ocultar'};
 $('#loginForm').onsubmit=function(e){e.preventDefault();var b=$('#lBtn');b.disabled=true;b.textContent='Entrando…';$('#lErr').textContent='';
-  rpc('joice_login',{p_login:$('#lUser').value,p_pass:$('#lPass').value}).then(function(r){token=r.token;ls('jc_token',token);ls('jc_admin','1');me=r;start()})
+  rpc('joice_login',{p_login:$('#lUser').value,p_pass:$('#lPass').value}).then(function(r){token=r.token;ls('jc_token',token);ls('jc_admin','1');me=r;tmpPass=$('#lPass').value;start()})
   .catch(function(er){$('#lErr').textContent=er.message}).then(function(){b.disabled=false;b.textContent='Entrar'})};
 $('#logout').onclick=function(){logout()};$('#logout2').onclick=function(){logout()};
 
+var tmpPass='';
+function askNewPass(){$('#app').hidden=true;$('#login').hidden=false;$('#loginForm').hidden=true;$('#firstForm').hidden=false;$('#fOldWrap').hidden=!!tmpPass;setTimeout(function(){(tmpPass?$('#fNew'):$('#fOld')).focus()},50)}
+$('#firstForm').onsubmit=function(e){e.preventDefault();var er=$('#fErr');er.textContent='';
+  var o=tmpPass||$('#fOld').value,n=$('#fNew').value;
+  if(n.length<8){er.textContent='A nova senha precisa ter pelo menos 8 caracteres.';return}
+  if(n!==$('#fNew2').value){er.textContent='As duas senhas não são iguais.';return}
+  if(n===o){er.textContent='Escolha uma senha diferente da provisória.';return}
+  var b=$('#fBtn');b.disabled=true;
+  rpc('joice_change_password',{p_token:token,p_old:o,p_new:n}).then(function(){tmpPass='';if(me)me.must_change=false;$('#firstForm').hidden=true;$('#loginForm').hidden=false;start()})
+  .catch(function(x){er.textContent=x.message}).then(function(){b.disabled=false})};
 function start(){
+  if(me&&me.must_change){askNewPass();return}
   if(/[?&]next=crm/.test(location.search)){location.replace('/crm/');return}
   $('#login').hidden=true;$('#app').hidden=false;
   var first=(me&&me.name||'').replace(/^Dra\.\s*/,'');

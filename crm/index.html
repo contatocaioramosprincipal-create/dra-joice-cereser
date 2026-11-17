@@ -1150,7 +1150,7 @@ function famBox(l){var el=$('#dFam');if(!el)return;
   }).catch(function(){el.innerHTML='<p class="hint">Não foi possível carregar.</p>'})}
 
 /* ---------- início ---------- */
-rpc('joice_me',{p_token:token}).then(function(r){if(r)me=r;$('#app').hidden=false;go(location.hash.slice(1)||'hoje');getCfg();loadLeads()});
+rpc('joice_me',{p_token:token}).then(function(r){if(r)me=r;if(r&&r.must_change){location.replace('/painel/?next=crm');return}$('#app').hidden=false;go(location.hash.slice(1)||'hoje');getCfg();loadLeads()});
 $('#kbtn').onclick=openCmd;
 window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(v&&v!==cur)go(v)});
 setInterval(function(){if(document.visibilityState==='visible'&&(cur==='funil'||cur==='contatos')&&!dr.classList.contains('on')&&$('#modal').hidden)loadLeads()},60000);
