@@ -238,10 +238,10 @@ $$('#tabs button').forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
 
 /* ---------- início ---------- */
 function ics(a){function z(d){return new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}
-  var s='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Dra Joice Cereser//PT\r\nBEGIN:VEVENT\r\nUID:'+a.id+'@drajoice.com.br\r\nDTSTAMP:'+z(Date.now())+'\r\nDTSTART:'+z(a.starts_at)+'\r\nDTEND:'+z(a.ends_at)+'\r\nSUMMARY:Consulta com a Dra. Joice Cereser'+(a.child_name?' - '+a.child_name:'')+'\r\nLOCATION:Consultório Dra. Joice Cereser - Tatuí\\, SP\r\nBEGIN:VALARM\r\nTRIGGER:-PT2H\r\nACTION:DISPLAY\r\nDESCRIPTION:Consulta com a Dra. Joice\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR';
+  var s='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Dra Joice Cereser//PT\r\nBEGIN:VEVENT\r\nUID:'+a.id+'@drajoice.com.br\r\nDTSTAMP:'+z(Date.now())+'\r\nDTSTART:'+z(a.starts_at)+'\r\nDTEND:'+z(a.ends_at)+'\r\nSUMMARY:Consulta com a Dra. Joice Cereser'+(a.child_name?' - '+a.child_name:'')+'\r\nLOCATION:Hospital São Luiz São Bernardo - Centro Médico Unidade Anchieta\\, Rua Frei Gaspar 941\\, São Bernardo do Campo\\, SP\r\nBEGIN:VALARM\r\nTRIGGER:-PT2H\r\nACTION:DISPLAY\r\nDESCRIPTION:Consulta com a Dra. Joice\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR';
   var u=URL.createObjectURL(new Blob([s],{type:'text/calendar'})),l=document.createElement('a');l.href=u;l.download='consulta-dra-joice.ics';document.body.appendChild(l);l.click();l.remove();setTimeout(function(){URL.revokeObjectURL(u)},2000)}
 function vInicio(){var v=$('#view'),nx=(D.next||[])[0],h='';
-  if(nx){h+='<div class="next fade"><div class="lb">Sua próxima consulta</div><div class="when">'+esc(cap(whenLong(nx.starts_at)))+'</div><div class="who">'+esc([nx.child_name,'Dra. Joice Cereser','Tatuí, SP'].filter(Boolean).join(' · '))+'</div>'+
+  if(nx){h+='<div class="next fade"><div class="lb">Sua próxima consulta</div><div class="when">'+esc(cap(whenLong(nx.starts_at)))+'</div><div class="who">'+esc([nx.child_name,'Dra. Joice Cereser','São Bernardo do Campo, SP'].filter(Boolean).join(' · '))+'</div>'+
     (nx.status==='confirmado'?'<span class="st ok"><svg width="14" height="14"><use href="#i-check"/></svg>Presença confirmada</span>':'<span class="st">Aguardando sua confirmação</span>')+
     '<div class="acts">'+(nx.status==='pendente'?'<button class="btn wide" id="cfBtn"><svg><use href="#i-check"/></svg>Confirmar presença</button>':'')+'<button class="btn btn-w" id="icsBtn"><svg><use href="#i-cal"/></svg>No calendário</button><a class="btn btn-w" target="_blank" rel="noopener" href="'+waLink('Olá! Sou '+D.parent.name+' e preciso remarcar a consulta de '+whenLong(nx.starts_at)+'.')+'">Remarcar</a></div></div>'}
   else h+='<div class="next fade"><div class="lb">Consultas</div><div class="when">Nenhuma consulta marcada</div><div class="who">Quando for a hora do próximo acompanhamento, é só pedir por aqui.</div><div class="acts"><button class="btn wide" data-agendar>Pedir um horário</button></div></div>';
@@ -315,7 +315,7 @@ function vEquipe(){$('#view').innerHTML='<div class="doc fade" style="margin-top
   '<div class="list"><a target="_blank" rel="noopener" href="'+waLink('Olá! Sou '+D.parent.name+' e tenho uma dúvida.')+'"><svg><use href="#i-wa"/></svg><span>Falar com a equipe<small>WhatsApp do consultório</small></span></a>'+
   '<button data-agendar><svg><use href="#i-cal"/></svg><span>Pedir uma nova consulta<small>Escolha o melhor dia e período</small></span></button>'+
   '<a target="_blank" rel="noopener" href="https://www.instagram.com/'+esc(cfg.instagram)+'/"><svg><use href="#i-ig"/></svg><span>Instagram<small>@'+esc(cfg.instagram)+'</small></span></a>'+
-  '<a target="_blank" rel="noopener" href="/"><svg><use href="#i-pin"/></svg><span>Consultório em Tatuí, SP<small>drajoice.com.br</small></span></a></div>'+
+  '<a target="_blank" rel="noopener" href="/"><svg><use href="#i-pin"/></svg><span>São Bernardo do Campo · Em breve em Tatuí<small>drajoice.com.br</small></span></a></div>'+
   '<div class="list"><button id="outBtn"><svg><use href="#i-out"/></svg><span>Sair do aplicativo</span></button></div>'+
   '<p class="note" style="text-align:center">Seus dados ficam protegidos e só a equipe da Dra. Joice tem acesso. <a href="/privacidade" style="color:var(--caramelo)">Privacidade</a></p>';
   $('#outBtn').onclick=function(){if(!confirm('Sair do aplicativo?'))return;rpc('joice_family_logout',{p_ftoken:ft}).catch(function(){});ls('jc_fam',null);ft=null;showLogin()}}
@@ -362,6 +362,6 @@ if(ft)start();else showLogin();
 window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(D&&v&&v!==view)go(v)});
 })();
 </script>
-<script src="/assets/agendar.js?v=4" defer></script>
+<script src="/assets/agendar.js?v=5" defer></script>
 </body>
 </html>

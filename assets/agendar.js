@@ -117,7 +117,7 @@
         body.querySelector('#jmN').onclick = function () { s.det = body.querySelector('#jmDet').value; s.step = 2; render(b); };
       } else if (s.step === 2 && cfg.online && !s.prefMode) {
         body.innerHTML = '<span class="jm-l">Escolha o dia</span><div id="jmDays" class="jm-ch"><span class="jm-note" style="margin:0">Carregando horários livres…</span></div><span class="jm-l" id="jmHl" hidden>Horário</span><div id="jmTimes" class="jm-ch"></div>' +
-          '<p class="jm-note" id="jmLoc">Consulta presencial em Tatuí, SP. A equipe confirma o horário com você pelo WhatsApp.</p>' +
+          '<p class="jm-note" id="jmLoc">Consulta presencial em São Bernardo do Campo, SP (em breve também em Tatuí). A equipe confirma o horário com você pelo WhatsApp.</p>' +
           '<div class="jm-act"><button class="jm-btn g" id="jmB">← Voltar</button><button class="jm-btn p" id="jmN" disabled>Continuar</button></div><p class="jm-note" style="text-align:center"><a href="#" id="jmPref" style="color:#A26B44">Nenhum horário serve? Enviar minha preferência</a></p>';
         var nb = body.querySelector('#jmN');
         body.querySelector('#jmB').onclick = function () { s.step = 1; render(b); };
