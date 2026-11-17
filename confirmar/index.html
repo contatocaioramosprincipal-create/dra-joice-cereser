@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmar consulta | Dra. Joice Cereser</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#EADBC6">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap">
+<style>
+:root{--linho:#F5EDE2;--areia:#EADBC6;--cafe:#2F211A;--caramelo:#A26B44;--texto:#5A463A;--mudo:#8A7566;--salvia:#DCE0D0;--oliva:#5B5A3C}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:radial-gradient(120% 60% at 100% 0%,#EADBC6 0,transparent 60%),radial-gradient(90% 50% at 0% 100%,#E7DDCB 0,transparent 55%),var(--linho);color:var(--texto);font:300 17px/1.6 Jost,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:28px 16px}
+.card{position:relative;width:min(480px,100%);background:#FBF6EF;border-radius:30px;box-shadow:0 40px 90px -40px rgba(47,33,26,.55);overflow:hidden}
+.top{position:relative;background:var(--areia);padding:30px 28px 26px;overflow:hidden}
+.top svg{position:absolute;right:-46px;top:-36px;width:230px;opacity:.5}
+.s{font:400 32px/1 "Pinyon Script",cursive;color:var(--caramelo)}
+h1{font:400 34px/1.08 "Cormorant Garamond",Georgia,serif;color:var(--cafe);margin:6px 0 0;position:relative}
+h1 em{color:var(--caramelo)}
+.b{padding:26px 28px 30px}
+.when{display:flex;gap:16px;align-items:center;padding:18px;border-radius:20px;background:var(--linho);margin-bottom:16px}
+.dt{flex:none;width:70px;text-align:center;border-radius:16px;background:var(--cafe);color:var(--linho);padding:10px 0 8px}
+.dt small{display:block;font:500 10.5px/1 Jost;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.dt b{display:block;font:400 34px/1 "Cormorant Garamond",serif;margin:4px 0 2px}
+.when .hr{font:400 26px/1.1 "Cormorant Garamond",serif;color:var(--cafe)}
+.when .wd{font-size:14.5px;color:var(--mudo)}
+.loc{display:flex;gap:12px;align-items:flex-start;font-size:15px;margin:0 0 22px}
+.loc svg{flex:none;margin-top:3px;color:var(--caramelo)}
+.loc a{color:var(--caramelo);font-size:14px}
+.tips{font-size:14.5px;color:var(--texto);background:rgba(220,224,208,.55);border-radius:16px;padding:14px 16px;margin:0 0 22px}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:17px 22px;font:500 13px/1 Jost,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .2s,opacity .2s}
+.btn.p{background:var(--cafe);color:var(--linho)}.btn.p:hover{background:var(--caramelo)}
+.btn.g{background:transparent;color:var(--mudo);margin-top:8px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:default}
+.ok{text-align:center;padding:6px 0}
+.ok .ic{width:76px;height:76px;margin:0 auto 14px;border-radius:50%;background:var(--salvia);display:grid;place-items:center;color:var(--oliva)}
+.ok h2{font:400 30px/1.1 "Cormorant Garamond",serif;color:var(--cafe);margin:0 0 8px}
+.err{color:#9B3B2E;font-size:14px;min-height:20px;text-align:center;margin-top:10px}
+.foot{text-align:center;font-size:12.5px;color:var(--mudo);padding:0 20px 22px}
+.foot a{color:var(--mudo)}
+.sk{height:16px;border-radius:8px;background:linear-gradient(90deg,#EFE5D7,#F7F0E6,#EFE5D7);background-size:200% 100%;animation:sk 1.2s infinite;margin:10px 0}
+@keyframes sk{to{background-position:-200% 0}}
+</style></head><body>
+<div class="card">
+  <div class="top"><svg viewBox="0 0 300 300" fill="none" stroke="#A26B44" stroke-width="1.2"><path d="M30 300V170a120 120 0 0 1 240 0V300"/><path d="M60 300V175a90 90 0 0 1 180 0V300" opacity=".6"/><path d="M90 300V180a60 60 0 0 1 120 0V300" opacity=".35"/></svg>
+    <div class="s">Dra. Joice Cereser</div><h1 id="t">Sua <em>consulta</em></h1></div>
+  <div class="b" id="b"><div class="sk" style="height:90px"></div><div class="sk"></div><div class="sk" style="width:60%"></div></div>
+  <div class="foot">Pediatria · CRM-SP 174512 · RQE 119336 · <a href="/">drajoice.com.br</a></div>
+</div>
+<script>
+(function(){
+var c=(new URLSearchParams(location.search).get('c')||'').trim(),B=document.getElementById('b'),T=document.getElementById('t');
+var WD=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'],MS=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+var CHECK='<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+var PIN='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(x){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]})}
+function sp(iso){var d=new Date(iso);var p=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short'}).formatToParts(d),o={};p.forEach(function(x){o[x.type]=x.value});
+  var ld=new Date(Date.UTC(+o.year,+o.month-1,+o.day));return{dia:+o.day,mes:MS[+o.month-1],wd:WD[ld.getUTCDay()],hr:o.hour+'h'+o.minute}}
+function bad(msg){T.innerHTML='Link <em>indisponível</em>';B.innerHTML='<p style="text-align:center">'+(msg||'Este link de confirmação não é válido ou a consulta já passou.')+'</p><p style="text-align:center;font-size:15px">Se precisar, fale com a equipe da Dra. Joice pelo WhatsApp.</p>'}
+function done(a,kind){
+  if(kind==='cancelado'){T.innerHTML='Pedido <em>recebido</em>';B.innerHTML='<div class="ok"><h2>Tudo bem, '+esc(a.parent)+'.</h2><p>Avisamos a equipe da Dra. Joice que você não vai poder ir. Se quiser marcar outro dia, é só pedir um novo horário pelo site.</p><a class="btn p" href="/?agendar=1" style="margin-top:18px">Escolher outro horário</a></div>';return}
+  var w=sp(a.starts_at);T.innerHTML='Consulta <em>confirmada</em>';
+  B.innerHTML='<div class="ok"><div class="ic">'+CHECK+'</div><h2>Obrigada, '+esc(a.parent)+'!</h2><p>Esperamos '+(a.child?esc(a.child.split(' ')[0]):'vocês')+' na '+w.wd+', '+w.dia+' de '+w.mes+' às <b>'+w.hr+'</b>'+(a.local?', no '+esc(a.local):'')+'.</p></div>'+(a.endereco?'<p class="loc" style="justify-content:center;margin:18px 0 0">'+PIN+'<span>'+esc(a.endereco)+'<br><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(a.endereco)+'">Abrir no mapa</a></span></p>':'')}
+function show(a){
+  if(a.status==='cancelado')return done(a,'cancelado');
+  if(a.confirmed)return done(a,'ok');
+  var w=sp(a.starts_at);
+  T.innerHTML=(a.child?'Consulta de <em>'+esc(a.child.split(' ')[0])+'</em>':'Sua <em>consulta</em>');
+  B.innerHTML='<p style="margin:0 0 16px">Olá, '+esc(a.parent)+'! Sua consulta com a Dra. Joice está marcada. Confira e confirme sua presença:</p>'+
+   '<div class="when"><div class="dt"><small>'+w.mes+'</small><b>'+w.dia+'</b></div><div><div class="hr">'+w.hr+'</div><div class="wd">'+w.wd+'</div></div></div>'+
+   (a.local?'<p class="loc">'+PIN+'<span><b style="font-weight:500;color:#2F211A">'+esc(a.local)+'</b>'+(a.endereco?'<br>'+esc(a.endereco)+'<br><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(a.endereco)+'">Abrir no mapa</a>':'')+'</span></p>':'')+
+   '<p class="tips">Se não puder ir, avise por aqui: assim o horário fica livre para outra família.</p>'+
+   '<button class="btn p" id="ok">Confirmar presença</button><button class="btn g" id="no">Não vou poder ir</button><div class="err" id="e"></div>';
+  document.getElementById('ok').onclick=function(){act('confirmar',this)};
+  document.getElementById('no').onclick=function(){if(confirm('Quer mesmo desmarcar esta consulta?'))act('cancelar',this)};
+}
+function act(acao,btn){var e=document.getElementById('e');e.textContent='';btn.disabled=true;
+  fetch('/api/confirmar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({c:c,acao:acao})}).then(function(r){return r.json()}).then(function(r){
+    if(!r.ok)throw new Error(r.error==='encerrada'?'Esta consulta já foi encerrada.':'Não foi possível agora. Tente de novo.');
+    done(r.appt,acao==='cancelar'?'cancelado':'ok')}).catch(function(x){e.textContent=x.message;btn.disabled=false})}
+if(!/^[0-9a-f]{10,32}$/.test(c))return bad();
+fetch('/api/confirmar?c='+encodeURIComponent(c)).then(function(r){return r.json()}).then(function(r){if(!r.ok)return bad();show(r.appt)}).catch(function(){bad('Não foi possível carregar agora. Tente de novo em instantes.')});
+})();
+</script></body></html>

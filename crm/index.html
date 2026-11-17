@@ -655,8 +655,10 @@ aside .axis{color:#A8957F!important;letter-spacing:.18em!important}
       <form class="card" id="agForm">
         <h2>Configuração</h2>
         <p class="hint">Quando a agenda online está ligada, o site mostra apenas os horários livres. Cada escolha entra no Funil e na Agenda como "a confirmar".</p>
+        <label class="field" style="margin:14px 0 4px"><span>De onde vêm os horários</span><select id="agFonte"><option value="rededor">Espelho da agenda da Rede D'Or (robô)</option><option value="grade">Grade própria (configurada abaixo)</option></select></label>
+        <div id="extBox" class="hint" style="margin:0 0 12px"></div>
         <div class="sw"><div><b>Agenda online no site</b><div class="hint" id="swTxt">Desligada: as famílias enviam só a preferência de dia e período.</div></div><label class="toggle"><input type="checkbox" id="agOn"><span></span></label></div>
-        <div class="frow">
+        <div class="frow" id="agGradeOpts">
           <label class="field"><span>Duração da consulta</span><select id="agDur"><option value="30">30 min</option><option value="40">40 min</option><option value="45">45 min</option><option value="50">50 min</option><option value="60">1 hora</option><option value="75">1h15</option><option value="90">1h30</option><option value="120">2 horas</option></select></label>
           <label class="field"><span>Antecedência mínima</span><select id="agAnt"><option value="2">2 horas</option><option value="6">6 horas</option><option value="12">12 horas</option><option value="24">1 dia</option><option value="48">2 dias</option></select></label>
           <label class="field"><span>Mostrar até</span><select id="agJan"><option value="7">7 dias</option><option value="14">14 dias</option><option value="21">21 dias</option><option value="30">30 dias</option><option value="45">45 dias</option><option value="60">60 dias</option></select></label>
@@ -707,6 +709,7 @@ function dayObj(iso){return new Date(iso+'T12:00:00Z')}
 function addD(iso,n){var d=dayObj(iso);d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)}
 function wdOf(iso){return dayObj(iso).getUTCDay()}
 function fmtD(iso){var d=dayObj(iso);return String(d.getUTCDate()).padStart(2,'0')+'/'+String(d.getUTCMonth()+1).padStart(2,'0')}
+function msgLink(l,ap,code){return 'Olá, '+first(l.parent_name)+'! Aqui é da equipe da Dra. Joice Cereser. A consulta'+(l.child_name?' de '+first(l.child_name):'')+' está marcada para '+whenTxt(ap.starts_at)+'. Para confirmar sua presença, é só tocar no link: https://drajoice.com.br/confirmar/?c='+code}
 function whenTxt(ts){var i=isoDay(ts);return WD[wdOf(i)]+', '+fmtD(i)+' às '+hmTxt(ts)}
 function ago(ts){var s=(Date.now()-new Date(ts))/1000;if(s<60)return 'agora';if(s<3600)return 'há '+Math.floor(s/60)+' min';if(s<86400)return 'há '+Math.floor(s/3600)+' h';var d=Math.floor(s/86400);return d===1?'ontem':'há '+d+' dias'}
 function fmtPhone(p){p=String(p||'').replace(/\D/g,'').replace(/^55(?=\d{10,11}$)/,'');return p.length===11?'('+p.slice(0,2)+') '+p.slice(2,7)+'-'+p.slice(7):p.length===10?'('+p.slice(0,2)+') '+p.slice(2,6)+'-'+p.slice(6):p}
@@ -829,13 +832,17 @@ function apptModal(o){
      '<label class="field"><span>Duração</span><select name="duration">'+[15,20,30,40,45,50,60,75,90,120,180,240].map(function(m){return '<option value="'+m+'"'+(m===dur?' selected':'')+'>'+(m<60?m+' min':(m/60|0)+'h'+(m%60?String(m%60).padStart(2,'0'):''))+'</option>'}).join('')+(([15,20,30,40,45,50,60,75,90,120,180,240].indexOf(dur)<0)?'<option selected value="'+dur+'">'+dur+' min</option>':'')+'</select></label>'+
      '<label class="field"><span>Situação</span><select name="status">'+Object.keys(APS).map(function(k){return '<option value="'+k+'"'+(k===(a.status||'confirmado')?' selected':'')+'>'+APS[k]+'</option>'}).join('')+'</select></label></div>';
   h+='<label class="field"><span>Observações</span><textarea name="notes" placeholder="Ex.: primeira consulta, trazer relatório da escola">'+esc(a.notes||'')+'</textarea></label>';
-  if(a.origin==='site')h+='<p class="hint" style="margin:0">Horário escolhido pela família no site'+(a.status==='pendente'?'. Confirme pelo WhatsApp e mude a situação para "Confirmada".':'.')+'</p>';
-  h+='<div class="err" id="apE"></div></div><div class="mf"><span style="display:flex;gap:8px;flex-wrap:wrap">'+(!isNew?'<button type="button" class="btn btn-line" id="apDel" style="color:#9B3B2E">Excluir</button>':'')+'<a class="btn btn-wa" id="apWa" target="_blank" rel="noopener" hidden><svg><use href="#i-wa"/></svg>Confirmar no WhatsApp</a></span><button class="btn btn-solid" type="submit">'+(isNew?'Marcar consulta':'Salvar')+'</button></div></form>';
+  var ext=agCfg&&agCfg.fonte==='rededor',rd=(agCfg&&agCfg.rededor)||{};
+  if(a.origin==='site')h+='<p class="hint" style="margin:0">Horário escolhido pela família no site'+(a.status==='pendente'?(ext?'. <b>1)</b> Marque este horário na agenda da Rede D\'Or com os dados da família. <b>2)</b> Envie o link de confirmação pelo WhatsApp: quando a família tocar em "Confirmar", a consulta fica como "Confirmada" aqui sozinha.':'. Confirme pelo WhatsApp e mude a situação para "Confirmada".'):'.')+'</p>';
+  if(a.family_confirmed_at)h+='<p class="hint" style="margin:6px 0 0;color:#5B5A3C">✓ A família confirmou pelo link em '+fmtD(isoDay(a.family_confirmed_at))+' às '+hmTxt(a.family_confirmed_at)+'.</p>';
+  h+='<div class="err" id="apE"></div></div><div class="mf"><span style="display:flex;gap:8px;flex-wrap:wrap">'+(!isNew?'<button type="button" class="btn btn-line" id="apDel" style="color:#9B3B2E">Excluir</button>':'')+'<a class="btn btn-wa" id="apWa" target="_blank" rel="noopener" hidden><svg><use href="#i-wa"/></svg>Confirmar no WhatsApp</a>'+(ext&&rd.url&&!isNew&&a.kind!=='bloqueio'&&a.status==='pendente'?'<a class="btn btn-line" href="'+esc(rd.url)+'" target="_blank" rel="noopener">Abrir agenda Rede D\'Or</a>':'')+'</span><button class="btn btn-solid" type="submit">'+(isNew?'Marcar consulta':'Salvar')+'</button></div></form>';
   modal(h);
   var sel=lead?{id:lead.id,parent_name:lead.parent_name,phone:lead.phone,child_name:lead.child_name}:(a.parent_name?{id:null,parent_name:a.parent_name,phone:a.phone,child_name:a.child_name}:null);
   function drawWho(){var k=$('[name=kind]').value;$('#whoBox').hidden=k==='bloqueio';
     if(sel){$('#who').innerHTML='<div class="chosen"><span><b style="font-weight:500">'+esc(sel.parent_name)+'</b>'+(sel.child_name?' · '+esc(sel.child_name):'')+'<br><small>'+esc(fmtPhone(sel.phone))+'</small></span>'+(isNew||!sel.id?'<button type="button" class="btn-ic" id="unsel"><svg><use href="#i-x"/></svg></button>':'')+'</div>';var u=$('#unsel');if(u)u.onclick=function(){sel=null;drawWho()};
-      var w=$('#apWa');if(w&&!isNew&&sel.phone){w.hidden=false;w.href=wa(sel.phone,msgConfirm(sel,{starts_at:a.starts_at}))}}
+      var w=$('#apWa');if(w&&!isNew&&sel.phone){w.hidden=false;w.href=wa(sel.phone,msgConfirm(sel,{starts_at:a.starts_at}));
+        if(a.kind!=='bloqueio'&&a.status!=='cancelado'&&new Date(a.starts_at)>new Date()){w.innerHTML='<svg><use href="#i-wa"/></svg>Enviar link de confirmação';
+          rpc('joice_appt_link',{p_token:token,p_id:a.id}).then(function(code){w.href=wa(sel.phone,msgLink(sel,a,code))}).catch(function(){})}}}
     else{$('#who').innerHTML='<div class="lk"><div class="field"><input id="lkQ" placeholder="Buscar contato ou digitar nome de nova família" autocomplete="off"></div><div class="lk-res" id="lkR" hidden></div></div><div class="grid2" id="quick" hidden style="margin-top:10px"><label class="field"><span>WhatsApp</span><input id="qPh" inputmode="tel"></label><label class="field"><span>Criança</span><input id="qCh"></label></div>';
       var q=$('#lkQ');q.oninput=function(){var v=q.value.trim(),res=$('#lkR');$('#quick').hidden=!v;if(!v){res.hidden=true;return}
         var m=leads.filter(function(l){return match(l,v)}).slice(0,6);res.hidden=!m.length;res.innerHTML=m.map(function(l){return '<button type="button" data-id="'+l.id+'">'+esc(l.parent_name)+' <small>'+esc([l.child_name,fmtPhone(l.phone)].filter(Boolean).join(' · '))+'</small></button>'}).join('');
@@ -904,12 +911,19 @@ $('#tbody').addEventListener('click',function(e){var r=e.target.closest('tr[data
 /* ---------- agenda online ---------- */
 var DAYS=[['seg','Segunda'],['ter','Terça'],['qua','Quarta'],['qui','Quinta'],['sex','Sexta'],['sab','Sábado'],['dom','Domingo']];
 function loadAg(){rpc('joice_settings_get',{p_token:token}).then(function(c){var a=c.agenda||{};agCfg=a;
-  $('#agOn').checked=!!a.online;swTxt();$('#agDur').value=String(a.duracao||60);$('#agAnt').value=String(a.antecedencia_h||12);$('#agJan').value=String(a.janela_dias||21);
+  $('#agOn').checked=!!a.online;swTxt();$('#agFonte').value=a.fonte==='rededor'?'rededor':'grade';fonteUI();$('#agDur').value=String(a.duracao||60);$('#agAnt').value=String(a.antecedencia_h||12);$('#agJan').value=String(a.janela_dias||21);
   var g=a.grade||{};$('#wk').innerHTML=DAYS.map(function(d){var r=g[d[0]]||[];return '<div class="wkd" data-k="'+d[0]+'"><label><input type="checkbox"'+(r.length?' checked':'')+'>'+d[1]+'</label><div class="rngs">'+r.map(rng).join('')+'<button type="button" class="add">+ intervalo</button></div></div>'}).join('');
   preview()})}
 function rng(r){return '<span class="rng"><input type="time" value="'+(r&&r[0]||'08:00')+'" step="300"> às <input type="time" value="'+(r&&r[1]||'12:00')+'" step="300"><button type="button" aria-label="Remover">×</button></span>'}
 function swTxt(){$('#swTxt').textContent=$('#agOn').checked?'Ligada: as famílias escolhem um horário livre direto no site.':'Desligada: as famílias enviam só a preferência de dia e período.'}
 $('#agOn').onchange=swTxt;
+function fonteUI(){var ext=$('#agFonte').value==='rededor';$('#wk').style.display=ext?'none':'';$('#agDur').closest('.field').style.display=ext?'none':'';var b=$('#extBox');
+  if(!ext){b.innerHTML='';return}b.textContent='Verificando o robô…';
+  rpc('joice_ext_status',{p_token:token}).then(function(x){var lo=x.last_ok?new Date(x.last_ok):null,mins=lo?Math.round((Date.now()-lo)/60000):null;
+    b.innerHTML=(x.fresh?'<b style="color:#5B5A3C">● Robô funcionando</b>':'<b style="color:#9B3B2E">● Robô sem leitura recente</b> — o site mostra só o pedido de preferência até ele voltar.')+
+      '<br>Última leitura: '+(lo?(mins<60?'há '+mins+' min':fmtD(isoDay(x.last_ok))+' às '+hmTxt(x.last_ok)):'nenhuma ainda')+' · '+(x.future||0)+' horários livres espelhados'+
+      (x.last&&!x.last.ok?'<br><span style="color:#9B3B2E">Último erro: '+esc(x.last.error||'')+'</span>':'')}).catch(function(){b.textContent='Não foi possível ver o status do robô.'})}
+$('#agFonte').onchange=fonteUI;
 $('#wk').addEventListener('click',function(e){var row=e.target.closest('.wkd');if(!row)return;
   if(e.target.matches('.add')){var last=$$('.rng',row).pop(),st=last?$$('input',last)[1].value:'08:00';e.target.insertAdjacentHTML('beforebegin',rng([st,st<'12:00'?'12:00':'18:00']));$('input[type=checkbox]',row).checked=true}
   if(e.target.matches('.rng button')){e.target.parentNode.remove();if(!$$('.rng',row).length)$('input[type=checkbox]',row).checked=false}});
@@ -917,7 +931,7 @@ $('#wk').addEventListener('change',function(e){if(e.target.type==='checkbox'){va
 $('#agForm').onsubmit=function(e){e.preventDefault();var m=$('#agMsg');m.className='err';m.textContent='';var grade={},bad=false;
   $$('.wkd').forEach(function(row){var k=row.dataset.k,on=$('input[type=checkbox]',row).checked;grade[k]=on?$$('.rng',row).map(function(r){var t=$$('input',r);if(!t[0].value||!t[1].value||t[1].value<=t[0].value)bad=true;return [t[0].value,t[1].value]}):[]});
   if(bad){m.textContent='Confira os intervalos: o fim precisa ser depois do início.';return}
-  var v=Object.assign({},agCfg||{},{online:$('#agOn').checked,duracao:+$('#agDur').value,antecedencia_h:+$('#agAnt').value,janela_dias:+$('#agJan').value,grade:grade});
+  var v=Object.assign({},agCfg||{},{fonte:$('#agFonte').value,online:$('#agOn').checked,duracao:+$('#agDur').value,antecedencia_h:+$('#agAnt').value,janela_dias:+$('#agJan').value,grade:grade});
   rpc('joice_settings_save',{p_token:token,p_key:'agenda',p_value:v}).then(function(){agCfg=v;m.className='err ok';m.textContent=v.online?'Salvo! O site já mostra os horários livres.':'Salvo! A agenda online está desligada no site.';fetch('/api/config?nc=1');preview()}).catch(function(er){m.textContent=er.message})};
 function preview(){var el=$('#prev2');el.innerHTML='<div class="skel" style="height:60px"></div>';
   fetch('/api/slots?x='+Date.now()).then(function(r){return r.json()}).then(function(d){

@@ -117,7 +117,7 @@
         body.querySelector('#jmN').onclick = function () { s.det = body.querySelector('#jmDet').value; s.step = 2; render(b); };
       } else if (s.step === 2 && cfg.online && !s.prefMode) {
         body.innerHTML = '<span class="jm-l">Escolha o dia</span><div id="jmDays" class="jm-ch"><span class="jm-note" style="margin:0">Carregando horários livres…</span></div><span class="jm-l" id="jmHl" hidden>Horário</span><div id="jmTimes" class="jm-ch"></div>' +
-          '<p class="jm-note">Consulta presencial em Tatuí, SP. A equipe confirma o horário com você pelo WhatsApp.</p>' +
+          '<p class="jm-note" id="jmLoc">Consulta presencial em Tatuí, SP. A equipe confirma o horário com você pelo WhatsApp.</p>' +
           '<div class="jm-act"><button class="jm-btn g" id="jmB">← Voltar</button><button class="jm-btn p" id="jmN" disabled>Continuar</button></div><p class="jm-note" style="text-align:center"><a href="#" id="jmPref" style="color:#A26B44">Nenhum horário serve? Enviar minha preferência</a></p>';
         var nb = body.querySelector('#jmN');
         body.querySelector('#jmB').onclick = function () { s.step = 1; render(b); };
@@ -125,7 +125,8 @@
         nb.onclick = function () { s.step = 3; render(b); };
         fetch('/api/slots').then(function (r) { return r.json(); }).then(function (d) {
           if (!d || !d.enabled || !(d.days || []).length) { s.prefMode = true; render(b); return; }
-          s.days = d.days;
+          s.days = d.days; s.local = d.local || '';
+          if (d.local) body.querySelector('#jmLoc').innerHTML = 'Consulta presencial no <b>' + esc(d.local) + '</b>' + (d.endereco ? ' (' + esc(d.endereco) + ')' : '') + '. A equipe marca o horário na clínica e envia pelo WhatsApp um link para você confirmar.';
           var wd = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
           var dz = body.querySelector('#jmDays');
           dz.innerHTML = d.days.map(function (x, i) { var dt = new Date(x.date + 'T12:00:00Z'); return '<button type="button" aria-pressed="false" data-i="' + i + '">' + wd[dt.getUTCDay()] + ' ' + String(dt.getUTCDate()).padStart(2, '0') + '/' + String(dt.getUTCMonth() + 1).padStart(2, '0') + '</button>'; }).join('');
@@ -179,7 +180,7 @@
         var msg = 'Olá! Acabei de ' + (when ? 'reservar um horário (' + when + ')' : 'pedir um horário') + ' pelo site da Dra. Joice. Sou ' + s.nome + '. Criança: ' + s.idade + '. Motivo: ' + s.motivo + '.';
         var wa = waLink(msg);
         body.innerHTML = '<div class="jm-done"><div class="ic">' + CHECK + '</div><h2>Obrigada, <em>' + esc(s.nome.split(' ')[0]) + '</em>.</h2>' +
-          (when ? '<p>Seu horário está reservado para <b>' + when + '</b>. A equipe da Dra. Joice vai chamar você no WhatsApp para confirmar.</p>' : '<p>A equipe da Dra. Joice vai chamar você no WhatsApp para confirmar o dia e o horário da consulta.</p>') +
+          (when ? '<p>Seu horário está reservado para <b>' + when + '</b>' + (s.local ? ' no ' + esc(s.local) : '') + '. A equipe da Dra. Joice vai marcar na clínica e mandar no seu WhatsApp um link para você confirmar.</p>' : '<p>A equipe da Dra. Joice vai chamar você no WhatsApp para confirmar o dia e o horário da consulta.</p>') +
           (wa ? '<a class="jm-btn w" href="' + wa + '" target="_blank" rel="noopener">Prefiro chamar agora no WhatsApp</a>' :
             '<a class="jm-btn w" href="https://www.instagram.com/' + esc(cfg.instagram) + '/" target="_blank" rel="noopener">Falar também pelo Instagram</a>') +
           '<div><button class="jm-btn g" id="jmC" style="margin:12px auto 0;padding-left:26px">Fechar</button></div></div>';
