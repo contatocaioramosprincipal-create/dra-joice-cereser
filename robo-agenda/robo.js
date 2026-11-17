@@ -1,0 +1,279 @@
+/*
+ * Robô espelho da agenda — Dra. Joice Cereser (Rede D'Or São Luiz)
+ * Lê os horários livres no agendamento online da Rede D'Or e envia para o
+ * sistema da Dra. Joice (Supabase). Só LÊ: não marca nem reserva nada.
+ *
+ * Uso:  node robo.js            -> roda sem parar (a cada X minutos)
+ *       node robo.js --uma-vez  -> roda uma leitura e sai (para testar)
+ */
+const fs = require('fs');
+const path = require('path');
+const { chromium } = require('playwright');
+
+const DIR = __dirname;
+const CFG = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8'));
+const DEBUG = path.join(DIR, 'debug');
+fs.mkdirSync(DEBUG, { recursive: true });
+
+const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
+const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const UMA_VEZ = process.argv.includes('--uma-vez');
+const VERSAO = '1.1';
+const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
+
+function log(...a) {
+  const linha = `[${new Date().toLocaleString('pt-BR')}] ` + a.join(' ');
+  console.log(linha);
+  try { fs.appendFileSync(path.join(DIR, 'robo.log'), linha + '\n'); } catch (e) {}
+}
+const espera = ms => new Promise(r => setTimeout(r, ms));
+const hojeSP = () => { const d = new Date(Date.now() - 3 * 3600e3); return d.toISOString().slice(0, 10); };
+const somaDias = (iso, n) => { const d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+
+async function foto(page, nome) {
+  try { await page.screenshot({ path: path.join(DEBUG, nome + '.png'), fullPage: true }); } catch (e) {}
+}
+
+async function cliqueSeVisivel(loc, ms = 1200) {
+  try { if (await loc.first().isVisible({ timeout: ms })) { await loc.first().click({ timeout: 3000 }); return true; } } catch (e) {}
+  return false;
+}
+
+async function fecharAvisos(page) {
+  await cliqueSeVisivel(page.getByText('Fechar', { exact: true }), 800);
+  await cliqueSeVisivel(page.getByRole('button', { name: /rejeitar|recusar|somente necess/i }), 500);
+}
+
+async function botaoProssiga(page) {
+  const b = page.getByRole('button', { name: /^(prossiga|continuar|avançar|avancar)$/i });
+  if (await b.count()) { try { await b.first().click({ timeout: 5000 }); return true; } catch (e) {} }
+  return false;
+}
+
+function etapa(page) {
+  const p = new URL(page.url()).pathname.replace(/\/+$/, '');
+  return p.split('/').pop();
+}
+
+/* ---------- passo a passo até a tela da agenda ---------- */
+async function chegarNaAgenda(page) {
+  await page.goto(URL_INICIO, { waitUntil: 'domcontentloaded', timeout: 90000 });
+  const presencial = page.getByRole('button', { name: 'PRESENCIAL', exact: true }).last();
+  await presencial.waitFor({ timeout: 90000 });
+  await espera(1500);
+  await fecharAvisos(page);
+  await presencial.click();
+
+  const busca = page.getByPlaceholder(/especialidade ou m[eé]dico/i).first();
+  await busca.waitFor({ timeout: 20000 });
+  await busca.click();
+  await busca.pressSequentially(CFG.medica, { delay: 60 });
+  const medica = page.getByRole('heading', { name: CFG.medica }).first();
+  await medica.waitFor({ timeout: 20000 });
+  await espera(600);
+  await medica.click();
+
+  for (let i = 0; i < 8; i++) {
+    await page.waitForLoadState('domcontentloaded');
+    await espera(2000);
+    await fecharAvisos(page);
+    const e = etapa(page);
+    log('etapa:', e);
+    if (e === 'agendar-consulta') return;
+
+    if (e === 'local') {
+      await page.getByText(new RegExp(CFG.unidade, 'i')).first().click({ timeout: 15000 });
+      await espera(800);
+      await botaoProssiga(page);
+    } else if (e === 'paciente') {
+      const nasc = page.getByPlaceholder(/dd\/mm\/aaaa/i).first();
+      await nasc.click();
+      await nasc.fill('');
+      await nasc.pressSequentially(CFG.nascimento_ficticio.replace(/\D/g, ''), { delay: 50 });
+      // sexo: <select> nativo ou lista do próprio site
+      const sel = page.locator('select');
+      if (await sel.count()) {
+        await sel.first().selectOption({ label: CFG.sexo_ficticio }).catch(async () => { await sel.first().selectOption({ index: 1 }); });
+      } else {
+        await page.getByText(/selecione o sexo/i).first().click();
+        await page.getByText(CFG.sexo_ficticio, { exact: true }).first().click();
+      }
+      await espera(600);
+      await botaoProssiga(page);
+    } else if (e === 'pagamento') {
+      await page.getByText(new RegExp('^\\s*' + CFG.pagamento + '\\s*$', 'i')).first().click({ timeout: 15000 });
+      await espera(1000);
+      // às vezes pede o "plano" logo em seguida: escolhe Particular de novo
+      await cliqueSeVisivel(page.getByText(new RegExp('^\\s*' + CFG.pagamento + '\\s*$', 'i')).nth(1), 1500);
+      await espera(600);
+      await botaoProssiga(page);
+    } else {
+      // etapa desconhecida: tenta só prosseguir
+      if (!(await botaoProssiga(page))) throw new Error('Não sei o que fazer na etapa "' + e + '". Veja debug/etapa-desconhecida.png');
+    }
+  }
+  if (etapa(page) !== 'agendar-consulta') throw new Error('Não cheguei na tela da agenda (parei em "' + etapa(page) + '").');
+}
+
+/* ---------- leitura do calendário ---------- */
+// Marca os dias do calendário com data-robo-dia="AAAA-MM-DD" e devolve a lista.
+async function marcarDias(page) {
+  return page.evaluate((MESES) => {
+    const all = [...document.querySelectorAll('body *')];
+    const titulo = all.find(el => el.children.length === 0 && /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-z]*\.?,?\s+\d{4}$/i.test(el.textContent.trim()));
+    if (!titulo) return { erro: 'mes_nao_encontrado' };
+    const m = titulo.textContent.trim().match(/^([a-z]{3})[a-z]*\.?,?\s+(\d{4})$/i);
+    const mes = MESES.indexOf(m[1].toLowerCase()), ano = +m[2];
+    let box = titulo.parentElement;
+    while (box && !/S[ÁA]B/.test(box.innerText)) box = box.parentElement;
+    if (!box) return { erro: 'calendario_nao_encontrado' };
+    // botão "próximo mês": último botão perto do título
+    let head = titulo.parentElement; let prox = null;
+    for (let k = 0; k < 3 && head && !prox; k++) { const bs = head.querySelectorAll('button,[role=button]'); if (bs.length) prox = bs[bs.length - 1]; head = head.parentElement; }
+    document.querySelectorAll('[data-robo-prox]').forEach(x => x.removeAttribute('data-robo-prox'));
+    if (prox) prox.setAttribute('data-robo-prox', '1');
+
+    document.querySelectorAll('[data-robo-dia]').forEach(x => x.removeAttribute('data-robo-dia'));
+    const cells = [...box.querySelectorAll('*')].filter(el => el.children.length === 0 && /^\d{1,2}$/.test(el.textContent.trim()));
+    // sequência: dias antes do 1º "1" são do mês anterior; depois de chegar no fim, o "1" seguinte é do próximo mês
+    let fase = -1, ult = 0; const dias = [];
+    for (const el of cells) {
+      const n = +el.textContent.trim();
+      if (fase === -1 && n === 1) fase = 0; else if (fase === 0 && n < ult) fase = 1;
+      ult = n;
+      if (fase !== 0) continue;
+      const alvo = el.closest('button,[role=button],td,li') || el;
+      const st = getComputedStyle(el), stA = getComputedStyle(alvo);
+      const desabilitado = alvo.disabled || alvo.getAttribute('aria-disabled') === 'true' || stA.pointerEvents === 'none';
+      const negrito = Math.max(+st.fontWeight || 400, +stA.fontWeight || 400) >= 600;
+      const iso = ano + '-' + String(mes + 1).padStart(2, '0') + '-' + String(n).padStart(2, '0');
+      alvo.setAttribute('data-robo-dia', iso);
+      dias.push({ iso, desabilitado, negrito });
+    }
+    return { ano, mes, dias };
+  }, MESES);
+}
+
+async function lerHorariosDoDia(page) {
+  return page.evaluate((unidade) => {
+    const re = /^(\d{2}:\d{2})(\s*E)?$/;
+    const norm = s => (s || '').replace(/\s+/g, ' ').trim();
+    let raiz = document.querySelector('main') || document.body;
+    // se houver mais de uma unidade na tela, usa só o bloco da unidade configurada
+    const blocos = [...raiz.querySelectorAll('*')].filter(el => new RegExp(unidade, 'i').test(el.textContent) && [...el.querySelectorAll('button,[role=button]')].some(b => re.test(norm(b.innerText))));
+    if (blocos.length) raiz = blocos.sort((a, b) => a.querySelectorAll('*').length - b.querySelectorAll('*').length)[0];
+    const vistos = new Map();
+    raiz.querySelectorAll('button,[role=button]').forEach(b => {
+      const t = norm(b.innerText); const m = t.match(re);
+      if (m && !b.disabled && b.getAttribute('aria-disabled') !== 'true') vistos.set(m[1], !!m[2]);
+    });
+    return [...vistos.entries()].map(([h, e]) => ({ h, e }));
+  }, CFG.unidade);
+}
+
+async function lerAgenda(page) {
+  const inicio = hojeSP(), fim = somaDias(inicio, CFG.dias);
+  const slots = [], diasLidos = [];
+  for (let mesN = 0; mesN < 4; mesN++) {
+    const cal = await marcarDias(page);
+    if (cal.erro) { await foto(page, 'calendario'); throw new Error('Calendário: ' + cal.erro); }
+    let alvo = cal.dias.filter(d => d.iso >= inicio && d.iso <= fim && !d.desabilitado);
+    if (alvo.some(d => d.negrito)) alvo = alvo.filter(d => d.negrito);
+    log(`mês ${MESES[cal.mes]}/${cal.ano}: ${alvo.length} dia(s) para ler`);
+    for (const d of alvo) {
+      await page.locator(`[data-robo-dia="${d.iso}"]`).first().click({ timeout: 8000 }).catch(() => {});
+      await espera(1600);
+      const hs = await lerHorariosDoDia(page);
+      diasLidos.push(d.iso + ':' + hs.length);
+      hs.forEach(x => slots.push({ t: d.iso + 'T' + x.h, e: x.e }));
+    }
+    const ultimoDoMes = new Date(Date.UTC(cal.ano, cal.mes + 1, 0)).toISOString().slice(0, 10);
+    if (ultimoDoMes >= fim) break;
+    const prox = page.locator('[data-robo-prox]');
+    if (!(await prox.count())) break;
+    await prox.first().click().catch(() => {});
+    await espera(2200);
+  }
+  return { inicio, fim, slots, diasLidos };
+}
+
+/* ---------- envio ---------- */
+async function rpc(fn, body) {
+  const r = await fetch(`${CFG.supabase_url}/rest/v1/rpc/${fn}`, {
+    method: 'POST',
+    headers: { apikey: CFG.supabase_key, Authorization: `Bearer ${CFG.supabase_key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  const t = await r.text();
+  if (!r.ok) throw new Error(`${fn} ${r.status}: ${t.slice(0, 200)}`);
+  return t ? JSON.parse(t) : null;
+}
+
+/* ---------- uma rodada ---------- */
+let ctx;
+async function rodada() {
+  if (!ctx) {
+    ctx = await chromium.launchPersistentContext(path.join(DIR, 'perfil'), {
+      headless: !CFG.mostrar_navegador,
+      viewport: { width: 1366, height: 860 },
+      locale: 'pt-BR', timezoneId: 'America/Sao_Paulo',
+      args: CFG.mostrar_navegador ? ['--start-minimized'] : []
+    });
+  }
+  const page = await ctx.newPage();
+  const frames = [];
+  page.on('websocket', ws => ws.on('framereceived', f => { if (frames.length < 60) frames.push(String(f.payload).slice(0, 4000)); }));
+  const t0 = Date.now();
+  try {
+    await chegarNaAgenda(page);
+    await espera(2500);
+    const r = await lerAgenda(page);
+    const res = await rpc('joice_ext_sync', { p_key: CFG.robo_key, p_from: r.inicio, p_to: r.fim, p_slots: r.slots, p_info: { versao: VERSAO, dias: r.diasLidos, seg: Math.round((Date.now() - t0) / 1000) } });
+    log(`OK: ${r.slots.length} horário(s) livres de ${r.inicio} a ${r.fim} enviados (${res && res.slots} gravados).`);
+    fs.writeFileSync(path.join(DEBUG, 'ultima-leitura.json'), JSON.stringify(r, null, 2));
+  } catch (e) {
+    log('ERRO:', e.message);
+    await foto(page, 'erro-' + etapa(page));
+    try { await rpc('joice_ext_error', { p_key: CFG.robo_key, p_error: e.message, p_info: { versao: VERSAO, etapa: etapa(page) } }); } catch (x) {}
+  } finally {
+    try { fs.writeFileSync(path.join(DEBUG, 'websocket.txt'), frames.join('\n\n----\n\n')); } catch (e) {}
+    await page.close().catch(() => {});
+  }
+}
+
+/* ---------- atualização automática ---------- */
+async function atualizar() {
+  try {
+    const r = await fetch(URL_ATUALIZACAO + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return false;
+    const novo = await r.text();
+    const atual = fs.readFileSync(__filename, 'utf8');
+    if (!novo.includes('Robô espelho da agenda') || novo === atual) return false;
+    const tmp = path.join(DIR, 'robo.novo.js');
+    fs.writeFileSync(tmp, novo);
+    const { spawnSync } = require('child_process');
+    if (spawnSync(process.execPath, ['--check', tmp]).status !== 0) { fs.unlinkSync(tmp); return false; }
+    fs.copyFileSync(__filename, path.join(DIR, 'robo.anterior.js'));
+    fs.renameSync(tmp, __filename);
+    const v = (novo.match(/const VERSAO = '([^']+)'/) || [])[1];
+    log('Robô atualizado para a versão ' + v + '. Reiniciando...');
+    const res = spawnSync(process.execPath, [__filename, ...process.argv.slice(2)], { stdio: 'inherit' });
+    process.exit(res.status || 0);
+  } catch (e) { return false; }
+}
+
+(async () => {
+  await atualizar();
+  log(`Robô da agenda iniciado (v${VERSAO}). Médica: ${CFG.medica} · ${CFG.unidade}`);
+  if (!CFG.robo_key || /COLE/.test(CFG.robo_key)) { log('Falta a chave do robô no config.json.'); process.exit(1); }
+  do {
+    const h = +new Date().toLocaleString('en-US', { hour: 'numeric', hour12: false, timeZone: 'America/Sao_Paulo' });
+    if (UMA_VEZ || (h >= CFG.hora_inicio && h < CFG.hora_fim)) await rodada();
+    else log('Fora do horário de leitura; aguardando.');
+    if (UMA_VEZ) break;
+    if (ctx) { await ctx.close().catch(() => {}); ctx = null; }
+    await atualizar();
+    await espera(CFG.intervalo_min * 60e3);
+  } while (true);
+  if (ctx) await ctx.close();
+})();
