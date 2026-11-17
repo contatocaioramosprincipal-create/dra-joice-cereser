@@ -18,7 +18,7 @@ fs.mkdirSync(DEBUG, { recursive: true });
 const URL_INICIO = 'https://www.rededorsaoluiz.com.br/paciente/marcar-consulta';
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const UMA_VEZ = process.argv.includes('--uma-vez');
-const VERSAO = '1.5';
+const VERSAO = '1.6';
 const URL_ATUALIZACAO = 'https://drajoice.com.br/robo-agenda/robo.js';
 
 function log(...a) {
@@ -171,41 +171,57 @@ const DEEP = `
   true;
 `;
 
+// calendário do site: <cura-calendar> com dias em div.date (valid/invalid; o selecionado tem "start")
 async function marcarDias(page) {
   await page.evaluate(DEEP);
   return page.evaluate((MESES) => {
     const all = window.__deepAll(document);
-    all.forEach(x => { x.removeAttribute && x.removeAttribute('data-robo-dia'); x.removeAttribute && x.removeAttribute('data-robo-prox'); });
-    const reT = /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-zç]*\.?,?\s+(de\s+)?\d{4}$/i;
-    const titulo = all.find(el => el.children.length === 0 && reT.test((el.textContent || '').trim()));
+    const cal = all.find(el => el.tagName === 'CURA-CALENDAR');
+    if (!cal) return { erro: 'calendario_nao_encontrado' };
+    const els = window.__deepAll(cal);
+    els.forEach(x => { x.removeAttribute('data-robo-dia'); x.removeAttribute('data-robo-prox'); });
+    const reT = /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-zç]*\.?,?\s+(?:de\s+)?(\d{4})$/i;
+    const titulo = els.find(el => reT.test((el.textContent || '').trim()) && el.children.length === 0) || els.find(el => reT.test(window.__txt(el)));
     if (!titulo) return { erro: 'mes_nao_encontrado' };
-    const m = titulo.textContent.trim().match(/^([a-z]{3})[a-zç]*\.?,?\s+(?:de\s+)?(\d{4})$/i);
+    const m = (titulo.textContent.trim() || window.__txt(titulo)).match(reT);
     const mes = MESES.indexOf(m[1].toLowerCase()), ano = +m[2];
-    const ehDia = el => el.children.length === 0 && /^\d{1,2}$/.test((el.textContent || '').trim());
-    let box = window.__up(titulo), k = 0;
-    while (box && k < 12 && window.__deepAll(box).filter(ehDia).length < 28) { box = window.__up(box); k++; }
-    if (!box) return { erro: 'calendario_nao_encontrado' };
-    let head = window.__up(titulo), prox = null;
-    for (let i = 0; i < 4 && head && !prox; i++) { const bs = window.__deepAll(head).filter(x => x.tagName === 'BUTTON' || x.getAttribute('role') === 'button'); if (bs.length >= 2) prox = bs[bs.length - 1]; head = window.__up(head); }
+    const prox = els.find(el => el.tagName === 'CURA-ICON' && el.getAttribute('name') === 'right');
     if (prox) prox.setAttribute('data-robo-prox', '1');
-    const cells = window.__deepAll(box).filter(ehDia);
+    const cells = els.filter(el => el.classList && el.classList.contains('date'));
     let fase = -1, ult = 0; const dias = [];
     for (const el of cells) {
-      const n = +el.textContent.trim();
+      const n = +(el.textContent || '').trim();
+      if (!n) continue;
       if (fase === -1 && n === 1) fase = 0; else if (fase === 0 && n < ult) fase = 1;
       ult = n;
       if (fase !== 0) continue;
-      let alvo = el; for (let i = 0; i < 3; i++) { if (alvo.tagName === 'BUTTON' || alvo.getAttribute('role') === 'button' || alvo.tagName === 'TD') break; const u = window.__up(alvo); if (!u) break; alvo = u; }
-      if (!(alvo.tagName === 'BUTTON' || alvo.getAttribute('role') === 'button' || alvo.tagName === 'TD')) alvo = el;
-      const st = getComputedStyle(el), stA = getComputedStyle(alvo);
-      const desabilitado = alvo.disabled || alvo.getAttribute('aria-disabled') === 'true' || stA.pointerEvents === 'none' || /disabled/i.test(alvo.className || '');
-      const negrito = Math.max(+st.fontWeight || 400, +stA.fontWeight || 400) >= 600;
       const iso = ano + '-' + String(mes + 1).padStart(2, '0') + '-' + String(n).padStart(2, '0');
-      alvo.setAttribute('data-robo-dia', iso);
-      dias.push({ iso, desabilitado, negrito });
+      el.setAttribute('data-robo-dia', iso);
+      dias.push({ iso, valido: el.classList.contains('valid') && !el.classList.contains('invalid'), selecionado: el.classList.contains('start') });
     }
-    return { ano, mes, dias };
+    return { ano, mes, titulo: m[0], dias };
   }, MESES);
+}
+
+async function diaSelecionado(page) {
+  await page.evaluate(DEEP);
+  return page.evaluate(() => { const el = window.__deepAll(document).find(x => x.classList && x.classList.contains('date') && x.classList.contains('start')); return el ? el.getAttribute('data-robo-dia') : null; });
+}
+
+// lê os horários de um dia, esperando a lista realmente trocar
+async function lerDia(page, iso, sigAnterior, jaSelecionado) {
+  if (!jaSelecionado) await page.locator(`[data-robo-dia="${iso}"]`).first().click({ timeout: 8000 }).catch(() => {});
+  const t0 = Date.now(); let ultSig = null, hs = [];
+  await espera(1200);
+  while (Date.now() - t0 < 15000) {
+    const sel = await diaSelecionado(page);
+    hs = await lerHorariosDoDia(page);
+    const sig = JSON.stringify(hs);
+    if (sel === iso && hs.length && sig === ultSig && (jaSelecionado || sig !== sigAnterior)) return hs;
+    ultSig = sig;
+    await espera(800);
+  }
+  return hs;
 }
 
 async function lerHorariosDoDia(page) {
@@ -245,25 +261,27 @@ async function prepararAgenda(page) {
 async function lerAgenda(page) {
   const inicio = hojeSP(), fim = somaDias(inicio, CFG.dias);
   const slots = [], diasLidos = [];
+  let sig = null;
   for (let mesN = 0; mesN < 4; mesN++) {
     const cal = await marcarDias(page);
     if (cal.erro) { await foto(page, 'calendario'); throw new Error('Calendário: ' + cal.erro); }
-    let alvo = cal.dias.filter(d => d.iso >= inicio && d.iso <= fim && !d.desabilitado);
-    if (alvo.some(d => d.negrito)) alvo = alvo.filter(d => d.negrito);
-    log(`mês ${MESES[cal.mes]}/${cal.ano}: ${alvo.length} dia(s) para ler`);
+    const alvo = cal.dias.filter(d => d.iso >= inicio && d.iso <= fim && d.valido);
+    log(`mês ${cal.titulo}: ${alvo.length} dia(s) com horário`);
+    // o dia já selecionado primeiro (os horários dele já estão na tela)
+    alvo.sort((x, y) => (y.selecionado - x.selecionado) || (x.iso < y.iso ? -1 : 1));
     for (const d of alvo) {
-      await page.locator(`[data-robo-dia="${d.iso}"]`).first().click({ timeout: 8000 }).catch(() => {});
-      await espera(1600);
-      const hs = await lerHorariosDoDia(page);
+      const hs = await lerDia(page, d.iso, sig, d.selecionado);
+      sig = JSON.stringify(hs);
       diasLidos.push(d.iso + ':' + hs.length);
       hs.forEach(x => slots.push({ t: d.iso + 'T' + x.h, e: x.e }));
     }
     const ultimoDoMes = new Date(Date.UTC(cal.ano, cal.mes + 1, 0)).toISOString().slice(0, 10);
     if (ultimoDoMes >= fim) break;
     const prox = page.locator('[data-robo-prox]');
-    if (!(await prox.count())) break;
+    if (!(await prox.count())) { log('botão de próximo mês não encontrado'); break; }
     await prox.first().click().catch(() => {});
-    await espera(2200);
+    for (let i = 0; i < 20; i++) { await espera(700); const c2 = await marcarDias(page); if (c2.titulo && c2.titulo !== cal.titulo) break; }
+    await espera(1500);
   }
   return { inicio, fim, slots, diasLidos };
 }
