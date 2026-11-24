@@ -52,6 +52,8 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function chips(name, list, multi) { return '<div class="jm-ch" data-name="' + name + '"' + (multi ? ' data-multi="1"' : '') + '>' + list.map(function (x) { return '<button type="button" aria-pressed="false" data-v="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div>'; }
   function maskPhone(v) { v = v.replace(/\D/g, '').slice(0, 11); if (v.length > 10) return '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7); if (v.length > 6) return '(' + v.slice(0, 2) + ') ' + v.slice(2, 6) + '-' + v.slice(6); if (v.length > 2) return '(' + v.slice(0, 2) + ') ' + v.slice(2); return v; }
+  var DDDS = '11 12 13 14 15 16 17 18 19 21 22 24 27 28 31 32 33 34 35 37 38 41 42 43 44 45 46 47 48 49 51 53 54 55 61 62 63 64 65 66 67 68 69 71 73 74 75 77 79 81 82 83 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99';
+  function celularOk(v) { var n = String(v || '').replace(/\D/g, ''); return n.length === 11 && DDDS.indexOf(n.slice(0, 2)) >= 0 && n.charAt(2) === '9' && !/^(\d)\1+$/.test(n.slice(2)); }
   function track(label) { try { W.jcTrack && W.jcTrack(label, true); } catch (e) {} }
   function ids() { try { return W.jcIds ? W.jcIds() : {}; } catch (e) { return {}; } }
   function waLink(text) { var n = String(cfg.whatsapp || '').replace(/\D/g, ''); if (!n) return ''; if (n.length <= 11) n = '55' + n; return 'https://wa.me/' + n + '?text=' + encodeURIComponent(text); }
@@ -193,21 +195,26 @@
   var GUIA = '/guia/os-primeiros-sinais.pdf';
   function guia() {
     var html = '<div class="jm-top">' + ARC + '<div class="jm-s">Guia gratuito</div><h2 id="jmT">Os primeiros <em>sinais</em></h2><p style="margin:8px 0 14px;color:#5A463A;max-width:24em">O que observar no desenvolvimento do seu filho, mês a mês, e quando vale conversar com a pediatra.</p></div><div class="jm-b">' +
-      '<label class="jm-f"><span>Seu nome</span><input type="text" id="jmNome" autocomplete="name" maxlength="80"></label>' +
-      '<label class="jm-f"><span>Seu WhatsApp</span><input type="tel" id="jmTel" autocomplete="tel" inputmode="tel" placeholder="(15) 99999-9999"></label>' +
+      '<label class="jm-f"><span>Seu nome completo</span><input type="text" id="jmNome" autocomplete="name" maxlength="80"></label>' +
+      '<label class="jm-f"><span>Seu WhatsApp (celular com DDD)</span><input type="tel" id="jmTel" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999"></label>' +
+      '<label class="jm-f"><span>Nome da criança</span><input type="text" id="jmCri" maxlength="80"></label>' +
+      '<span class="jm-l">Idade da criança</span>' + chips('idade', IDADES) +
       '<input class="jm-hp" type="text" id="jmHp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       '<label class="jm-ok"><input type="checkbox" id="jmOk"><span>Quero receber o guia e conteúdos da Dra. Joice pelo WhatsApp. Posso pedir para sair quando quiser. <a href="/privacidade" target="_blank">Privacidade</a>.</span></label>' +
       '<div class="jm-err" id="jmErr" role="alert"></div><div class="jm-act"><span></span><button class="jm-btn p" id="jmN">Baixar o guia</button></div></div>';
     open(html, function (b) {
+      var g = { idade: '' }; bindChips(b, g);
       var tel = b.querySelector('#jmTel'); tel.addEventListener('input', function () { tel.value = maskPhone(tel.value); });
       b.querySelector('#jmN').onclick = function () {
-        var btn = this, err = b.querySelector('#jmErr'), nome = b.querySelector('#jmNome').value.trim(); err.textContent = '';
-        if (nome.length < 2) { err.textContent = 'Escreva seu nome.'; return; }
-        if (tel.value.replace(/\D/g, '').length < 10) { err.textContent = 'Confira o número de WhatsApp (com DDD).'; return; }
+        var btn = this, err = b.querySelector('#jmErr'), nome = b.querySelector('#jmNome').value.trim(), cri = b.querySelector('#jmCri').value.trim(); err.textContent = '';
+        if (nome.length < 3 || nome.indexOf(' ') < 0) { err.textContent = 'Escreva seu nome e sobrenome.'; return; }
+        if (!celularOk(tel.value)) { err.textContent = 'Confira o WhatsApp: celular com DDD, 11 números. Ex.: (11) 99999-9999.'; return; }
+        if (cri.length < 2) { err.textContent = 'Escreva o nome da criança.'; return; }
+        if (!g.idade) { err.textContent = 'Escolha a idade da criança.'; return; }
         if (!b.querySelector('#jmOk').checked) { err.textContent = 'Marque a autorização para receber o guia.'; return; }
         btn.disabled = true; btn.textContent = 'Enviando…';
         var i = ids();
-        post({ kind: 'guia', parent_name: nome, phone: tel.value, reason: 'Guia: Os primeiros sinais', consent: true, website: b.querySelector('#jmHp').value, vid: i.vid, sid: i.sid, source: i.source })
+        post({ kind: 'guia', parent_name: nome, phone: tel.value, child_name: cri, child_age: g.idade, reason: 'Guia: Os primeiros sinais', consent: true, website: b.querySelector('#jmHp').value, vid: i.vid, sid: i.sid, source: i.source })
           .then(function (r) {
             if (!r.ok) throw new Error(r.error);
             track('Guia gratuito baixado');

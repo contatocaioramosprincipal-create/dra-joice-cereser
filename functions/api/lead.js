@@ -5,6 +5,14 @@ export async function onRequestPost(ctx) {
   let p;
   try { p = await ctx.request.json(); } catch (e) { return Response.json({ ok: false, error: 'Dados inválidos.' }, { status: 400 }); }
   if (p.website) return Response.json({ ok: true }); // armadilha anti-robô
+  if (p.kind === 'guia') {
+    const n = String(p.phone || '').replace(/\D/g, '');
+    const bad = (m) => Response.json({ ok: false, error: m }, { status: 400 });
+    if (String(p.parent_name || '').trim().split(/\s+/).length < 2) return bad('Escreva seu nome e sobrenome.');
+    if (n.length !== 11 || n[2] !== '9' || /^0/.test(n) || /^(\d)\1+$/.test(n.slice(2))) return bad('Confira o WhatsApp: celular com DDD, 11 números.');
+    if (String(p.child_name || '').trim().length < 2) return bad('Escreva o nome da criança.');
+    if (!String(p.child_age || '').trim()) return bad('Escolha a idade da criança.');
+  }
   const cf = ctx.request.cf || {};
   p.city = cf.city ? cf.city + (cf.regionCode ? ', ' + cf.regionCode : '') : null;
   p.device = device(ctx.request.headers.get('user-agent') || '');
